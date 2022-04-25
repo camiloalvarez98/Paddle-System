@@ -1,0 +1,1 @@
+export {default as HomeClub} from '../Pages/HomeClub'
