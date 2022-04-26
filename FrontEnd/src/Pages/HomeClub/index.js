@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div>
       <Contenedor />
-      <h1 className = { classes.text }>Bienvenido!</h1>
+      <h1 className = { classes.text }>Bienvenidos</h1>
     </div>
   );
 }
