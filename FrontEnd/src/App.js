@@ -1,12 +1,11 @@
-
 import './App.css';
-import { HomeClub } from './Pages';
-
+//import { HomeClub } from './Pages';
+import { Principal } from './Pages';
 
 
 function App() {
   return (
-    <HomeClub/>
+    <Principal/>
   );
 }
 
