@@ -1,11 +1,27 @@
 import './App.css';
-import { HomeClub } from './Pages';
+import { AuthProvider } from './Context'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub } from './Pages'
+
 
 
 function App() {
   return (
-    <HomeClub/>
+    <AuthProvider>
+      <SelectGanadores/>
+    </AuthProvider>
+    
   );
 }
 
 export default App;
+
+/*
+<Router>
+<Switch>
+  <Route path = '/' exact component={PrincipalClub}/>
+  <Route path = '/CampeonatosClub' component = {CampeonatosClub}/>
+  
+</Switch>
+</Router>*/
