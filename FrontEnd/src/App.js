@@ -1,11 +1,10 @@
 import './App.css';
-//import { HomeClub } from './Pages';
-import { Principal } from './Pages';
+import { HomeClub } from './Pages';
 
 
 function App() {
   return (
-    <Principal/>
+    <HomeClub/>
   );
 }
 
