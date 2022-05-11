@@ -3,7 +3,7 @@ import './App.css';
 import { AuthProvider } from './Context'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub } from './Pages'
+import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato } from './Pages'
 
 
 
@@ -11,7 +11,7 @@ import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub } from './Pa
 function App() {
   return (
     <AuthProvider>
-      <SelectGanadores/>
+      <PrincipalClub/>
     </AuthProvider>
     
   );

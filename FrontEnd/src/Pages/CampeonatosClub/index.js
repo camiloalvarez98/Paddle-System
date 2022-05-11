@@ -1,10 +1,7 @@
 import React, {useEffect,useState} from 'react';
 //import axios from 'axios';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles   } from '@material-ui/core';
-import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from "../../Components";
 
 const useStyles = makeStyles((theme)=>({

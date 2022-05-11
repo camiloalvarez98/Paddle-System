@@ -48,16 +48,16 @@ export default function SelectGanadores() {
             <Contenedor/>
             <div align = 'center'>
                 <Box 
-                        sx = {{flexGrow: 20}}
-                        color = 'contrastText'
-                        backgroundColor = '#D8F3DC'
-                        mx = {20} //margen a todos los lados
-                        p = {1} //padding
-                        borderRadius = '8px'
-                        border = {2}
+                    sx = {{flexGrow: 20}}
+                    color = 'contrastText'
+                    backgroundColor = '#D8F3DC'
+                    mx = {20} //margen a todos los lados
+                    p = {1} //padding
+                    borderRadius = '8px'
+                    border = {2}
                                 
                 >
-                        <h1>Registrar Ganadores</h1>
+                    <h1>Registrar Ganadores</h1>
                 </Box>
                 <br></br>
                 <Box
@@ -89,24 +89,24 @@ export default function SelectGanadores() {
                             <h2 className={classes.text2}>Primer Lugar:</h2>
                         </Grid>
                         <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' sx = {{m: 1, width: '48%'}} label=' Rut Jugador 1'/>
-                            <TextField variant='outlined' sx = {{m: 1, width: '48%'}} label=' Rut Jugador 2'/>
+                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label=' Rut Jugador 1'/>
+                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label=' Rut Jugador 2'/>
                         </Grid>
                         {/*Segundo Lugar*/}
                         <Grid item sm = {3}>
                             <h2 className={classes.text2}>Segundo Lugar:</h2>
                         </Grid>
                         <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' sx = {{m: 1, width: '48%'}} label='Rut Jugador 1'/>
-                            <TextField variant='outlined' sx = {{m: 1, width: '48%'}} label='Rut Jugador 2'/>
+                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 1'/>
+                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 2'/>
                         </Grid>
                         {/*Tercer Lugar*/}
                         <Grid item sm = {3}>
                             <h2 className={classes.text2}>Tercer Lugar:</h2>
                         </Grid>
                         <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' sx = {{m: 1, width: '48%'}} label='Rut Jugador 1'/>
-                            <TextField variant='outlined' sx = {{m: 1, width: '48%'}} label='Rut Jugador 2'/>
+                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 1'/>
+                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 2'/>
                         </Grid>
 
                     </Grid>
