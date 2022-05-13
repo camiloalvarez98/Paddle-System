@@ -12,7 +12,7 @@ import { Principal, AgregarClub , Perfil, LoginAdmin} from './PagesAdministrador
 function App() {
   return (
     <AuthProvider>
-      <Principal/>
+      <AgregarClub/>
     </AuthProvider>
     
   );

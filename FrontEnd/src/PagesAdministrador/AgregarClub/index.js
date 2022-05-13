@@ -1,26 +1,21 @@
 import React, {useEffect,useState} from 'react';
-//import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
-import {Modal, Button, TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
+import {Principal} from '../Principal'
+import GroupsIcon from '@mui/icons-material/Groups';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import SaveIcon from '@mui/icons-material/Save';
+
+
 
 const useStyles = makeStyles((theme)=>({
-    modal:{
-        position: 'absolute',
-        width: 400,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2,4,3),
-        top: '50%',
-        left:'50%',
-        transform: 'translate(-50%, -50%)'
-    },
     icons: {
         cursor: 'pointer'
     },
@@ -36,28 +31,22 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
-        marginTop: theme.spacing(8) ,
-        marginBottom: theme.spacing(4),
-        marginTop: theme.spacing(4),
-        marginLeft: theme.spacing(4),
-        marginRight: theme.spacing(4),
-        
-        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
-            margin: theme.spacing(0),
-            width: '100%',
-            height: '100%'
-        }
+        margin: theme.spacing(4),
+        //si quiero agregar borde es con solid
+        border: '2px',
+        borderColor: '#4f772d'
     },
   
 }));
 
 
-  
 
 export default function AgregarClub() {
+    const history = useHistory();
     const classes = useStyles()
-    const [modalEdit, setModalEdit] = useState(false);
+    const redireccionar= () => {
+        history.push(' /Principal');    
+    }
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
     })
@@ -80,17 +69,17 @@ export default function AgregarClub() {
             <Contenedor/>
             <div align = 'center'>
                 <Box 
+                    align = 'left'
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
                     backgroundColor = '#D8F3DC'
-                    mx = {20} //margen a todos los lados
-                    //p = {1} //padding
-                    borderRadius = '8px'
+                    mx = {70} //margen a todos los lados
+                    //p = {0} //padding
+                    borderRadius = '20px'
                     border = {2}
-                    
-                    
+                    borderColor = '#4f772d'                    
                 >
-                    <h1 >Padel del mar</h1>
+                    <h2 >Agregar Club</h2>
                 </Box>
                 <br></br>
                 <Box
@@ -99,8 +88,9 @@ export default function AgregarClub() {
                     backgroundColor = '#D8F3DC'
                     mx = {20} //margen a todos los lados
                     //p = {30} //padding
-                    borderRadius = '8px'
+                    borderRadius = '20px'
                     border = {2}
+                    borderColor = '#4f772d'
                     
                 >
                     <br></br>
@@ -149,7 +139,8 @@ export default function AgregarClub() {
                         type = "button"
                         variant = 'contained'
                         size='medium'
-                        //onClick = {()=>abrirCerrarModalEdit()}
+                        endIcon = {<KeyboardReturnIcon/>}
+                        //onClick = {redireccionar}
                     >
                         Volver
                     </Button>
@@ -159,6 +150,7 @@ export default function AgregarClub() {
                         type = "button"
                         variant = 'contained'
                         size='medium'
+                        endIcon = {<SaveIcon/>}
                         //onClick = {()=>abrirCerrarModalEdit()}
                     >
                         Guardar
