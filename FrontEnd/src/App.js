@@ -4,7 +4,7 @@ import { AuthProvider } from './Context'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato } from './Pages'
-import { Principal, AgregarClub , Perfil} from './PagesAdministrador'
+import { Principal, AgregarClub , Perfil, LoginAdmin} from './PagesAdministrador'
 
 
 
