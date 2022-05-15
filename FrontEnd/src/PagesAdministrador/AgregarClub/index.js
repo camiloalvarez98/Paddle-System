@@ -12,6 +12,8 @@ import {Principal} from '../Principal'
 import GroupsIcon from '@mui/icons-material/Groups';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
+import BackdropFilter from "react-backdrop-filter";
+
 
 
 
@@ -36,7 +38,6 @@ const useStyles = makeStyles((theme)=>({
         border: '2px',
         borderColor: '#4f772d'
     },
-  
 }));
 
 
@@ -68,36 +69,35 @@ export default function AgregarClub() {
         <div>
             <Contenedor/>
             <div align = 'center'>
-                <Box 
-                    align = 'left'
-                    sx = {{flexGrow: 20}}
-                    color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
-                    mx = {70} //margen a todos los lados
-                    //p = {0} //padding
-                    borderRadius = '20px'
-                    border = {2}
-                    borderColor = '#4f772d'                    
-                >
-                    <h2 >Agregar Club</h2>
-                </Box>
                 <br></br>
                 <Box
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
-                    mx = {20} //margen a todos los lados
+                    //backgroundColor = '#D8F3DC'
+                    blurRadius = {1}
+                    mx = {40} //margen a todos los lados
                     //p = {30} //padding
-                    borderRadius = '20px'
-                    border = {2}
-                    borderColor = '#4f772d'
+                    //borderRadius = '20px'
+                    border = {1}
+                    borderColor = '#adc178'
                     
                 >
+                    <BackdropFilter
+                        className="bluredForm"
+                        filter={"blur(5px) "}
+                        html2canvasOpts={{
+                            allowTaint: true
+                        }}
+                        onDraw={() => {
+                            console.log("Rendered !");
+                        }}
+                    >
                     <br></br>
+                    <h1>Agregar club</h1>
                     <Grid container>
                         {/*Direccion*/}
                         <Grid item xs ={3}>
-                            <h2 className={classes.text2}>Direccion:</h2>  
+                            <h3 className={classes.text2}>Direccion:</h3>  
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
@@ -105,7 +105,7 @@ export default function AgregarClub() {
 
                         {/*Representante*/}
                         <Grid item xs = {3}>
-                            <h2 className={classes.text2}>Representante:</h2>               
+                            <h3 className={classes.text2}>Representante:</h3>               
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
@@ -113,7 +113,7 @@ export default function AgregarClub() {
 
                         {/*Telefono*/}
                         <Grid item xs = {3}>
-                            <h2 className={classes.text2}>Telefono:</h2>
+                            <h3 className={classes.text2}>Telefono:</h3>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
@@ -122,7 +122,7 @@ export default function AgregarClub() {
 
                         {/*Comuna*/}
                         <Grid item xs = {3}>
-                            <h2 className={classes.text2}>Comuna:</h2>
+                            <h3 className={classes.text2}>Comuna:</h3>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
@@ -130,7 +130,7 @@ export default function AgregarClub() {
                         
                     </Grid>
                     <br></br>
-
+                    </BackdropFilter>    
                 </Box>
                 <div  mx = {20}>
                     {/*boton volver*/}
@@ -138,7 +138,7 @@ export default function AgregarClub() {
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
-                        size='medium'
+                        size='small'
                         endIcon = {<KeyboardReturnIcon/>}
                         //onClick = {redireccionar}
                     >
@@ -149,7 +149,7 @@ export default function AgregarClub() {
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
-                        size='medium'
+                        size='small'
                         endIcon = {<SaveIcon/>}
                         //onClick = {()=>abrirCerrarModalEdit()}
                     >
