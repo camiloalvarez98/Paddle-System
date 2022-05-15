@@ -74,8 +74,8 @@ export default function AgregarClub() {
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
-                    blurRadius = {1}
-                    mx = {40} //margen a todos los lados
+                    //blurRadius = {1}
+                    mx = {25} //margen a todos los lados
                     //p = {30} //padding
                     //borderRadius = '20px'
                     border = {1}
@@ -100,7 +100,7 @@ export default function AgregarClub() {
                             <h3 className={classes.text2}>Direccion:</h3>  
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
 
                         {/*Representante*/}
@@ -108,7 +108,7 @@ export default function AgregarClub() {
                             <h3 className={classes.text2}>Representante:</h3>               
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
 
                         {/*Telefono*/}
@@ -116,7 +116,7 @@ export default function AgregarClub() {
                             <h3 className={classes.text2}>Telefono:</h3>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
 
 
@@ -125,7 +125,7 @@ export default function AgregarClub() {
                             <h3 className={classes.text2}>Comuna:</h3>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
                         
                     </Grid>
@@ -133,17 +133,6 @@ export default function AgregarClub() {
                     </BackdropFilter>    
                 </Box>
                 <div  mx = {20}>
-                    {/*boton volver*/}
-                    <Button 
-                        className={classes.button}
-                        type = "button"
-                        variant = 'contained'
-                        size='small'
-                        endIcon = {<KeyboardReturnIcon/>}
-                        //onClick = {redireccionar}
-                    >
-                        Volver
-                    </Button>
                     {/*boton guardar*/}
                     <Button 
                         className={classes.button}

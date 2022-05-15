@@ -143,7 +143,7 @@ export default function Perfil() {
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
-                    mx = {20} //margen a todos los lados
+                    mx = {25} //margen a todos los lados
                     //p = {30} //padding
                     //borderRadius = '8px'
                     border = {1}
@@ -166,7 +166,7 @@ export default function Perfil() {
                             <h3 className={classes.text2}>Nombre: </h3>  
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
 
                         {/*Rut*/}
@@ -174,7 +174,7 @@ export default function Perfil() {
                             <h3 className={classes.text2}>Rut: </h3>               
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
 
                         {/*Telefono*/}
@@ -182,7 +182,7 @@ export default function Perfil() {
                             <h3 className={classes.text2}>Teléfono:</h3>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
 
 
@@ -191,7 +191,7 @@ export default function Perfil() {
                             <h3 className={classes.text2}>Dirección: </h3>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
+                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
                         </Grid>
                         <Grid item xs={12} container justify="center">
                             <Button 

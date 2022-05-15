@@ -8,6 +8,7 @@ import {Modal, Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
+import BackdropFilter from "react-backdrop-filter";
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -100,19 +101,25 @@ export default function Principal() {
                 <Box
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
-                    mx = {15} //margen a todos los lados
-                    p = {10} //padding
-                    borderRadius = '8px'
-                    border = {2}
+                    //backgroundColor = '#D8F3DC'
+                    mx = {25} //margen a todos los lados
+                    //p = {10} //padding
+                    border = {1}
+                    borderColor = '#adc178'
                     
-                >   
-                    <Grid container>
-                        <Grid item xs ={3}>
-                            <h2 className={classes.text2}>Nombre club</h2> 
-                        </Grid>
-                    </Grid>
+                >
+                    <BackdropFilter
+                        className="bluredForm"
+                        filter={"blur(5px) "}
+                        html2canvasOpts={{
+                            allowTaint: true
+                        }}
+                        onDraw={() => {
+                            console.log("Rendered !");
+                        }}
+                    >
                     <br></br>
+                    <h1>Clubes registrados</h1>  
                     <Grid container>
                         {/*primer club*/}
                         <Grid item xs ={4}>
@@ -144,8 +151,8 @@ export default function Principal() {
                             </Button>
                         </Grid>
                     </Grid>
+                    </BackdropFilter>
                 </Box>
-                
             </div>
             <Modal
                 open = {modalEdit}
