@@ -4,3 +4,5 @@ export {default as Listas_admin} from '../Components/Listas_admin';
 export {default as Contenedor} from '../Components/Contenedor';
 export {default as Cajon} from '../Components/Cajon';
 export {default as Box} from '../Components/Box';
+export {default as BarraBusqueda} from '../Components/AppBarBuscador';
+export {default as ContenedorBusqueda} from './ContenedorBusqueda';
