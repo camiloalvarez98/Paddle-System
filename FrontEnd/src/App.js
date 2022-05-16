@@ -12,7 +12,11 @@ import { Principal, AgregarClub , Perfil, LoginAdmin} from './PagesAdministrador
 function App() {
   return (
     <AuthProvider>
-      <Principal/>
+      <Router>
+        <Switch>
+          <AgregarClub/>
+        </Switch>
+      </Router>
     </AuthProvider>
     
   );
