@@ -10,6 +10,9 @@ import Box from '@mui/material/Box';
 
 
 
+
+
+
 const useStyles = makeStyles(theme =>({
 
     offset: theme.mixins.toolbar, //hace al sitio responsive
@@ -35,6 +38,7 @@ const useStyles = makeStyles(theme =>({
         paddingTop: '56.25%', // 16:9,
         marginTop:'30'
     }
+
     
 
 }))
@@ -98,51 +102,50 @@ export default function BarraBusqueda(props) {
     const classes = useStyles()
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar className = {classes.appBar} color = 'white'>
-                <Toolbar >
-                    <IconButton
-                        className = {classes.menuButton}
-                        color = 'inherit'
-                        aria-label = 'menu'
-                        onClick = {() => props.accionAbrir()}
-                        sx = {{mr:2}}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
+        <AppBar className = {classes.appBar} color = 'white'>
+            <Toolbar >
+                <IconButton
+                    className = {classes.menuButton}
+                    color = 'inherit'
+                    aria-label = 'menu'
+                    onClick = {() => props.accionAbrir()}
+                    sx = {{mr:2}}
+                >
+                    <MenuIcon/>
+                </IconButton>
                     
                     
-                    <Typography
-                        variant='h6'
-                        className = {classes.title}
-                    >
-                        Sistema Padel
-                    </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
-                    <Box sx={{ flexGrow: 1 }} />
-                    <div>
-                        {error && <p className = 'error' > {error} </p>} 
-                    </div>
-                    <Button
-                        variant = 'contained'
-                        color = 'white'
-                        //onClick = {handleLogout}
-                    >
-                        Salir
-                    </Button>
-                    
-                </Toolbar>
+                <Typography
+                    variant='h6'
+                    className = {classes.title}
+                >
+                    Sistema Padel
+                </Typography>
+                <Search>
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        placeholder="Search…"
+                        inputProps={{ 'aria-label': 'search' }}
+                    />
+                </Search>
+                <Box sx={{ flexGrow: 1 }} />
+                <div>
+                    {error && <p className = 'error' > {error} </p>} 
+                </div>
+                <Button
+                    variant = 'contained'
+                    color = 'white'
+                    //onClick = {handleLogout}
+                >
+                    Salir
+                </Button>
+                
+            </Toolbar>
             
-            </AppBar>
-        </Box>
+        </AppBar>
+        
         
     )
 }
