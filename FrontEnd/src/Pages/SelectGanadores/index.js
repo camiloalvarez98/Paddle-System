@@ -51,6 +51,7 @@ export default function SelectGanadores() {
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
                     backgroundColor = '#D8F3DC'
+                    
                     mx = {20} //margen a todos los lados
                     p = {1} //padding
                     borderRadius = '8px'

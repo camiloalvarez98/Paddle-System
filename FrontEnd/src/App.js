@@ -11,7 +11,7 @@ import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeo
 function App() {
   return (
     <AuthProvider>
-      <PrincipalClub/>
+      <SelectGanadores/>
     </AuthProvider>
     
   );
