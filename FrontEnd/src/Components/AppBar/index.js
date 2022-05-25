@@ -35,6 +35,8 @@ const useStyles = makeStyles(theme =>({
 }))
 
 
+
+
 export default function Barra(props) {
     const [error, setError] = useState ('');
     //const { logout } = useAuth(); //esta funcion viene de /context/AuthContext
