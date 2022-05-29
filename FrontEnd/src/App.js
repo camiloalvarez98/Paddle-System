@@ -14,14 +14,15 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <AgregarClub/>
+          <Route path = '/' exact component={LoginAdmin}/>
+          <Route path = '/o' exact component={LoginClub}/>
         </Switch>
       </Router>
     </AuthProvider>
     
   );
 }
-
+/*FALTA UNA PÁGINA PRINCIPAL QUE PERMITA LA OPCIÓN DE LOS 3 LOGINS*/
 export default App;
 
 /*
