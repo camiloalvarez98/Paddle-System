@@ -1,0 +1,1 @@
+export {default as Hola} from '../PagePrincipal/Inicio'

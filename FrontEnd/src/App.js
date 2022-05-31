@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato } from './Pages'
 import { Principal, AgregarClub , Perfil, LoginAdmin} from './PagesAdministrador'
-
+import { Hola } from './PagePrincipal'
 
 
 
@@ -14,7 +14,11 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Perfil/>
+          <div class='slider'>
+            <div class='load'>
+            </div>
+            <Principal/>
+          </div>
         </Switch>
       </Router>
     </AuthProvider>
