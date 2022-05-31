@@ -9,6 +9,8 @@ import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -214,7 +216,7 @@ export default function Perfil() {
                         type = "button"
                         variant = 'contained'
                         size='small'
-
+                        endIcon = {<KeyboardReturnIcon/>}
                         //onClick = {()=>abrirCerrarModalEdit()}
                         //agregar función de volver a la página anterior
                     >
@@ -225,6 +227,7 @@ export default function Perfil() {
                         type = "button"
                         variant = 'contained'
                         size='small'
+                        endIcon = {<ModeEditIcon/>}
                         onClick = {()=>abrirCerrarModalEdit()}
                     >
                         Editar

@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, Drawer, Divider } from '@material-ui/core'
-import { Listas_admin } from '../../Components'
+import { ListasAdmin } from '../../Components'
 
 
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme =>({
     toolbar: theme.mixins.toolbar,
 }))
 
-export default function Cajon(props) {
+export default function CajonAdmin(props) {
     const classes = useStyles()
     return (
         <Drawer 
@@ -32,7 +32,7 @@ export default function Cajon(props) {
         >
             <div className = {classes.toolbar}/>
             <Divider/>
-            <Listas_admin/>
+            <ListasAdmin/>
 
         </Drawer>
     )
