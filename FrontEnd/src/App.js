@@ -12,6 +12,15 @@ import { Principal, AgregarClub , Perfil, LoginAdmin} from './PagesAdministrador
 function App() {
   return (
     <AuthProvider>
+      <SelectGanadores/>
+    </AuthProvider>
+    
+  );
+}
+
+export default App;
+
+/*
       <Router>
         <Routes>
           <Route element = {<PrivateRoute/>}>
@@ -25,18 +34,4 @@ function App() {
           
         </Routes>
       </Router>
-    </AuthProvider>
-    
-  );
-}
-
-export default App;
-
-/*
-<Router>
-<Switch>
-  <Route path = '/' exact component={PrincipalClub}/>
-  <Route path = '/CampeonatosClub' component = {CampeonatosClub}/>
-  
-</Switch>
-</Router>*/
+*/

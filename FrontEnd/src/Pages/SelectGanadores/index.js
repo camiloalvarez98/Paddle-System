@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core';
 import { TextField } from '@mui/material';
 import BackdropFilter from "react-backdrop-filter";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import SaveIcon from '@mui/icons-material/Save';
 
 const useStyles = makeStyles (theme=>({
 
@@ -112,13 +114,24 @@ export default function SelectGanadores() {
                         <br></br>
                     </BackdropFilter>
                 </Box>
-                <div  mx = {10}>
+                <div  mx = {20}>
+                    <Button 
+                            className={classes.button}
+                            type = "button"
+                            variant = 'contained'
+                            size='small'
+                            endIcon = {<KeyboardReturnIcon/>}
+                            //onClick = {()=>abrirCerrarModalEdit()}
+                            //agregar función de volver a la página anterior
+                    >
+                        Volver
+                    </Button>
                     <Button 
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
-                        size='medium'
-                        
+                        size='small'
+                        endIcon = {<SaveIcon/>}
                     >
                         Guardar
                     </Button>

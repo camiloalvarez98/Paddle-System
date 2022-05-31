@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles   } from '@material-ui/core';
 import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -86,13 +87,24 @@ export default function CampeonatosClub() {
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
-                        size='medium'
+                        size='small'
+                        endIcon = {<KeyboardReturnIcon/>}
+                        //onClick = {()=>abrirCerrarModalEdit()}
+                        //agregar función de volver a la página anterior
+                    >
+                        Volver
+                    </Button>
+                    
+                    <Button 
+                        className={classes.button}
+                        type = "button"
+                        variant = 'contained'
+                        size='small'
                         
                     >
                         Nuevo Campeonato
                     </Button>
                 </div>
-
             </div>
         </div>
     )
