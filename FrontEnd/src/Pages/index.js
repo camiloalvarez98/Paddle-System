@@ -1,3 +1,5 @@
+import { FlipRounded } from '@material-ui/icons'
+
 export {default as HomeClub} from '../Pages/HomeClub'
 export {default as PrincipalClub} from '../Pages/PrincipalClub'
 export {default as CampeonatosClub} from '../Pages/CampeonatosClub'

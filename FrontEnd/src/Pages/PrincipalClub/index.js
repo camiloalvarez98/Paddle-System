@@ -8,6 +8,7 @@ import {Modal, Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
+import BackdropFilter from "react-backdrop-filter";
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -25,7 +26,8 @@ const useStyles = makeStyles((theme)=>({
         cursor: 'pointer'
     },
     inputMaterial:{
-        width: '100%'
+        width: '100%',
+        
     },
     text:{
         fontFamily: 'oswald',
@@ -78,7 +80,7 @@ export default function PrincipalClub() {
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange}/>
+            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} />
             <br/>
             <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
             <br/>
@@ -100,7 +102,6 @@ export default function PrincipalClub() {
                 <Box 
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
                     mx = {20} //margen a todos los lados
                     p = {1} //padding
                     borderRadius = '8px'
@@ -108,58 +109,57 @@ export default function PrincipalClub() {
                     
                     
                 >
-                    <h1 >Padel del mar</h1>
+                    <BackdropFilter
+                        className="bluredForm"
+                        filter={"blur(5px) "}
+                        html2canvasOpts={{
+                            allowTaint: true
+                        }}
+                        onDraw={() => {
+                            console.log("Rendered !");
+                        }}
+                    >
+                        <h1 >Padel del mar</h1>
+                        <br></br>
+                        <Grid container>
+                            {/*Direccion*/}
+                            <Grid item xs ={3}>
+                                <h2 className={classes.text2}>Direccion:</h2>  
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
+                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                            </Grid>
+
+                            {/*Representante*/}
+                            <Grid item xs = {3}>
+                                <h2 className={classes.text2}>Representante:</h2>               
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                            </Grid>
+
+                            {/*Telefono*/}
+                            <Grid item xs = {3}>
+                                <h2 className={classes.text2}>Telefono:</h2>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                            </Grid>
+
+
+                            {/*Comuna*/}
+                            <Grid item xs = {3}>
+                                <h2 className={classes.text2}>Comuna:</h2>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                            </Grid>
+                            
+                        </Grid>
+                        <br></br>
+                    </BackdropFilter>
                 </Box>
-                <br></br>
-                <Box
-                    sx = {{flexGrow: 20}}
-                    color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
-                    mx = {20} //margen a todos los lados
-                    //p = {30} //padding
-                    borderRadius = '8px'
-                    border = {2}
-                    
-                >
-                    <br></br>
-                    <Grid container>
-                        {/*Direccion*/}
-                        <Grid item xs ={3}>
-                            <h2 className={classes.text2}>Direccion:</h2>  
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
-                        </Grid>
 
-                        {/*Representante*/}
-                        <Grid item xs = {3}>
-                            <h2 className={classes.text2}>Representante:</h2>               
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
-                        </Grid>
-
-                        {/*Telefono*/}
-                        <Grid item xs = {3}>
-                            <h2 className={classes.text2}>Telefono:</h2>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
-                        </Grid>
-
-
-                        {/*Comuna*/}
-                        <Grid item xs = {3}>
-                            <h2 className={classes.text2}>Comuna:</h2>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth/>
-                        </Grid>
-                        
-                    </Grid>
-                    <br></br>
-
-                </Box>
                 <div  mx = {20}>
                     <Button 
                         className={classes.button}

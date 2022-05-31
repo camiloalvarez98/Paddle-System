@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core';
 import { TextField } from '@mui/material';
+import BackdropFilter from "react-backdrop-filter";
 
 const useStyles = makeStyles (theme=>({
 
@@ -50,68 +51,66 @@ export default function SelectGanadores() {
                 <Box 
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
-                    
                     mx = {20} //margen a todos los lados
                     p = {1} //padding
                     borderRadius = '8px'
                     border = {2}
                                 
                 >
-                    <h1>Registrar Ganadores</h1>
-                </Box>
-                <br></br>
-                <Box
-                    sx = {{flexGrow: 20}}
-                    color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
-                    mx = {20} //margen a todos los lados
-                    //p = {30} //padding
-                    borderRadius = '8px'
-                    border = {2}    
-                >
-                    <Grid container>
-                        {/*Campeonato */}
-                        <Grid item sm = {3}>
-                            <h2 className={classes.text2}>ID Campeonato:</h2>
-                        </Grid>
-                        <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' fullWidth/>
-                        </Grid>
-                        {/*Categoria*/}
-                        <Grid item sm = {3}>
-                            <h2 className={classes.text2}>Categoria:</h2>
-                        </Grid>
-                        <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' fullWidth/>
-                        </Grid>
-                        {/*Primer Lugar*/}
-                        <Grid item sm = {3}>
-                            <h2 className={classes.text2}>Primer Lugar:</h2>
-                        </Grid>
-                        <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label=' Rut Jugador 1'/>
-                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label=' Rut Jugador 2'/>
-                        </Grid>
-                        {/*Segundo Lugar*/}
-                        <Grid item sm = {3}>
-                            <h2 className={classes.text2}>Segundo Lugar:</h2>
-                        </Grid>
-                        <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 1'/>
-                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 2'/>
-                        </Grid>
-                        {/*Tercer Lugar*/}
-                        <Grid item sm = {3}>
-                            <h2 className={classes.text2}>Tercer Lugar:</h2>
-                        </Grid>
-                        <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 1'/>
-                            <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 2'/>
-                        </Grid>
+                    <BackdropFilter
+                        className="bluredForm"
+                        filter={"blur(5px) "}
+                        html2canvasOpts={{
+                            allowTaint: true
+                        }}
+                        onDraw={() => {
+                            console.log("Rendered !");
+                        }}
+                    >
+                        <h1>Registrar Ganadores</h1>
+                        <Grid container>
+                            {/*Campeonato */}
+                            <Grid item sm = {3}>
+                                <h2 className={classes.text2}>ID Campeonato:</h2>
+                            </Grid>
+                            <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                                <TextField variant='outlined' fullWidth/>
+                            </Grid>
+                            {/*Categoria*/}
+                            <Grid item sm = {3}>
+                                <h2 className={classes.text2}>Categoria:</h2>
+                            </Grid>
+                            <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                                <TextField variant='outlined' fullWidth/>
+                            </Grid>
+                            {/*Primer Lugar*/}
+                            <Grid item sm = {3}>
+                                <h2 className={classes.text2}>Primer Lugar:</h2>
+                            </Grid>
+                            <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                                <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label=' Rut Jugador 1'/>
+                                <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label=' Rut Jugador 2'/>
+                            </Grid>
+                            {/*Segundo Lugar*/}
+                            <Grid item sm = {3}>
+                                <h2 className={classes.text2}>Segundo Lugar:</h2>
+                            </Grid>
+                            <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                                <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 1'/>
+                                <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 2'/>
+                            </Grid>
+                            {/*Tercer Lugar*/}
+                            <Grid item sm = {3}>
+                                <h2 className={classes.text2}>Tercer Lugar:</h2>
+                            </Grid>
+                            <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                                <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 1'/>
+                                <TextField variant='outlined' sx = {{m: 1, width: '47%'}} label='Rut Jugador 2'/>
+                            </Grid>
 
-                    </Grid>
-                    <br></br>
+                        </Grid>
+                        <br></br>
+                    </BackdropFilter>
                 </Box>
                 <div  mx = {10}>
                     <Button 

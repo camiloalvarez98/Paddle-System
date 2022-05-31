@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Toolbar,AppBar, Typography, IconButton} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-//import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../Context/AuthContext';
 
 
 const useStyles = makeStyles(theme =>({
@@ -39,16 +39,16 @@ const useStyles = makeStyles(theme =>({
 
 export default function Barra(props) {
     const [error, setError] = useState ('');
-    //const { logout } = useAuth(); //esta funcion viene de /context/AuthContext
+    const { logout } = useAuth(); //esta funcion viene de /context/AuthContext
 
-    /*
+    
     const handleLogout = async () => {
         try{
             await logout();
         } catch (error){ 
             setError('Server Error')
         }
-    }*/
+    }
     const classes = useStyles()
 
     return (
@@ -69,7 +69,7 @@ export default function Barra(props) {
                     variant='h6'
                     className = {classes.title}
                 >
-                    Sistema Padel
+                    Gestor de Campeonatos Padel
                 </Typography>
                 
                 <div>
@@ -78,7 +78,7 @@ export default function Barra(props) {
                 <Button
                     variant = 'contained'
                     color = 'white'
-                    //onClick = {handleLogout}
+                    onClick = {handleLogout}
                 >
                     Salir
                 </Button>

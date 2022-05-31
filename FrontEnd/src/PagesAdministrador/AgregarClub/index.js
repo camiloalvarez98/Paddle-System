@@ -6,8 +6,8 @@ import { makeStyles, styled } from '@material-ui/core';
 import { Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from '../../Components';
-import { Link, NavLink,  } from 'react-router-dom'
-import {useHistory} from 'react-router-dom'
+import { Link, NavLink, useNavigate,  } from 'react-router-dom'
+import {NavLinkProps} from 'react-router-dom'
 import {Principal} from '../Principal'
 import GroupsIcon from '@mui/icons-material/Groups';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
@@ -43,10 +43,10 @@ const useStyles = makeStyles((theme)=>({
 
 
 export default function AgregarClub() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const classes = useStyles()
     const redireccionar= () => {
-        history.push(' /Principal');    
+        navigate(' /Principal');    
     }
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
