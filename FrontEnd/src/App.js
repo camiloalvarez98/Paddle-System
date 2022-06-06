@@ -1,27 +1,31 @@
 
 import './App.css';
 import { AuthProvider } from './Context'
-import { BrowserRouter as Router, Routes as Nose} from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato } from './Pages'
 import { Principal, AgregarClub , Perfil, LoginAdmin} from './PagesAdministrador'
-import { PerfilJugador, CampeonatosJugador } from './PagesPlayer';
+import { PerfilJugador, CampeonatosJugador, LoginJugador } from './PagesPlayer';
 import { Hola } from './PublicPages'
 
 
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-          <div class='slider'>
-            <div class='load'>
-            </div>
-            <CampeonatosJugador/>
-          </div>
-        
-      </Router>
-    </AuthProvider>
+    <div class='slider'>
+      <div class='load'>
+      </div>
+      <BrowserRouter>
+        <main>
+          <Routes>
+              <Route path="/" element={<AgregarClub/>}/>
+              <Route path="/LoginAdmin" element={<AgregarClub/>}/>
+              <Route path="/LoginClub" element={<CampeonatosClub/>}/>
+              <Route path="/LoginJugador" element={<LoginJugador/>}/>
+          </Routes>
+        </main>
+      </BrowserRouter>
+    </div>
     
   );
 }
