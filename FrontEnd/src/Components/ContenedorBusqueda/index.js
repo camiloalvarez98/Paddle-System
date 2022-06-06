@@ -1,6 +1,7 @@
 import React from "react";
 import { BarraBusqueda, Cajon, Box } from "..";
 import { makeStyles, Hidden } from "@material-ui/core";
+import CajonAdmin from "../CajonAdmin";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,10 +24,10 @@ export default function ContenedorBusqueda() {
     <div className={classes.root}>
       <BarraBusqueda accionAbrir={accionAbrir} />
       <Hidden xsDown>
-        <Cajon variant="temporary" open={abrir} onClose={accionAbrir} />
+        <CajonAdmin variant="temporary" open={abrir} onClose={accionAbrir} />
       </Hidden>
       <Hidden xlUp>
-        <Cajon variant="temporary" open={abrir} onClose={accionAbrir} />
+        <CajonAdmin variant="temporary" open={abrir} onClose={accionAbrir} />
       </Hidden>
       <div className={classes.content}>
         <div className={classes.toolbar} />

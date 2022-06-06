@@ -6,11 +6,11 @@ import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
-import { Contenedor } from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { ContenedorAdmin } from '../../Components';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -138,7 +138,7 @@ export default function Perfil() {
 
     return (
         <div>
-            <Contenedor/>
+            <ContenedorAdmin/>
             <div align = 'center'>
                 <br></br>
                 <Box

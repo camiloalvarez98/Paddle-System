@@ -126,7 +126,7 @@ export default function BarraBusqueda(props) {
                         <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
-                        placeholder="Search…"
+                        placeholder="Buscar club"
                         inputProps={{ 'aria-label': 'search' }}
                     />
                 </Search>
