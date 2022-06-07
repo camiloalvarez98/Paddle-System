@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {  Button, TextField, makeStyles, FormControlLabel, Checkbox, FormControl, FormLabel, FormGroup  } from '@material-ui/core';
 import { Contenedor } from "../../Components";
+import BackdropFilter from "react-backdrop-filter";
 
 const useStyles = makeStyles((theme)=>({
   modal:{
@@ -74,114 +75,103 @@ export default function NuevoCampeonato() {
               }
             }}
             color = 'contrastText'
-            backgroundColor = '#D8F3DC'
             mx = {20} //margen a todos los lados
             p = {1} //padding
-            borderRadius = '8px'
+            //borderRadius = '8px'
             border = {2}
           >
-            <h1>Nuevo Campeonato</h1>
-          </Box>
-          <br></br>
-          <Box
-            //sx = {{flexGrow: 20}}
-            sx = {{
-              width:{
-                xs: 300,
-                sm: 400,
-                md: 600,
-                lg: 800,
-                xl: 1200,
-              }
-            }}
-            color = 'contrastText'
-            backgroundColor = '#D8F3DC'
-            mx = {20} //margen a todos los lados
-            p = {1} //padding
-            borderRadius = '8px'
-            border = {2}
-            
-          >
-            <Grid container>
-              <Grid item sm = {3}>
-                <h2 className={classes.text2}>Nombre:</h2>
-              </Grid>
-              <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                  <TextField variant='outlined' fullWidth/>
-              </Grid>
-              <Grid item sm = {3}>
-                <h2 className={classes.text2}>Fecha de inicio:</h2>
-              </Grid>
-              <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                  <TextField variant='outlined' fullWidth/>
-              </Grid>
-              <Grid item sm = {3}>
-                <h2 className={classes.text2}>Fecha de termino:</h2>
-              </Grid>
-              <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                  <TextField variant='outlined' fullWidth/>
+            <BackdropFilter
+              className="bluredForm"
+              filter={"blur(5px) "}
+              html2canvasOpts={{
+                  allowTaint: true
+              }}
+              onDraw={() => {
+                  console.log("Rendered !");
+              }}
+            >
+              <h1>Nuevo Campeonato</h1>
+              <Grid container>
+                <Grid item sm = {3}>
+                  <h2 className={classes.text2}>Nombre:</h2>
+                </Grid>
+                <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                    <TextField variant='outlined' fullWidth/>
+                </Grid>
+                <Grid item sm = {3}>
+                  <h2 className={classes.text2}>Fecha de inicio:</h2>
+                </Grid>
+                <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                    <TextField variant='outlined' fullWidth/>
+                </Grid>
+                <Grid item sm = {3}>
+                  <h2 className={classes.text2}>Fecha de termino:</h2>
+                </Grid>
+                <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
+                    <TextField variant='outlined' fullWidth/>
+                </Grid>
+                <br></br>
+                <Box 
+                  margin = 'center' 
+                  sx = {{flexGrow: 20}}
+                  marginTop = {'30px'}
+                >
+                  <FormControl>
+                      <h3>Categorias</h3>
+                    <FormGroup>
+                      <Grid item sm = {12} xl = {12} marginTop= {'20px'} >
+                        <FormControlLabel
+                          label = 'Primera'
+                          value = '1'
+                          control = {<Checkbox color = 'secondary'  checked = {categoriesAc.includes('1')} onChange = {handleCategoriesChange}/>}
+                        />
+                        <FormControlLabel
+                          label = 'Segunda'
+                          value = '2'
+                          control = {<Checkbox color = 'secondary'  checked = {categoriesAc.includes('2')} onChange = {handleCategoriesChange}/>}
+                        />
+                        <FormControlLabel
+                          label = 'Tercera'
+                          value = '3'
+                          control = {<Checkbox color = 'secondary'  checked = {categoriesAc.includes('3')} onChange = {handleCategoriesChange}/>}
+                        />
+                        <FormControlLabel
+                          label = 'Cuarta'
+                          value = '4'
+                          control = {<Checkbox color = 'secondary'  checked = {categoriesAc.includes('4')} onChange = {handleCategoriesChange}/>}
+                        />
+                        <FormControlLabel
+                          label = 'Quinta'
+                          value = '5'
+                          control = {<Checkbox color = 'secondary'   checked = {categoriesAc.includes('5')} onChange = {handleCategoriesChange}/>}
+                        />
+                        <FormControlLabel
+                          label = 'Sexta'
+                          value = '6'
+                          control = {<Checkbox color = 'secondary'  checked = {categoriesAc.includes('6')} onChange = {handleCategoriesChange}/>}
+                        />     
+                        <FormControlLabel
+                          label = 'Damas A'
+                          value = 'DA'
+                          control = {<Checkbox color = 'secondary'  checked = {categoriesAc.includes('DA')} onChange = {handleCategoriesChange}/>}
+                        />       
+                        <FormControlLabel
+                          label = 'Damas B'
+                          value = 'DB'
+                          control = {<Checkbox color = 'secondary' checked = {categoriesAc.includes('DB')} onChange = {handleCategoriesChange}/>}
+                        />
+                        <FormControlLabel
+                          label = 'Damas C'
+                          value = 'DC'
+                          control = {<Checkbox color = 'secondary'  checked = {categoriesAc.includes('DC')} onChange = {handleCategoriesChange}/>}
+                        />
+                      </Grid>
+                    </FormGroup>
+                  </FormControl>
+                </Box>
               </Grid>
               <br></br>
-              <Box 
-                margin = 'center' 
-                sx = {{flexGrow: 20}}
-                marginTop = {'30px'}
-              >
-                <FormControl>
-                    <FormLabel >Categorias</FormLabel>
-                  <FormGroup>
-                    <Grid item sm = {12} xl = {12} marginTop= {'20px'} >
-                      <FormControlLabel
-                        label = 'Primera'
-                        value = '1'
-                        control = {<Checkbox color = 'primary'  checked = {categoriesAc.includes('1')} onChange = {handleCategoriesChange}/>}
-                      />
-                      <FormControlLabel
-                        label = 'Segunda'
-                        value = '2'
-                        control = {<Checkbox color = 'primary'  checked = {categoriesAc.includes('2')} onChange = {handleCategoriesChange}/>}
-                      />
-                      <FormControlLabel
-                        label = 'Tercera'
-                        value = '3'
-                        control = {<Checkbox color = 'primary'  checked = {categoriesAc.includes('3')} onChange = {handleCategoriesChange}/>}
-                      />
-                      <FormControlLabel
-                        label = 'Cuarta'
-                        value = '4'
-                        control = {<Checkbox color = 'primary'  checked = {categoriesAc.includes('4')} onChange = {handleCategoriesChange}/>}
-                      />
-                      <FormControlLabel
-                        label = 'Quinta'
-                        value = '5'
-                        control = {<Checkbox color = 'primary'   checked = {categoriesAc.includes('5')} onChange = {handleCategoriesChange}/>}
-                      />
-                      <FormControlLabel
-                        label = 'Sexta'
-                        value = '6'
-                        control = {<Checkbox color = 'primary'  checked = {categoriesAc.includes('6')} onChange = {handleCategoriesChange}/>}
-                      />     
-                      <FormControlLabel
-                        label = 'Damas A'
-                        value = 'DA'
-                        control = {<Checkbox color = 'primary'  checked = {categoriesAc.includes('DA')} onChange = {handleCategoriesChange}/>}
-                      />       
-                      <FormControlLabel
-                        label = 'Damas B'
-                        value = 'DB'
-                        control = {<Checkbox color = 'primary' checked = {categoriesAc.includes('DB')} onChange = {handleCategoriesChange}/>}
-                      />
-                      <FormControlLabel
-                        label = 'Damas C'
-                        value = 'DC'
-                        control = {<Checkbox color = 'primary'  checked = {categoriesAc.includes('DC')} onChange = {handleCategoriesChange}/>}
-                      />
-                    </Grid>
-                  </FormGroup>
-                </FormControl>
-              </Box>
-            </Grid>
-            <br></br>
+            </BackdropFilter>
           </Box>
           <div  mx = {10}>
             <Button 

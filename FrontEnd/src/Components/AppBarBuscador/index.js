@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Toolbar,AppBar, Typography, IconButton} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-//import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../Context/AuthContext';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
@@ -89,16 +89,16 @@ const Search = styled('div')(({ theme }) => ({
 
 export default function BarraBusqueda(props) {
     const [error, setError] = useState ('');
-    //const { logout } = useAuth(); //esta funcion viene de /context/AuthContext
+    const { logout } = useAuth(); //esta funcion viene de /context/AuthContext
 
-    /*
+    
     const handleLogout = async () => {
         try{
             await logout();
         } catch (error){ 
             setError('Server Error')
         }
-    }*/
+    }
     const classes = useStyles()
 
     return (
@@ -119,7 +119,7 @@ export default function BarraBusqueda(props) {
                     variant='h6'
                     className = {classes.title}
                 >
-                    Sistema Padel
+                    Gestor de Campeonatos Padel
                 </Typography>
                 <Search>
                     <SearchIconWrapper>
@@ -137,7 +137,7 @@ export default function BarraBusqueda(props) {
                 <Button
                     variant = 'contained'
                     color = 'white'
-                    //onClick = {handleLogout}
+                    onClick = {handleLogout}
                 >
                     Salir
                 </Button>

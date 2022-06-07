@@ -3,6 +3,8 @@ import React, {useEffect,useState} from 'react';
 import Box from '@mui/material/Box';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles   } from '@material-ui/core';
 import { Contenedor } from "../../Components";
+import BackdropFilter from "react-backdrop-filter";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -48,51 +50,61 @@ export default function CampeonatosClub() {
                 <Box 
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
                     mx = {20} //margen a todos los lados
                     p = {1} //padding
-                    borderRadius = '8px'
+                    //borderRadius = '8px'
                     border = {2}
                             
                 >
-                    <h1>Campeonatos</h1>
-                </Box>
-                <br></br>
-                <Box
-                    sx = {{flexGrow: 20}}
-                    color = 'contrastText'
-                    backgroundColor = '#D8F3DC'
-                    mx = {20} //margen a todos los lados
-                    //p = {30} //padding
-                    borderRadius = '8px'
-                    border = {2}
-                >
-                   <TableContainer>
-                       <Table sx = {{ minWidth: 650 }} id = 'tables' >
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align='center'><h2>Nombre</h2></TableCell>
-                                    <TableCell align='center'><h2>ID</h2></TableCell>
-                                    <TableCell align='center'><h2>Fecha Inicio</h2></TableCell>
-                                    <TableCell align='center'><h2>Fecha Termino</h2></TableCell>
-                                    <TableCell align='center'><h2>Acciones</h2></TableCell>
-                                </TableRow>
-                            </TableHead>
-                       </Table>
-                   </TableContainer>
+                    <BackdropFilter
+                        className="bluredForm"
+                        filter={"blur(5px) "}
+                        html2canvasOpts={{
+                            allowTaint: true
+                        }}
+                        onDraw={() => {
+                            console.log("Rendered !");
+                        }}
+                    >
+                        <h1>Campeonatos</h1>
+                        <TableContainer>
+                            <Table sx = {{ minWidth: 650 }} id = 'tables' >
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align='center'><h2>Nombre</h2></TableCell>
+                                            <TableCell align='center'><h2>ID</h2></TableCell>
+                                            <TableCell align='center'><h2>Fecha Inicio</h2></TableCell>
+                                            <TableCell align='center'><h2>Fecha Termino</h2></TableCell>
+                                            <TableCell align='center'><h2>Acciones</h2></TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                            </Table>
+                        </TableContainer>
+                    </BackdropFilter>
                 </Box>
                 <div  mx = {20}>
                     <Button 
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
-                        size='medium'
+                        size='small'
+                        endIcon = {<KeyboardReturnIcon/>}
+                        //onClick = {()=>abrirCerrarModalEdit()}
+                        //agregar función de volver a la página anterior
+                    >
+                        Volver
+                    </Button>
+                    
+                    <Button 
+                        className={classes.button}
+                        type = "button"
+                        variant = 'contained'
+                        size='small'
                         
                     >
                         Nuevo Campeonato
                     </Button>
                 </div>
-
             </div>
         </div>
     )
