@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme=>({
     },
     avatar:{
         margin: theme.spacing(6),
-        marginBottom: theme.spacing(1),
+        marginTop: -40,
         backgroundColor: theme.palette.secondary.main
        
     },
@@ -52,11 +52,11 @@ const useStyles = makeStyles(theme=>({
 
     text:{
         marginLeft: 155,
-        marginTop: 30
+        marginTop: 40
     },
     text2:{
         marginLeft: 128,
-        marginTop: 30
+        marginTop: 40
     }
 
 }))
@@ -96,7 +96,7 @@ export default function Login() {
                     <div className = {classes.div}>
                         {error && <p className= 'error'>{error}</p>}
                         
-                        <Avatar className = {classes.avatar}> 
+                        <Avatar className = {classes.avatar} > 
                             <LockOutlinedIcon / /*ICONO DE CANDADO*/> 
                         </Avatar>
                         <Typography component = 'h1' variant = 'h4'> Login </Typography>
@@ -125,21 +125,20 @@ export default function Login() {
                                 type = 'password' //eso encripta la password por pantalla
                                 onChange = {handlePassword}         
                             />
-                            
-                        
                             <Button
                                 type = 'submit'
                                 value = 'Login'
                                 fullWidth
                                 variant = 'contained'
-                                
                                 className = {classes.button}
                             >
                                 Ingresar
                             </Button>    
                             
-
-                            <br  /><br  />                  
+                            <Link to = '/signupclub'>
+                                <ListItemText secondary = 'Crear cuenta' className= {classes.text}/>
+                            </Link>       
+                            <br  /><br  />          
                         </form>
                     </div>
                 </Container>

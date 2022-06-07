@@ -52,7 +52,7 @@ export default function CampeonatosClub() {
                     color = 'contrastText'
                     mx = {20} //margen a todos los lados
                     p = {1} //padding
-                    borderRadius = '8px'
+                    //borderRadius = '8px'
                     border = {2}
                             
                 >

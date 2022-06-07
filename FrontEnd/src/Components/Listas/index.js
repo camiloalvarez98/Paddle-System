@@ -14,8 +14,7 @@ import {  NavLink, Link  } from 'react-router-dom'; //ESTO HACE Q EL PROGRAMA SE
 
 
 export default function Lista() {
-    
-    
+
     return (
        
         <div>
