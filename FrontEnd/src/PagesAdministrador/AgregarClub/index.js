@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import { Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
-import { ContenedorAdmin } from '../../Components';
+import { ContenedorAdmin , Jeje} from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
 import {Principal} from '../Principal'
@@ -13,6 +13,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
 import BackdropFilter from "react-backdrop-filter";
+
 
 
 
@@ -38,6 +39,9 @@ const useStyles = makeStyles((theme)=>({
         border: '2px',
         borderColor: '#4f772d'
     },
+    root: {
+        display: "flex",
+      },
 }));
 
 
