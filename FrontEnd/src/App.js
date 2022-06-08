@@ -18,10 +18,13 @@ function App() {
       <BrowserRouter>
         <main>
           <Routes>
-              <Route path="/" element={<AgregarClub/>}/>
+              <Route exact path="/" element={<Principal/>}/>
               <Route path="/LoginAdmin" element={<AgregarClub/>}/>
               <Route path="/LoginClub" element={<CampeonatosClub/>}/>
               <Route path="/LoginJugador" element={<LoginJugador/>}/>
+              <Route exact path="/PerfilAdmin" element={<Perfil/>}/>
+              <Route exact path="/AgregarClub" element={<AgregarClub/>}/>
+              <Route exact path="/Campeonatos" element={<AgregarClub/>}/>
           </Routes>
         </main>
       </BrowserRouter>

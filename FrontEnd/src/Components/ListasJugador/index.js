@@ -12,7 +12,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from '@material-ui/core';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-
+import { PerfilJugador } from '../../PagesPlayer';
 
 
 const style = {
@@ -31,7 +31,7 @@ export default function ListasJugador() {
             <List sx={style} component = 'nav' >
                 <div>
                     <li className='nav-item'>
-                        <Link underline='none' color='inherit' href= '/PerfilJugador' >
+                        <Link underline='none' color='inherit' href= '/PerfilJugador'  >
                             <ListItem button>
                                 <ListItemIcon>
                                     <AccountCircleIcon/>
