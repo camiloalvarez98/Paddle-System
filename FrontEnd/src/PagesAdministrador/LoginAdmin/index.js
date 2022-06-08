@@ -3,7 +3,7 @@ import { Grid, Container, Paper, Avatar, Typography, Button, TextField} from '@m
 import { makeStyles } from '@material-ui/core/styles'
 import {  LockOutlined as LockOutlinedIcon } from '@material-ui/icons'
 import { useAuth } from '../../Context/AuthContext'
-//import { Link, useHistory} from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { ListItemText } from '@mui/material'
 
 
@@ -67,24 +67,24 @@ export default function LoginAdmin() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const classes = useStyles();
-    //const history = useHistory();
+    const navigate = useNavigate();
 
     const handleEmail = (event) => setEmail(event.target.value) //el email se setea deacuerdo al valor que ingrese en el input
     const handlePassword = (event) => setPassword(event.target.value) //la password se setea deacuerdo al valor que ingrese en el input
 
-    /*
+    
     const handleSubmit = async(event) => { //usaremos login, que es asincrona por eso colocamos asyn en esta funcion
         event.preventDefault();
 
         try{
             await login(email, password)
             // history nos envia a home luego de iniciar sesion validamente
-            history.push('/') 
+            navigate('/principalAdmin') 
         }catch (error){
             setError('Datos incorrectos');
             setTimeout (()=> setError(''), 2500) //se setea el error a un string vacio dps de 1500ms
         }
-    }*/
+    }
 
 
 
@@ -101,7 +101,7 @@ export default function LoginAdmin() {
                         </Avatar>
                         <Typography component = 'h1' variant = 'h4'> Login </Typography>
                         
-                        <form className = {classes.form} >  
+                        <form className = {classes.form} onSubmit = {handleSubmit}>  
                             <br/>
                             <TextField //input de usuario
                                 variant = 'outlined'

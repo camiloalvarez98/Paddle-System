@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import {  Button, TextField, makeStyles, FormControlLabel, Checkbox, FormControl, FormLabel, FormGroup  } from '@material-ui/core';
 import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({
   modal:{
@@ -174,11 +176,24 @@ export default function NuevoCampeonato() {
             </BackdropFilter>
           </Box>
           <div  mx = {10}>
+          <Link  underline ='none' color='inherit' to ='/campeonatosclub'>
+              <Button 
+                  className={classes.button}
+                  type = "button"
+                  variant = 'contained'
+                  size='small'
+                  endIcon = {<KeyboardReturnIcon/>}
+                  //onClick = {()=>abrirCerrarModalEdit()}
+                  //agregar función de volver a la página anterior
+              >
+                  Volver
+              </Button>
+            </Link>    
             <Button 
                 className={classes.button}
                 type = "button"
                 variant = 'contained'
-                size='medium'
+                size='small'
                 
             >
                 Guardar

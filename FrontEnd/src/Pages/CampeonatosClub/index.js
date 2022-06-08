@@ -5,6 +5,7 @@ import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal
 import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -83,27 +84,17 @@ export default function CampeonatosClub() {
                     </BackdropFilter>
                 </Box>
                 <div  mx = {20}>
-                    <Button 
-                        className={classes.button}
-                        type = "button"
-                        variant = 'contained'
-                        size='small'
-                        endIcon = {<KeyboardReturnIcon/>}
-                        //onClick = {()=>abrirCerrarModalEdit()}
-                        //agregar función de volver a la página anterior
-                    >
-                        Volver
-                    </Button>
                     
-                    <Button 
-                        className={classes.button}
-                        type = "button"
-                        variant = 'contained'
-                        size='small'
-                        
-                    >
-                        Nuevo Campeonato
-                    </Button>
+                    <Link underline ='none' color='inherit' to ='/nuevocampeonato'>
+                        <Button 
+                            className={classes.button}
+                            type = "button"
+                            variant = 'contained'
+                            size='small'  
+                        >
+                            Nuevo Campeonato
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>

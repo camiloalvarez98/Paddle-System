@@ -116,6 +116,7 @@ export default function SignIn() {
                             <br/>
                             <TextField
                                 variant = 'outlined'
+                                color='secondary'
                                 fullWidth
                                 required
                                 autoFocus //enfocado en input de usuario
@@ -127,6 +128,7 @@ export default function SignIn() {
                             <br/>
                             <TextField
                                 variant = 'outlined'
+                                color='secondary'
                                 fullWidth
                                 required
                                 autoFocus //enfocado en input de usuario
@@ -138,6 +140,7 @@ export default function SignIn() {
                             <br/>
                             <TextField
                                 variant = 'outlined'
+                                color='secondary'
                                 fullWidth
                                 required
                                 autoFocus //enfocado en input de usuario

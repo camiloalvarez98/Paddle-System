@@ -15,7 +15,6 @@ import Divider from '@mui/material/Divider';
 import { Link } from '@material-ui/core';
 
 
-
 const style = {
     width: '100%',
     maxWidth: 360,
@@ -32,7 +31,7 @@ export default function ListasAdmin() {
             <List sx={style} component = 'nav' >
                 <div>
                     <li className='nav-item'>
-                        <Link underline='none' color='inherit' href= '/Perfil' >
+                        <Link underline='none' color='inherit' href= '/perfilAdmin' >
                             <ListItem button>
                                 <ListItemIcon>
                                     <AccountCircleIcon/>
@@ -44,7 +43,7 @@ export default function ListasAdmin() {
                     </li>
                     
                     <li className = 'nav-item'>
-                        <Link underline='none' color='inherit' href='/AgregarClub' >
+                        <Link underline='none' color='inherit' href='/agregarClub' >
                             <ListItem button>
                                 <ListItemIcon>
                                     <AddCircleIcon/>
@@ -56,7 +55,7 @@ export default function ListasAdmin() {
                     </li>
 
                     <li className='nav-item'>
-                        <Link underline="none" color='inherit' href= "/Principal" >
+                        <Link underline="none" color='inherit' href= "/principalAdmin" >
                             <ListItem button>
                                 <ListItemIcon>
                                     <CalendarTodayIcon/>

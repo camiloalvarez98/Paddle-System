@@ -7,6 +7,5 @@ export default function PrivateRoute() {
     const { currentUser } = useAuth(); //usuario actual, se obtiene desde useAuth
     return (
         currentUser?<Outlet/>:<Navigate to='/loginClub'/>
-        
     )
 }

@@ -8,10 +8,13 @@ import {
 } from '@material-ui/core'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import HomeIcon from '@mui/icons-material/Home';
-import {  NavLink, Link  } from 'react-router-dom'; //ESTO HACE Q EL PROGRAMA SE CAIGA AL ABRIR LAS LISTAS
+import { Link } from '@material-ui/core';
 
-
-
+const style = {
+    width: '100%',
+    maxWidth: 360,
+    bgcolor: 'background.paper'
+}
 
 export default function Lista() {
 
@@ -19,10 +22,10 @@ export default function Lista() {
        
         <div>
         
-            <List component = 'nav'>
+            <List sx={style} component = 'nav'>
                 <div>
                     <li className = 'nav-item'>
-                        <Link to = "/" className = 'btn' >
+                        <Link underline='none' color='inherit' href = "/" className='btn' >
                             <ListItem button>
                                 <ListItemIcon>
                                     <HomeIcon/>
@@ -33,7 +36,7 @@ export default function Lista() {
                     </li>
 
                     <li className='nav-item'>
-                        <Link to = "/CampeonatosClub" className = 'btn'>
+                        <Link underline='none' color='inherit' href = "/CampeonatosClub" className = 'btn'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <CalendarTodayIcon/>
@@ -43,7 +46,7 @@ export default function Lista() {
                         </Link>
                     </li>
                     <li className='nav-item'>
-                        <Link to = "/selectganadores" className = 'btn'>
+                        <Link underline='none' color='inherit'  href = "/selectganadores" className = 'btn'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <CalendarTodayIcon/>

@@ -129,6 +129,7 @@ export default function Login() {
                                 type = 'submit'
                                 value = 'Login'
                                 fullWidth
+                                
                                 variant = 'contained'
                                 className = {classes.button}
                             >
@@ -137,8 +138,11 @@ export default function Login() {
                             
                             <Link to = '/signupclub'>
                                 <ListItemText secondary = 'Crear cuenta' className= {classes.text}/>
-                            </Link>       
-                            <br  /><br  />          
+                            </Link>   
+                            <Link to = '/forgotpassword'>
+                                <ListItemText secondary = 'Recuperar contraseña' className= {classes.text2}/>
+                            </Link>     
+                            <br  /><br />          
                         </form>
                     </div>
                 </Container>

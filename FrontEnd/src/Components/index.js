@@ -13,5 +13,5 @@ export {default as CajonAdmin} from '../Components/CajonAdmin'
 export {default as CajonJugador} from '../Components/CajonJugador'
 export {default as Box} from '../Components/Box';
 export {default as BarraBusqueda} from '../Components/AppBarBuscador';
-
-
+export {default as PrivateRoute} from '../Components/Private'
+export {default as PrivateRoute2} from '../Components/Private2'
