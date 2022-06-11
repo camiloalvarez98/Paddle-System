@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState,Fragment} from 'react';
 //import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -7,6 +7,12 @@ import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from 'react-router-dom';
+import SaveIcon from '@mui/icons-material/Save';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+
 
 const useStyles = makeStyles((theme)=>({
   modal:{
@@ -29,7 +35,10 @@ const useStyles = makeStyles((theme)=>({
   button:{
       width: '20%',
       //margin: theme.spacing(10,65,10),
-      marginTop: theme.spacing(8) ,
+      marginTop: theme.spacing(2) ,
+      marginBottom: theme.spacing(2),
+      marginLeft: theme.spacing(5),
+      marginRight: theme.spacing(5),
       
       [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
           margin: theme.spacing(0),
@@ -49,7 +58,12 @@ export default function NuevoCampeonato() {
   const classes = useStyles()
   const [categoriesAc, setCategoriesAc] = useState([])
   console.log(categoriesAc)
-  
+  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
   const handleCategoriesChange = e =>{
     const index = categoriesAc.indexOf(e.target.value)
     if (index === -1){
@@ -59,7 +73,10 @@ export default function NuevoCampeonato() {
     }
   }
 
+  const [selects,setSelects]=useState();
 
+  
+  
 
   return (
     <div>
@@ -78,9 +95,9 @@ export default function NuevoCampeonato() {
             }}
             color = 'contrastText'
             mx = {20} //margen a todos los lados
-            p = {1} //padding
+            //p = {1} //padding
             //borderRadius = '8px'
-            border = {2}
+            border = {1}
           >
             <BackdropFilter
               className="bluredForm"
@@ -92,26 +109,53 @@ export default function NuevoCampeonato() {
                   console.log("Rendered !");
               }}
             >
-              <h1>Nuevo Campeonato</h1>
-              <Grid container>
-                <Grid item sm = {3}>
-                  <h2 className={classes.text2}>Nombre:</h2>
+              <h2>Nuevo Campeonato</h2>
+              <Grid container direction="row" justify="flex-end" alignItems="center">
+
+                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                    <TextField required label='Nombre campeonato'  />
                 </Grid>
-                <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                    <TextField variant='outlined' fullWidth/>
+                
+                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                      label="Fecha de inicio *"
+                      inputFormat="yyyy-MM-dd"
+                      value={value}
+                      onChange={handleChange}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>                
                 </Grid>
-                <Grid item sm = {3}>
-                  <h2 className={classes.text2}>Fecha de inicio:</h2>
+                
+                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <TimePicker
+                    label="Hora de inicio"
+                    ampm={false}
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                  </LocalizationProvider>                
                 </Grid>
-                <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                    <TextField variant='outlined' fullWidth/>
+
+                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                      label="Fecha de término *"
+                      inputFormat="yyyy-MM-dd"
+                      value={value}
+                      onChange={handleChange}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>                
                 </Grid>
-                <Grid item sm = {3}>
-                  <h2 className={classes.text2}>Fecha de termino:</h2>
-                </Grid>
-                <Grid item sm = {12} xl = {8} marginTop= {'10px'}  >
-                    <TextField variant='outlined' fullWidth/>
-                </Grid>
+
+                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                  <TextField required label='Cupos'  />
+                </Grid>  
+
                 <br></br>
                 <Box 
                   margin = 'center' 
@@ -119,7 +163,7 @@ export default function NuevoCampeonato() {
                   marginTop = {'30px'}
                 >
                   <FormControl>
-                      <h3>Categorias</h3>
+                      <h4>Categorias</h4>
                     <FormGroup>
                       <Grid item sm = {12} xl = {12} marginTop= {'20px'} >
                         <FormControlLabel
@@ -176,15 +220,13 @@ export default function NuevoCampeonato() {
             </BackdropFilter>
           </Box>
           <div  mx = {10}>
-          <Link  underline ='none' color='inherit' to ='/campeonatosclub'>
+          <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
               <Button 
                   className={classes.button}
                   type = "button"
                   variant = 'contained'
                   size='small'
                   endIcon = {<KeyboardReturnIcon/>}
-                  //onClick = {()=>abrirCerrarModalEdit()}
-                  //agregar función de volver a la página anterior
               >
                   Volver
               </Button>
@@ -194,7 +236,7 @@ export default function NuevoCampeonato() {
                 type = "button"
                 variant = 'contained'
                 size='small'
-                
+                endIcon = {<SaveIcon/>}
             >
                 Guardar
             </Button>

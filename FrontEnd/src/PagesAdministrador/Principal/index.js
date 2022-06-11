@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
-import { Contenedor, ContenedorBusqueda } from '../../Components';
+import { ContenedorAdmin } from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 
@@ -96,7 +96,7 @@ export default function Principal() {
 
     return (
         <div>
-            <ContenedorBusqueda/>
+            <ContenedorAdmin/>
             <div align = 'center'>   
                 <Box
                     sx = {{flexGrow: 20}}

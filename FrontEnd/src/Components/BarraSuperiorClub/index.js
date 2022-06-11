@@ -22,7 +22,7 @@ const settings = ['Perfil', 'Salir'];
 
 
 
-const Jeje = () => {
+const BarraSuperiorClub = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
     
@@ -62,7 +62,7 @@ const Jeje = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/homeclub"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -106,14 +106,14 @@ const Jeje = () => {
               }}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                    <Link underline='none' color='inherit' href = "/agregarClub" className='btn'>
-                        <Typography textAlign="center">Agregar club</Typography>
+                    <Link underline='none' color='inherit' href = "/campeonatosclub" className='btn'>
+                        <Typography textAlign="center">Campeonatos registrados</Typography>
                     </Link>
                 </MenuItem>
                 
                 <MenuItem onClick={handleCloseNavMenu}>
-                    <Link underline='none' color='inherit' href = "/principalAdmin" className='btn'>
-                        <Typography textAlign="center">Clubes</Typography>
+                    <Link underline='none' color='inherit' href = "/nuevocampeonato" className='btn'>
+                        <Typography textAlign="center">Nuevo campeonato</Typography>
                     </Link>
                 </MenuItem>
 
@@ -124,7 +124,7 @@ const Jeje = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/homeclub"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -139,20 +139,20 @@ const Jeje = () => {
             PadelCL
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>  
-            <Link underline='none' color='inherit' href = "/agregarClub" className='btn'>
+            <Link underline='none' color='inherit' href = "/campeonatosclub" className='btn'>
                 <Button
                     onClick={handleCloseNavMenu}
                     variant='text' color='inherit' 
                 >
-                    Agregar Club
+                    Campeonatos registrados
                 </Button>
             </Link>
-            <Link underline='none' color='inherit' href = "/principalAdmin" className='btn'>
+            <Link underline='none' color='inherit' href = "/nuevocampeonato" className='btn'>
                 <Button
                     onClick={handleCloseNavMenu}
                     variant='text' color='inherit' 
                 >
-                    Clubes
+                    Nuevo campeonato
                 </Button>
             </Link>
           </Box>
@@ -180,7 +180,7 @@ const Jeje = () => {
               onClose={handleCloseUserMenu}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                    <Link underline='none' color='inherit' href = "/perfilAdmin" className='btn'>
+                    <Link underline='none' color='inherit' href = "/principalclub" className='btn'>
                         <Button variant='text' color='inherit'>
                             <Typography variant='h7' textAlign="center">Perfil</Typography>
                         </Button>
@@ -199,5 +199,5 @@ const Jeje = () => {
     </AppBar>
   );
 };
-export default Jeje;
+export default BarraSuperiorClub;
 

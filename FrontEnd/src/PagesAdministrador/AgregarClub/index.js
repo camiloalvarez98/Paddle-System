@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import { Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
-import { ContenedorAdmin , Jeje} from '../../Components';
+import { ContenedorAdmin , BarraSuperior} from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
 import {Principal} from '../Principal'
@@ -73,7 +73,7 @@ export default function AgregarClub() {
         <div>
             <ContenedorAdmin/>
             <div align = 'center'>
-                <br></br>
+                
                 <Box
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'

@@ -19,11 +19,11 @@ function App() {
           <Routes>
             {/*Rutas para Club*/}
             <Route element = {<PrivateRoute/>}>
-              <Route exact path = '/' element = {<PrincipalClub/>}/>
-              <Route path = 'homeclub' element = {<HomeClub/>}/>
+              <Route exact path = '/homeclub' element = {<PrincipalClub/>}/>
               <Route path = 'selectganadores' element = {<SelectGanadores/>}/>
               <Route path = 'campeonatosclub' element = {<CampeonatosClub/>}/>
               <Route path = 'nuevocampeonato' element = {<NuevoCampeonato/>}/>
+              <Route path = 'principalclub' element = {<PrincipalClub/>}/>
             </Route>
             <Route path = 'loginClub' element = {<LoginClub/>}/>
             <Route path = 'signupclub' element = {<SignUpClub/>}/>
