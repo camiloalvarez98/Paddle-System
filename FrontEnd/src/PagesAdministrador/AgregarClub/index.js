@@ -10,9 +10,9 @@ import { Link, NavLink,  } from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
 import {Principal} from '../Principal'
 import GroupsIcon from '@mui/icons-material/Groups';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
 import BackdropFilter from "react-backdrop-filter";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 
 
@@ -34,7 +34,10 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        margin: theme.spacing(4),
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        marginLeft: theme.spacing(5),
+        marginRigt: theme.spacing(5),
         //si quiero agregar borde es con solid
         border: '2px',
         borderColor: '#4f772d'
@@ -67,15 +70,20 @@ export default function AgregarClub() {
 
     }
 
-
-
     return (
         <div>
             <ContenedorAdmin/>
             <div align = 'center'>
-                
                 <Box
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
                     //blurRadius = {1}
@@ -97,39 +105,31 @@ export default function AgregarClub() {
                         }}
                     >
                     <br></br>
-                    <h1>Agregar club</h1>
+                    <h2>Agregar club</h2>
                     <Grid container>
                         {/*Direccion*/}
-                        <Grid item xs ={3}>
-                            <h3 className={classes.text2}>Direccion:</h3>  
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                        
+                        <Grid item xs = {6} marginTop= {'10px'}  >
+                            <TextField required label='Dirección' />
                         </Grid>
 
                         {/*Representante*/}
-                        <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Representante:</h3>               
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                        
+                        <Grid item xs = {6} marginTop= {'10px'} >
+                            <TextField required label='Representante' />
                         </Grid>
 
                         {/*Telefono*/}
-                        <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Telefono:</h3>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                       
+                        <Grid item xs = {6} marginTop= {'10px'} >
+                            <TextField required label='Teléfono' />
                         </Grid>
 
 
                         {/*Comuna*/}
-                        <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Comuna:</h3>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                        
+                        <Grid item xs = {6} marginTop= {'10px'} >
+                            <TextField required label='Comuna' />
                         </Grid>
                         
                     </Grid>
@@ -138,16 +138,28 @@ export default function AgregarClub() {
                 </Box>
                 <div  mx = {20}>
                     {/*boton guardar*/}
+                    <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
+                        <Button 
+                            className={classes.button}
+                            type = "button"
+                            variant = 'contained'
+                            size='small'
+                            endIcon = {<KeyboardReturnIcon/>}
+                        >
+                            Volver
+                        </Button>
+                    </Link>
                     <Button 
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
                         size='small'
                         endIcon = {<SaveIcon/>}
-                        //onClick = {()=>abrirCerrarModalEdit()}
                     >
                         Guardar
                     </Button>
+
+                    
                 </div>
             </div>
         </div>

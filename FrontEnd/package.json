@@ -28,6 +28,7 @@
     "react-blur": "^1.1.1",
     "react-native-blur": "^3.2.2",
     "react-native-material-dropdown": "^0.11.1",
+    "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "reactstrap": "^9.1.1",

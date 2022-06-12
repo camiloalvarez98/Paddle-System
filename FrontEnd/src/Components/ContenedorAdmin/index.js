@@ -20,7 +20,6 @@ export default function ContenedorAdmin() {
       <BarraSuperiorAdmin/>
         <div className={classes.toolbar} />
         <Box />
-      
     </div>
   );
 }

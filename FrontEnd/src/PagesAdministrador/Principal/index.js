@@ -99,7 +99,15 @@ export default function Principal() {
             <ContenedorAdmin/>
             <div align = 'center'>   
                 <Box
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
                     mx = {25} //margen a todos los lados
@@ -119,11 +127,11 @@ export default function Principal() {
                         }}
                     >
                     <br></br>
-                    <h1>Clubes registrados</h1>  
+                    <h2>Clubes registrados</h2>  
                     <Grid container>
                         {/*primer club*/}
                         <Grid item xs ={4}>
-                            <h2 className={classes.text2}>Club puertas del mar</h2>  
+                            <h4 className={classes.text2}>Club puertas del mar</h4>  
                         </Grid>
                         {/*boton editar*/}
                         <Grid item xs = {3} marginTop= {'10px'} marginRight = {'50px'} >

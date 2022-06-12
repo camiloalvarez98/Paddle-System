@@ -39,8 +39,10 @@ const useStyles = makeStyles((theme)=>({
     button:{
         width: '20%',
         //margin: theme.spacing(10,65,10),
-        marginTop: theme.spacing(4) ,
-        marginBottom: theme.spacing(4),
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        marginLeft: theme.spacing(5),
+        marginRigt: theme.spacing(5),
         
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
@@ -175,14 +177,26 @@ export default function PrincipalClub() {
                     >
                         Editar
                     </Button>
+                    <Modal
+                        open = {modalEdit}
+                        close = {abrirCerrarModalEdit}
+                    >
+                        {bodyEdit}
+                    </Modal>
+                    <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
+                        <Button 
+                            className={classes.button}
+                            type = "button"
+                            variant = 'contained'
+                            size='small'
+                            onClick = {()=>abrirCerrarModalEdit()}
+                        >
+                            Volver
+                        </Button>
+                    </Link>
                 </div>
             </div>
-            <Modal
-                open = {modalEdit}
-                close = {abrirCerrarModalEdit}
-            >
-                {bodyEdit}
-            </Modal>
+            
         </div>
         
     )

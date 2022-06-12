@@ -19,7 +19,7 @@ export default function Contenedor() {
   return (
     <div>
       <BarraSuperiorClub />
-      <div className={classes.toolbar} />
+        <div className={classes.toolbar} />
         <Box />
       </div>
     

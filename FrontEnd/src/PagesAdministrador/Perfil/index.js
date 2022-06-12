@@ -71,8 +71,8 @@ const useStyles = makeStyles((theme)=>({
 
 export default function Perfil() {
     const classes = useStyles()
-    const [modalEdit, setModalEdit] = useState(false);
-    const [modalEditContra, setModalEditContra] = useState(false);
+    const [openEditar, setOpenEditar] = React.useState(false);
+    const [openContra, setOpenContra] = React.useState(false);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
     })
@@ -90,13 +90,19 @@ export default function Perfil() {
 
 
 
-    const abrirCerrarModalEdit =() =>{
-        setModalEdit(!modalEdit); //abre o cierra el modal
+    const abrirEditar =() =>{
+        setOpenEditar(true); 
+    }
+    const cerrarEditar = () =>{
+        setOpenEditar(false);
     }
 
     
-    const abrirCerrarModalContra =() =>{
-        setModalEditContra(!modalEditContra); //abre o cierra el modal
+    const abrirContra =() =>{
+        setOpenContra(true);
+    }
+    const cerrarContra = () => {
+        setOpenContra(false);
     }
 
     const bodyEdit = (
@@ -114,7 +120,7 @@ export default function Perfil() {
             <br></br>
             <div align = 'right'>
                 <Button>Guardar</Button>
-                <Button onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
+                <Button onClick={()=>cerrarEditar()}>Cancelar</Button>
             </div>
         </div>
     )
@@ -131,7 +137,7 @@ export default function Perfil() {
             <br></br>
             <div align = 'right'>
                 <Button>Guardar</Button>
-                <Button onClick={()=>abrirCerrarModalContra()}>Cancelar</Button>
+                <Button onClick={()=>cerrarContra()}>Cancelar</Button>
             </div>
         </div>
     )
@@ -140,9 +146,16 @@ export default function Perfil() {
         <div>
             <ContenedorAdmin/>
             <div align = 'center'>
-                <br></br>
                 <Box
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
                     mx = {25} //margen a todos los lados
@@ -161,11 +174,11 @@ export default function Perfil() {
                             console.log("Rendered !");
                         }}
                     >
-                    <h1>Perfil administrador</h1>    
+                    <h2>Perfil administrador</h2>    
                     <Grid container>
                         {/*Nombre*/}
                         <Grid item xs ={3}>
-                            <h3 className={classes.text2}>Nombre: </h3>  
+                            <h4 className={classes.text2}>Nombre: </h4>  
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -173,7 +186,7 @@ export default function Perfil() {
 
                         {/*Rut*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Rut: </h3>               
+                            <h4 className={classes.text2}>Rut: </h4>               
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -181,7 +194,7 @@ export default function Perfil() {
 
                         {/*Telefono*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Teléfono:</h3>
+                            <h4 className={classes.text2}>Teléfono:</h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -190,7 +203,7 @@ export default function Perfil() {
 
                         {/*Direccion*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Dirección: </h3>
+                            <h4 className={classes.text2}>Dirección: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -201,10 +214,16 @@ export default function Perfil() {
                                 type = "button"
                                 variant = 'contained'
                                 size='small'
-                                onClick = {()=>abrirCerrarModalEdit()}
+                                onClick = {()=>abrirContra()}
                             >
                                 Cambiar contraseña
                             </Button>
+                            <Modal
+                                open = {openContra}
+                                close = {cerrarContra}
+                            >
+                                {cambiarContraseña}
+                            </Modal>
                         </Grid>  
                     </Grid>
                     <br></br>
@@ -228,24 +247,19 @@ export default function Perfil() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<ModeEditIcon/>}
-                        onClick = {()=>abrirCerrarModalEdit()}
+                        onClick = {()=>abrirEditar()}
                     >
                         Editar
                     </Button>
+                    <Modal
+                        open = {openEditar}
+                        close = {cerrarEditar}
+                    >
+                        {bodyEdit}
+                    </Modal>
                 </div>
             </div>
-            <Modal
-                open = {modalEditContra}
-                close = {abrirCerrarModalContra}
-            >
-                {cambiarContraseña}
-            </Modal>
-            <Modal
-                open = {modalEdit}
-                close = {abrirCerrarModalEdit}
-            >
-                {bodyEdit}
-            </Modal>
+        
         </div>
         
     )
