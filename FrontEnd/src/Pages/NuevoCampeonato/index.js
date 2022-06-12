@@ -12,6 +12,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import MenuItem from '@mui/material/MenuItem';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -75,8 +76,23 @@ export default function NuevoCampeonato() {
 
   const [selects,setSelects]=useState();
 
+  const datos = [
+    { 
+      value: 10,
+      label: '10',
+    },
+    {
+      value: 20,
+      label: '20',
+    },
+  ];
   
+  const [currency, setCurrency] = React.useState('');
   
+  const handleChange2 = (event) => {
+    setCurrency(event.target.value);
+  };
+
 
   return (
     <div>
@@ -112,11 +128,11 @@ export default function NuevoCampeonato() {
               <h2>Nuevo Campeonato</h2>
               <Grid container direction="row" justify="flex-end" alignItems="center">
 
-                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                <Grid item sm = {12} xl = {4} marginLeft = {'90px'} marginTop= {'10px'} align='left' >
                     <TextField required label='Nombre campeonato'  />
                 </Grid>
                 
-                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de inicio *"
@@ -128,7 +144,7 @@ export default function NuevoCampeonato() {
                   </LocalizationProvider>                
                 </Grid>
                 
-                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <TimePicker
                     label="Hora de inicio"
@@ -140,7 +156,7 @@ export default function NuevoCampeonato() {
                   </LocalizationProvider>                
                 </Grid>
 
-                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de término *"
@@ -152,8 +168,22 @@ export default function NuevoCampeonato() {
                   </LocalizationProvider>                
                 </Grid>
 
-                <Grid item sm = {12} xl = {4} marginTop= {'10px'}  >
-                  <TextField required label='Cupos'  />
+                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                  <TextField 
+                    id='cuposMaximos'
+                    select
+                    label='Cupos '
+                    value={currency}
+                    onChange={handleChange2}
+                    helperTet='Por favor, seleccione la cantidad de cupos'
+                    sx = {{m: 1, width: '35%'}}
+                  >
+                    {datos.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </Grid>  
 
                 <br></br>

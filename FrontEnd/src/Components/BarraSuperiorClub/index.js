@@ -117,6 +117,12 @@ const BarraSuperiorClub = () => {
                     </Link>
                 </MenuItem>
 
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Link underline='none' color='inherit' href = "/selectganadores" className='btn'>
+                        <Typography textAlign="center">Registrar ganador</Typography>
+                    </Link>
+                </MenuItem>
+
             </Menu>
           </Box>
           <SportsTennisIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -153,6 +159,14 @@ const BarraSuperiorClub = () => {
                     variant='text' color='inherit' 
                 >
                     Nuevo campeonato
+                </Button>
+            </Link>
+            <Link underline='none' color='inherit' href = "/selectganadores" className='btn'>
+                <Button
+                    onClick={handleCloseNavMenu}
+                    variant='text' color='inherit' 
+                >
+                    Registrar ganador
                 </Button>
             </Link>
           </Box>
