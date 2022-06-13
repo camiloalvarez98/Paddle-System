@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, CajonJugador, Box } from "../index";
+import { BarraSuperiorJugador, CajonJugador, Box } from "../index";
 import { makeStyles, Hidden } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,18 +20,10 @@ export default function ContenedorJugador() {
     setAbrir(!abrir);
   };
   return (
-    <div className={classes.root}>
-      <AppBar accionAbrir={accionAbrir} />
-      <Hidden xsDown>
-        <CajonJugador variant="temporary" open={abrir} onClose={accionAbrir} />
-      </Hidden>
-      <Hidden xlUp>
-        <CajonJugador variant="temporary" open={abrir} onClose={accionAbrir} />
-      </Hidden>
-      <div className={classes.content}>
+    <div >
+      <BarraSuperiorJugador/>
         <div className={classes.toolbar} />
         <Box />
-      </div>
     </div>
   );
 }

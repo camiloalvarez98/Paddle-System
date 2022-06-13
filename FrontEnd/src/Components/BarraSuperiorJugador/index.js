@@ -22,7 +22,7 @@ const settings = ['Perfil', 'Salir'];
 
 
 
-const Jeje = () => {
+const BarraSuperiorJugador = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
     
@@ -106,14 +106,8 @@ const Jeje = () => {
               }}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                    <Link underline='none' color='inherit' href = "/agregarClub" className='btn'>
-                        <Typography textAlign="center">Agregar club</Typography>
-                    </Link>
-                </MenuItem>
-                
-                <MenuItem onClick={handleCloseNavMenu}>
-                    <Link underline='none' color='inherit' href = "/principalAdmin" className='btn'>
-                        <Typography textAlign="center">Clubes</Typography>
+                    <Link underline='none' color='inherit' href = "/campeonatosjugador" className='btn'>
+                        <Typography textAlign="center">Campeonatos</Typography>
                     </Link>
                 </MenuItem>
 
@@ -139,20 +133,12 @@ const Jeje = () => {
             PadelCL
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>  
-            <Link underline='none' color='inherit' href = "/agregarClub" className='btn'>
+            <Link underline='none' color='inherit' href = "/campeonatosjugador" className='btn'>
                 <Button
                     onClick={handleCloseNavMenu}
                     variant='text' color='inherit' 
                 >
-                    Agregar Club
-                </Button>
-            </Link>
-            <Link underline='none' color='inherit' href = "/principalAdmin" className='btn'>
-                <Button
-                    onClick={handleCloseNavMenu}
-                    variant='text' color='inherit' 
-                >
-                    Clubes
+                    Campeonatos
                 </Button>
             </Link>
           </Box>
@@ -180,7 +166,7 @@ const Jeje = () => {
               onClose={handleCloseUserMenu}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                    <Link underline='none' color='inherit' href = "/perfilAdmin" className='btn'>
+                    <Link underline='none' color='inherit' href = "/perfiljugador" className='btn'>
                         <Button variant='text' color='inherit'>
                             <Typography variant='h7' textAlign="center">Perfil</Typography>
                         </Button>
@@ -199,5 +185,5 @@ const Jeje = () => {
     </AppBar>
   );
 };
-export default Jeje;
+export default BarraSuperiorJugador;
 

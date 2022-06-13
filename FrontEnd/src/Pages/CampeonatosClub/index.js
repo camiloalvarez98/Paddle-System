@@ -52,9 +52,9 @@ export default function CampeonatosClub() {
                     sx = {{flexGrow: 20}}
                     color = 'contrastText'
                     mx = {20} //margen a todos los lados
-                    p = {1} //padding
+                    //p = {1} //padding
                     //borderRadius = '8px'
-                    border = {2}
+                    border = {1}
                             
                 >
                     <BackdropFilter
@@ -67,16 +67,16 @@ export default function CampeonatosClub() {
                             console.log("Rendered !");
                         }}
                     >
-                        <h1>Campeonatos</h1>
+                        <h2>Campeonatos</h2>
                         <TableContainer>
                             <Table sx = {{ minWidth: 650 }} id = 'tables' >
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell align='center'><h2>Nombre</h2></TableCell>
-                                            <TableCell align='center'><h2>ID</h2></TableCell>
-                                            <TableCell align='center'><h2>Fecha Inicio</h2></TableCell>
-                                            <TableCell align='center'><h2>Fecha Termino</h2></TableCell>
-                                            <TableCell align='center'><h2>Acciones</h2></TableCell>
+                                            <TableCell align='center'><h4>Nombre</h4></TableCell>
+                                            <TableCell align='center'><h4>ID</h4></TableCell>
+                                            <TableCell align='center'><h4>Fecha Inicio</h4></TableCell>
+                                            <TableCell align='center'><h4>Fecha Termino</h4></TableCell>
+                                            <TableCell align='center'><h4>Acciones</h4></TableCell>
                                         </TableRow>
                                     </TableHead>
                             </Table>
@@ -85,7 +85,7 @@ export default function CampeonatosClub() {
                 </Box>
                 <div  mx = {20}>
                     
-                    <Link underline ='none' color='inherit' to ='/nuevocampeonato'>
+                    <Link style={{ textDecoration: 'none' }}  color='inherit' to ='/nuevocampeonato'>
                         <Button 
                             className={classes.button}
                             type = "button"

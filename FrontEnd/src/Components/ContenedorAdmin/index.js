@@ -1,5 +1,5 @@
 import React from "react";
-import { Jeje, Box } from "../index";
+import { BarraSuperiorAdmin, Box } from "../index";
 import { makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,11 +17,9 @@ export default function ContenedorAdmin() {
   const classes = useStyles();
   return (
     <div >
-      <Jeje/>
-      <div className={classes.content}>
+      <BarraSuperiorAdmin/>
         <div className={classes.toolbar} />
         <Box />
-      </div>
     </div>
   );
 }

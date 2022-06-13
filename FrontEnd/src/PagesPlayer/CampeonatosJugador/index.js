@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
-import { ContenedorBusquedaJugador } from '../../Components';
+import { ContenedorJugador } from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 
@@ -96,10 +96,18 @@ export default function CampeonatosJugador() {
 
     return (
         <div>
-            <ContenedorBusquedaJugador/>
-            <div align = 'center'>   
+            <ContenedorJugador/>
+            <div align = 'center'> 
                 <Box
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
                     mx = {25} //margen a todos los lados

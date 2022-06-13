@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Cajon, Box } from "../../Components";
+import { BarraSuperiorClub, Cajon, Box } from "../../Components";
 import { makeStyles, Hidden } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,23 +15,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Contenedor() {
   const classes = useStyles();
-  const [abrir, setAbrir] = React.useState(false);
-  const accionAbrir = () => {
-    setAbrir(!abrir);
-  };
+
   return (
-    <div className={classes.root}>
-      <AppBar accionAbrir={accionAbrir} />
-      <Hidden xsDown>
-        <Cajon variant="temporary" open={abrir} onClose={accionAbrir} />
-      </Hidden>
-      <Hidden xlUp>
-        <Cajon variant="temporary" open={abrir} onClose={accionAbrir} />
-      </Hidden>
-      <div className={classes.content}>
+    <div>
+      <BarraSuperiorClub />
         <div className={classes.toolbar} />
         <Box />
       </div>
-    </div>
+    
   );
 }

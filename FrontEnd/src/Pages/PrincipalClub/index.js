@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme)=>({
     button:{
         width: '20%',
         //margin: theme.spacing(10,65,10),
-        marginTop: theme.spacing(8) ,
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        marginLeft: theme.spacing(5),
+        marginRigt: theme.spacing(5),
         
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
@@ -100,14 +103,18 @@ export default function PrincipalClub() {
             <Contenedor/>
             <div align = 'center'>
                 <Box 
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
                     mx = {20} //margen a todos los lados
-                    p = {1} //padding
-                    //borderRadius = '8px'
-                    border = {2}
-                    
-                    
+                    border = {1}
                 >
                     <BackdropFilter
                         className="bluredForm"
@@ -119,12 +126,12 @@ export default function PrincipalClub() {
                             console.log("Rendered !");
                         }}
                     >
-                        <h1 >Padel del mar</h1>
+                        <h2>Padel del mar</h2>
                         <br></br>
                         <Grid container>
                             {/*Direccion*/}
                             <Grid item xs ={3}>
-                                <h2 className={classes.text2}>Direccion:</h2>  
+                                <h4 className={classes.text2}>Direccion:</h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                                 <TextField variant='outlined' color = 'secondary' fullWidth/>
@@ -132,7 +139,7 @@ export default function PrincipalClub() {
 
                             {/*Representante*/}
                             <Grid item xs = {3}>
-                                <h2 className={classes.text2}>Representante:</h2>               
+                                <h4 className={classes.text2}>Representante:</h4>               
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                                 <TextField variant='outlined' color = 'secondary' fullWidth/>
@@ -140,7 +147,7 @@ export default function PrincipalClub() {
 
                             {/*Telefono*/}
                             <Grid item xs = {3}>
-                                <h2 className={classes.text2}>Telefono:</h2>
+                                <h4 className={classes.text2}>Telefono:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                                 <TextField variant='outlined' color = 'secondary' fullWidth/>
@@ -149,7 +156,7 @@ export default function PrincipalClub() {
 
                             {/*Comuna*/}
                             <Grid item xs = {3}>
-                                <h2 className={classes.text2}>Comuna:</h2>
+                                <h4 className={classes.text2}>Comuna:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                                 <TextField variant='outlined' color = 'secondary' fullWidth/>
@@ -165,19 +172,31 @@ export default function PrincipalClub() {
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
-                        size='medium'
+                        size='small'
                         onClick = {()=>abrirCerrarModalEdit()}
                     >
                         Editar
                     </Button>
+                    <Modal
+                        open = {modalEdit}
+                        close = {abrirCerrarModalEdit}
+                    >
+                        {bodyEdit}
+                    </Modal>
+                    <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
+                        <Button 
+                            className={classes.button}
+                            type = "button"
+                            variant = 'contained'
+                            size='small'
+                            onClick = {()=>abrirCerrarModalEdit()}
+                        >
+                            Volver
+                        </Button>
+                    </Link>
                 </div>
             </div>
-            <Modal
-                open = {modalEdit}
-                close = {abrirCerrarModalEdit}
-            >
-                {bodyEdit}
-            </Modal>
+            
         </div>
         
     )

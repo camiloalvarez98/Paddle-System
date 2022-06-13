@@ -118,8 +118,8 @@ export default function PerfilJugador() {
             <br/>
             <br></br>
             <div align = 'right'>
-                <Button>Guardar</Button>
-                <Button onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
+                <Button size='small'>Guardar</Button>
+                <Button size='small' onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
             </div>
         </div>
     )
@@ -135,8 +135,8 @@ export default function PerfilJugador() {
             <br/>
             <br></br>
             <div align = 'right'>
-                <Button>Guardar</Button>
-                <Button onClick={cerrarModalContra}>Cancelar</Button>
+                <Button size='small'>Guardar</Button>
+                <Button size='small' onClick={cerrarModalContra}>Cancelar</Button>
             </div>
         </div>
     )
@@ -145,9 +145,16 @@ export default function PerfilJugador() {
         <div>
             <ContenedorJugador/>
             <div align = 'center'>
-                <br></br>
                 <Box
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
                     mx = {25} //margen a todos los lados
@@ -166,11 +173,11 @@ export default function PerfilJugador() {
                             console.log("Rendered !");
                         }}
                     >
-                    <h1>Perfil jugador</h1>    
+                    <h2>Perfil jugador</h2>    
                     <Grid container>
                         {/*Nombre*/}
                         <Grid item xs ={3}>
-                            <h3 className={classes.text2}>Nombre: </h3>  
+                            <h4 className={classes.text2}>Nombre: </h4>  
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -178,7 +185,7 @@ export default function PerfilJugador() {
 
                         {/*Rut*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Apellido paterno: </h3>               
+                            <h4 className={classes.text2}>Apellido paterno: </h4>               
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -186,7 +193,7 @@ export default function PerfilJugador() {
 
                         {/*Telefono*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Teléfono:</h3>
+                            <h4 className={classes.text2}>Teléfono:</h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -194,7 +201,7 @@ export default function PerfilJugador() {
 
                         {/*Direccion*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Dirección: </h3>
+                            <h4 className={classes.text2}>Dirección: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -202,7 +209,7 @@ export default function PerfilJugador() {
 
                         {/*Puntaje*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Puntaje actual: </h3>
+                            <h4 className={classes.text2}>Puntaje actual: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -210,7 +217,7 @@ export default function PerfilJugador() {
 
                         {/*Categoria*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Categoría: </h3>
+                            <h4 className={classes.text2}>Categoría: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
@@ -218,7 +225,7 @@ export default function PerfilJugador() {
                         
                         {/*Correo*/}
                         <Grid item xs = {3}>
-                            <h3 className={classes.text2}>Correo electrónico: </h3>
+                            <h4 className={classes.text2}>Correo electrónico: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
