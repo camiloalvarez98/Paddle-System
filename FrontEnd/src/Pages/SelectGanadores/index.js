@@ -81,34 +81,34 @@ export default function SelectGanadores() {
                         }}
                     >
                         <h2>Registrar Ganadores</h2>
-                        <Grid container direction="row" justify="flex-end" alignItems="center">
+                        <Grid container >
                             {/*Campeonato */}
                             
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required label='ID de Campeonato' />
                             </Grid>
                             {/*Categoria*/}
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required label='Categoría' />
                             </Grid>
                             {/*Primer Lugar*/}
                             <Grid item sm = {12}>
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required label=' Rut Jugador 1'/>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required label=' Rut Jugador 2'/>
                             </Grid>
                             {/*Segundo Lugar*/}
                             <Grid item sm = {12}>
                                 <h4 className={classes.text2}>Segundo Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required  label='Rut Jugador 1'/>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required  label='Rut Jugador 2'/>
                             </Grid>
                             {/*Tercer Lugar*/}
