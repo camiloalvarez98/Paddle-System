@@ -1,6 +1,9 @@
-import Pool from "pg";
+//import Pool from "pg";
+const Pool = require('pg');
+//import dotenv from "dotenv";
 
-import dotenv from "dotenv";
+const dotenv = require('dotenv')
+
 dotenv.config();
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -12,4 +15,5 @@ const pool = new Pool.Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-export default pool;
+
+module.exports = pool;

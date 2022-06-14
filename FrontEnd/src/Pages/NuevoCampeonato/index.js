@@ -126,12 +126,13 @@ export default function NuevoCampeonato() {
               }}
             >
               <h2>Nuevo Campeonato</h2>
-              <Grid container>
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
-                    <TextField required label='Nombre campeonato' />
+              <Grid container direction="row" justify="flex-end" alignItems="center">
+
+                <Grid item sm = {12} xl = {12} marginTop= {'10px'} >
+                    <TextField required label='Nombre campeonato'  />
                 </Grid>
                 
-                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de inicio *"
@@ -143,7 +144,7 @@ export default function NuevoCampeonato() {
                   </LocalizationProvider>                
                 </Grid>
                 
-                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <TimePicker
                     label="Hora de inicio"
@@ -155,7 +156,7 @@ export default function NuevoCampeonato() {
                   </LocalizationProvider>                
                 </Grid>
 
-                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de término *"
@@ -167,7 +168,7 @@ export default function NuevoCampeonato() {
                   </LocalizationProvider>                
                 </Grid>
 
-                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
                   <TextField 
                     id='cuposMaximos'
                     select
@@ -270,6 +271,7 @@ export default function NuevoCampeonato() {
                 Guardar
             </Button>
           </div>
+
         </div>
     </div>
   )
