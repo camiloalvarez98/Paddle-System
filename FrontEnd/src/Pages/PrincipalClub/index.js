@@ -2,13 +2,14 @@ import React, {useEffect,useState} from 'react';
 //import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { makeStyles, styled } from '@material-ui/core';
+
+import { makeStyles, } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
-import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from '../../Components';
-import { Link, NavLink,  } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -126,8 +127,10 @@ export default function PrincipalClub() {
                             console.log("Rendered !");
                         }}
                     >
-                        <h2>Padel del mar</h2>
                         <br></br>
+                        <Avatar align = 'center' sx={{ width: 100, height: 100 }}>PM</Avatar>
+                        <h2>Padel del mar</h2>
+                       
                         <Grid container>
                             {/*Direccion*/}
                             <Grid item xs ={3}>

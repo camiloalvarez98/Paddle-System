@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core';
-import { TextField } from '@mui/material';
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
@@ -28,11 +27,11 @@ const useStyles = makeStyles (theme=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
-        marginTop: theme.spacing(2) ,
-        marginBottom: theme.spacing(2),
-        marginLeft: theme.spacing(5),
-        marginRight: theme.spacing(5),
+        margin: theme.spacing(2,2,5,5),
+        //marginTop: theme.spacing(2) ,
+        //marginBottom: theme.spacing(2),
+        //marginLeft: theme.spacing(5),
+        //marginRight: theme.spacing(5),
         
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
@@ -62,7 +61,7 @@ export default function SelectGanadores() {
                           sm: 400,
                           md: 600,
                           lg: 800,
-                          xl: 1200,
+                          xl: 1000,
                         }
                       }}
                     color = 'contrastText'
@@ -77,48 +76,47 @@ export default function SelectGanadores() {
                             allowTaint: true
                         }}
                         onDraw={() => {
-                            console.log("Rendered !");
+                            console.log("Rendered!");
                         }}
                     >
                         <h2>Registrar Ganadores</h2>
-                        <Grid container direction="row" justify="flex-end" alignItems="center">
+                        <Grid container>
                             {/*Campeonato */}
-                            
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
-                                <Textt required label='ID de Campeonato' />
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
+                                <Textt required label='ID de Campeonato'/>
                             </Grid>
                             {/*Categoria*/}
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required label='Categoría' />
                             </Grid>
                             {/*Primer Lugar*/}
                             <Grid item sm = {12}>
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required label=' Rut Jugador 1'/>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required label=' Rut Jugador 2'/>
                             </Grid>
                             {/*Segundo Lugar*/}
                             <Grid item sm = {12}>
                                 <h4 className={classes.text2}>Segundo Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required  label='Rut Jugador 1'/>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required  label='Rut Jugador 2'/>
                             </Grid>
                             {/*Tercer Lugar*/}
                             <Grid item sm = {12}>
                                 <h4 className={classes.text2}>Tercer Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
-                                <Textt required  label='Rut Jugador 1'/>
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
+                                <Textt required label='Rut Jugador 1'/>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
+                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
                                 <Textt required  label='Rut Jugador 2'/>
                             </Grid>
 

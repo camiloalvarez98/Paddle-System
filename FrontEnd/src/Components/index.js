@@ -15,6 +15,7 @@ export {default as Box} from '../Components/Box';
 export {default as BarraBusqueda} from '../Components/AppBarBuscador';
 export {default as PrivateRoute} from '../Components/Private'
 export {default as PrivateRoute2} from '../Components/Private2'
+export {default as PrivateRoute3} from '../Components/Private3'
 export {default as BarraSuperiorAdmin} from './BarraSuperiorAdmin'
 export {default as BarraSuperiorClub} from './BarraSuperiorClub'
 export {default as BarraSuperiorJugador} from './BarraSuperiorJugador'

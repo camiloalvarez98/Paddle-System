@@ -7,8 +7,6 @@ import { Link, useNavigate} from 'react-router-dom'
 import { ListItemText } from '@mui/material'
 
 
-
-
 const useStyles = makeStyles(theme=>({
     root:{
         backgroundRepeat: 'no-repeat',
@@ -37,7 +35,7 @@ const useStyles = makeStyles(theme=>({
     },
     avatar:{
         margin: theme.spacing(6),
-        marginTop: -40,
+        marginBottom: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main
        
     },
@@ -52,12 +50,13 @@ const useStyles = makeStyles(theme=>({
 
     text:{
         marginLeft: 155,
-        marginTop: 40
+        marginTop: 30
     },
     text2:{
         marginLeft: 128,
-        marginTop: 40
+        marginTop: 30
     }
+
 
 }))
 
@@ -78,8 +77,8 @@ export default function Login() {
 
         try{
             await login(email, password)
-            // history nos envia a home luego de iniciar sesion validamente
-            navigate('/') 
+            // navigate nos envia a home luego de iniciar sesion validamente
+            navigate('/homeclub') 
         }catch (error){
             setError('Datos incorrectos');
             setTimeout (()=> setError(''), 2500) //se setea el error a un string vacio dps de 1500ms
@@ -99,7 +98,7 @@ export default function Login() {
                         <Avatar className = {classes.avatar} > 
                             <LockOutlinedIcon / /*ICONO DE CANDADO*/> 
                         </Avatar>
-                        <Typography component = 'h1' variant = 'h4'> Login </Typography>
+                        <Typography component = 'h1' variant = 'h4'> Ingreso Club </Typography>
                         
                         <form className = {classes.form} onSubmit = {handleSubmit}>  
                             <br/>

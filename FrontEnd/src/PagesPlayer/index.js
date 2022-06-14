@@ -1,3 +1,5 @@
 export {default as PerfilJugador} from '../PagesPlayer/PerfilJugador'
 export {default as CampeonatosJugador} from '../PagesPlayer/CampeonatosJugador'
 export {default as LoginJugador} from '../PagesPlayer/LoginJugador'
+export {default as SignUpJugador} from '../PagesPlayer/SignUpJugador'
+export {default as ForgotPassJug} from '../PagesPlayer/ForgotPassJug'

@@ -160,7 +160,7 @@ export default function SignIn() {
                                 Crear
                             </Button>
                     
-                            <Link to = '/'>
+                            <Link to = '/loginClub'>
                                 <ListItemText secondary = 'Regresar' className = {classes.text}/>
                             </Link>
                             <br/><br/>
