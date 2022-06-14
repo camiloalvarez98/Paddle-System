@@ -69,16 +69,15 @@ export default function TablaClubes() {
     
     //petición put
     const editarClub = async()=>{
-        await axios.put('http://localhost:3001/api/Administrador/updateClub/'+ ClubSeleccionado.id_club, ClubSeleccionado)
+        await axios.put('http://localhost:3001/api/Administrador/updateClub/'+ClubSeleccionado.id_club,ClubSeleccionado)
         .then(response =>{
             var dataNueva = data; //guarda los nuevos datos de la sala
             dataNueva.forEach(club=>{ //recorre el arrego con los nuevos datos de la sala 
                 if(ClubSeleccionado.id_club === club.id_club){
-                    club.direccion = ClubSeleccionado.direccion;
-                    club.representante = ClubSeleccionado.representante;
-                    club.telefono = ClubSeleccionado.telefono;
-                    club.comuna = ClubSeleccionado.comuna;
-                    club.id_club = ClubSeleccionado.id_club;
+                    club.direccion_club = ClubSeleccionado.direccion_club;
+                    club.representante_club = ClubSeleccionado.representante_club;
+                    club.telefono_club = ClubSeleccionado.telefono_club;
+                    club.comuna_club = ClubSeleccionado.comuna_club;
                 }
             })
             setData(dataNueva);
@@ -112,14 +111,14 @@ export default function TablaClubes() {
 
     const bodyEdit = (
         <div className= {classes.modal}>
-            <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.direccion}/>
+            <h3>Editar datos de <b>{ClubSeleccionado.nombre_club}</b></h3>
+            <TextField name = 'direccion_club' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.direccion_club}/>
             <br/>
-            <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.representante}/>
+            <TextField name = 'representante_club' className={classes.inputMaterial} label='Representante' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.representante_club}/>
             <br/>
-            <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.telefono}/>
+            <TextField name = 'telefono_club' className={classes.inputMaterial} label='Telefono' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.telefono_club}/>
             <br/>
-            <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.comuna}/>
+            <TextField name = 'comuna_club' className={classes.inputMaterial} label='Comuna' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.comuna_club}/>
             <br></br>
             <div align = 'right'>
                 <Button onClick={()=>editarClub()}>Editar Club</Button>
@@ -130,7 +129,7 @@ export default function TablaClubes() {
 
     const bodyEliminar = (
         <div className={classes.modal}>
-          <p>¿Estás seguro que deseas eliminar el club <b>{ClubSeleccionado.nombre_club && ClubSeleccionado.id_club}</b> ? </p>
+          <p>¿Estás seguro que deseas eliminar el club <b>{ClubSeleccionado.nombre_club}</b>? </p>
           <div align="right">
             <Button color="secondary" onClick={()=>deleteClub()}>Sí</Button>
             <Button onClick={()=>abrirCerrarModalELiminar()}>No</Button>
