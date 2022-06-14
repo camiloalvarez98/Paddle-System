@@ -32,10 +32,10 @@ code {
 
 @keyframes slide{
   0%{
-    background-image: url('./Assets/fondo4.jpg');
+    background-image: url('./Assets/fondo3.jpg');
   }
   25%{
-    background-image: url('./Assets/fondo4.jpg');
+    background-image: url('./Assets/fondo3.jpg');
   }
   25.01%{
     background-image: url('./Assets/fondo7.jpg');

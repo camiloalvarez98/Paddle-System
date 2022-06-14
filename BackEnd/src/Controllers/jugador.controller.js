@@ -14,4 +14,10 @@ jugadorFunctions.getInfo = async(req,res)=> {
 
 }
 
+//Información campeonatos
+jugadorFunctions.getCampeonatos = async(req,res) =>{
+    await pool
+        .query('select ')
+}
+
 module.exports = jugadorFunctions;

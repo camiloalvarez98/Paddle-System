@@ -47,4 +47,23 @@ administradorFunctions.deleteClub = async(req, res)=>{
     .catch((e) => console.log(e));
 }
 
+//Agregar club
+administradorFunctions.createClub = async(req,res)=>{
+    console.log(req.body)
+    const {nombre_club, direccion_club, representante_club, telefono_club, comuna_club } = req.body; 
+    await pool
+    .query('INSERT INTO club (nombre_club, comuna_club, representante_club, direccion_club, telefono_club) VALUES ($1,$2,$3,$4,$5)',[nombre_club,comuna_club,representante_club,direccion_club,telefono_club])
+    .then((result) => {
+        console.log(result);
+        res.json({
+        message: 'Club creado correctamente',
+        body: {
+            club: {nombre_club, comuna_club, representante_club,direccion_club, telefono_club}
+        }
+        });
+    })
+    .catch((e) => console.log(e));
+}
+
+
 module.exports = administradorFunctions;

@@ -76,6 +76,7 @@ export default function Perfil() {
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
     })
+    
 
     const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
         const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo

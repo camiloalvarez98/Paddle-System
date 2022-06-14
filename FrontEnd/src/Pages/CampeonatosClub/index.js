@@ -49,7 +49,15 @@ export default function CampeonatosClub() {
             <Contenedor/>
             <div align = "center">
                 <Box 
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
                     mx = {20} //margen a todos los lados
                     //p = {1} //padding
