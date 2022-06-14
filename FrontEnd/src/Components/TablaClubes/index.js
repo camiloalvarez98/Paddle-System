@@ -34,15 +34,13 @@ export default function TablaClubes() {
     const [modalEdit, setModalEdit] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
-        direccion:'',
-        representante:'',
-        telefono: '',
-        comuna:''
+        id_club:'',
+        nombre_club:'',
+        comuna_club:'',
+        representante_club:'',
+        direccion_club: '',
+        telefono_club:''
     })
-
-    const abrirCerrarModalEdit =() =>{
-        setModalEdit(!modalEdit); //abre o cierra el modal
-    }
 
     const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
         const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
@@ -54,6 +52,63 @@ export default function TablaClubes() {
         }
 
     }
+
+    //peticion get
+    const getClubes = async() =>{
+        await axios.get('http://localhost:3001/api/Administrador/getClubes')
+        .then(response =>{
+           setData(response.data) 
+           console.log(response)
+        });
+    }
+    
+    useEffect (() =>{
+        getClubes();
+    },[])
+    
+    
+    //petición put
+    const editarClub = async()=>{
+        await axios.put('http://localhost:3001/api/Administrador/updateClub/'+ ClubSeleccionado.id_club, ClubSeleccionado)
+        .then(response =>{
+            var dataNueva = data; //guarda los nuevos datos de la sala
+            dataNueva.forEach(club=>{ //recorre el arrego con los nuevos datos de la sala 
+                if(ClubSeleccionado.id_club === club.id_club){
+                    club.direccion = ClubSeleccionado.direccion;
+                    club.representante = ClubSeleccionado.representante;
+                    club.telefono = ClubSeleccionado.telefono;
+                    club.comuna = ClubSeleccionado.comuna;
+                    club.id_club = ClubSeleccionado.id_club;
+                }
+            })
+            setData(dataNueva);
+            abrirCerrarModalEdit();
+        })
+    }
+    
+
+    //peticion delete
+    const deleteClub = async() =>{
+        await axios.delete('http://localhost:3001/api/Administrador/deleteClub/'+ClubSeleccionado.id_club)
+        .then(response=>{
+            setData(data.filter(club=>club.id_club!==ClubSeleccionado.id_club)); //filtar los datos por cdsala
+            abrirCerrarModalELiminar();
+        })
+    }
+
+    const abrirCerrarModalELiminar=() =>{
+        setModalEliminar(!modalEliminar);
+    }
+
+    const abrirCerrarModalEdit =() =>{
+        setModalEdit(!modalEdit); //abre o cierra el modal
+    }
+
+    const seleccionarClub=(club, caso)=>{
+        setClubSeleccionado(club);
+        (caso === 'Editar')?abrirCerrarModalEdit():abrirCerrarModalELiminar()
+    }
+
 
     const bodyEdit = (
         <div className= {classes.modal}>
@@ -75,66 +130,13 @@ export default function TablaClubes() {
 
     const bodyEliminar = (
         <div className={classes.modal}>
-          <p>Estás seguro que deseas eliminar la sala? <b>{ClubSeleccionado && ClubSeleccionado.id_club}</b> ? </p>
+          <p>¿Estás seguro que deseas eliminar el club <b>{ClubSeleccionado.nombre_club && ClubSeleccionado.id_club}</b> ? </p>
           <div align="right">
             <Button color="secondary" onClick={()=>deleteClub()}>Sí</Button>
             <Button onClick={()=>abrirCerrarModalELiminar()}>No</Button>
           </div>
         </div>
     )
-
-    const abrirCerrarModalELiminar=() =>{
-        setModalEliminar(!modalEliminar);
-    }
-
-    const seleccionarClub=(club, caso)=>{
-        setClubSeleccionado(club);
-        (caso === 'Editar')?abrirCerrarModalEdit():abrirCerrarModalELiminar()
-
-    }
-    
-    //peticion get
-    const getClubes = async() =>{
-        await axios.get('http://localhost:3001/api/Administrador/getClubes')
-        .then(response =>{
-           setData(response.data) 
-           console.log(response)
-        });
-        
-    }
-
-    useEffect (() =>{
-        getClubes();
-    },[])
-
-    console.log(getClubes());
-
-    //petición put
-    const editarClub = async()=>{
-        await axios.put('http://localhost:3001/api/Administrador/updateClub/'+ ClubSeleccionado.id_club, ClubSeleccionado)
-        .then(response =>{
-            var dataNueva = data; //guarda los nuevos datos de la sala
-            dataNueva.forEach(club=>{ //recorre el arrego con los nuevos datos de la sala 
-                if(ClubSeleccionado.id_club === club.id_club){
-                    club.direccion = ClubSeleccionado.direccion;
-                    club.representante = ClubSeleccionado.representante;
-                    club.telefono = ClubSeleccionado.telefono;
-                    club.comuna = ClubSeleccionado.comuna;
-                }
-            })
-            setData(dataNueva);
-            abrirCerrarModalEdit();
-        })
-    }
-    
-    const deleteClub = async() =>{
-        await axios.delete('http://localhost:3001/api/Administrador/deleteClub/'+ClubSeleccionado.id_club)
-        .then(response=>{
-            setData(data.filter(club=>club.id_club!==ClubSeleccionado.id_club)); //filtar los datos por cdsala
-            abrirCerrarModalELiminar();
-        })
-    }
-
 
     return (
         <div className = 'App'>
@@ -190,7 +192,7 @@ export default function TablaClubes() {
                                     </Modal>
                                     </TableCell>
                                     <TableCell>
-                                    <Delete className = {classes.icons} onClick ={()=>seleccionarClub(club, 'Eliminar')}/>
+                                    <Delete className = {classes.icons} onClick ={()=>seleccionarClub(club, 'Eliminar') }/>
                                     <Modal
                                         open = {modalEliminar}
                                         onClose = {abrirCerrarModalELiminar}
