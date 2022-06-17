@@ -18,7 +18,7 @@ administradorFunctions.getInfoPersonal = async(req,res)=> {
 //Información clubes
 administradorFunctions.getInfoClubes = async(req,res)=> {
     await pool
-        .query('select nombre_club from club')
+        .query('select id_club, nombre_club from club')
         .then((result) => {
             res.status(200).json(result.rows);
         })

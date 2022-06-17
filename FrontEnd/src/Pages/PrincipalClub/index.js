@@ -112,7 +112,7 @@ export default function PrincipalClub() {
                           lg: 800,
                           xl: 1200,
                         }
-                      }}
+                    }}
                     color = 'contrastText'
                     mx = {20} //margen a todos los lados
                     border = {1}
@@ -137,7 +137,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Direccion:</h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
                             </Grid>
 
                             {/*Representante*/}
@@ -145,7 +145,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Representante:</h4>               
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
                             </Grid>
 
                             {/*Telefono*/}
@@ -153,7 +153,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Telefono:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
                             </Grid>
 
 
@@ -162,7 +162,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Comuna:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
                             </Grid>
                             
                         </Grid>

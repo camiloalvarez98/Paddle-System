@@ -1,11 +1,10 @@
-
 import './App.css';
 import { AuthProvider } from './Context'
 import { BrowserRouter as Router, Route, Routes,} from 'react-router-dom';
 import { PrivateRoute, PrivateRoute2, PrivateRoute3} from './Components';
 import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato, SignUpClub, ForgotPassword } from './Pages'
 import { PrincipalAdmin, AgregarClub , Perfil, LoginAdmin, SignUpAdmin} from './PagesAdministrador'
-import { PerfilJugador, CampeonatosJugador, LoginJugador, SignUpJugador, ForgotPassJug  } from './PagesPlayer';
+import { PerfilJugador, CampeonatosJugador, LoginJugador, SignUpJugador, ForgotPassJug, BuscarCampeonato, InsCampeonato  } from './PagesPlayer';
 import { Principal } from './PublicPages'
 
 
@@ -41,12 +40,12 @@ function App() {
             </Route>
             <Route path = 'loginAdmin' element = {<LoginAdmin/>}/>
             
-
-
             {/*Rutas para Jugador*/}
             <Route element = {<PrivateRoute3/>}>
               <Route path = 'perfiljugador' element = {<PerfilJugador/>}/>
               <Route path = 'campeonatosjugador' element = {<CampeonatosJugador/>}/>
+              <Route path = 'buscarcampeonato' element = {<BuscarCampeonato/>}/>
+              <Route path = 'inscampeonato' element = {<InsCampeonato/>}/>
             </Route>
             <Route path = 'loginJugador' element = {<LoginJugador/>}/>
             <Route path = 'signupjugador' element = {<SignUpJugador/>}/>

@@ -4,12 +4,11 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core';
-import { TextField } from '@mui/material';
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
 import { Link } from 'react-router-dom';
-import {TextField as Textt} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 
 const useStyles = makeStyles (theme=>({
 
@@ -83,43 +82,42 @@ export default function SelectGanadores() {
                         <h2>Registrar Ganadores</h2>
                         <Grid container >
                             {/*Campeonato */}
-                            
-                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
-                                <Textt required label='ID de Campeonato' />
+                            <Grid item sm = {6} xl = {12} marginTop= {'5px'}  >
+                                <TextField required label='ID de Campeonato' variant = 'outlined' fullWidth/>
                             </Grid>
                             {/*Categoria*/}
-                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
-                                <Textt required label='Categoría' />
+                            <Grid item sm = {6} xl = {12} marginTop= {'5px'}  >
+                                <TextField required label='Categoría' variant = 'outlined' fullWidth/>
                             </Grid>
                             {/*Primer Lugar*/}
-                            <Grid item sm = {12}>
+                            <Grid item sm = {3}>
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
-                                <Textt required label=' Rut Jugador 1'/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
+                                <TextField required label=' Rut Jugador 1' variant = 'outlined' fullWidth/>
                             </Grid>
-                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
-                                <Textt required label=' Rut Jugador 2'/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
+                                <TextField required label=' Rut Jugador 2' variant = 'outlined' fullWidth/>
                             </Grid>
                             {/*Segundo Lugar*/}
-                            <Grid item sm = {12}>
+                            <Grid item sm = {3}>
                                 <h4 className={classes.text2}>Segundo Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
-                                <Textt required  label='Rut Jugador 1'/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
+                                <TextField required  label='Rut Jugador 1' variant = 'outlined' fullWidth/>
                             </Grid>
-                            <Grid item sm = {6} xl = {6} marginTop= {'5px'}  >
-                                <Textt required  label='Rut Jugador 2'/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
+                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth/>
                             </Grid>
                             {/*Tercer Lugar*/}
-                            <Grid item sm = {12}>
+                            <Grid item sm = {3}>
                                 <h4 className={classes.text2}>Tercer Lugar:</h4>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
-                                <Textt required  label='Rut Jugador 1'/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
+                                <TextField required  label='Rut Jugador 1'variant = 'outlined' fullWidth/>
                             </Grid>
-                            <Grid item sm = {6} xl = {8} marginTop= {'5px'}  >
-                                <Textt required  label='Rut Jugador 2'/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
+                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth/>
                             </Grid>
 
                         </Grid>
@@ -127,7 +125,7 @@ export default function SelectGanadores() {
                     </BackdropFilter>
                 </Box>
                 <div  mx = {20}>
-                <Link style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
+                    <Link style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
                         <Button 
                                 className={classes.button}
                                 type = "button"
@@ -137,7 +135,7 @@ export default function SelectGanadores() {
                         >
                             Volver
                         </Button>
-                </Link>
+                    </Link>
                     <Button 
                         className={classes.button}
                         type = "button"

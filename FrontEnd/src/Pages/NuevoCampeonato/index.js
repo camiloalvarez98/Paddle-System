@@ -58,8 +58,8 @@ export default function NuevoCampeonato() {
 
   const classes = useStyles()
   const [categoriesAc, setCategoriesAc] = useState([])
-  console.log(categoriesAc)
   const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [currency, setCurrency] = React.useState('');
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -74,8 +74,6 @@ export default function NuevoCampeonato() {
     }
   }
 
-  const [selects,setSelects]=useState();
-
   const datos = [
     { 
       value: 10,
@@ -87,7 +85,7 @@ export default function NuevoCampeonato() {
     },
   ];
   
-  const [currency, setCurrency] = React.useState('');
+
   
   const handleChange2 = (event) => {
     setCurrency(event.target.value);
@@ -126,20 +124,31 @@ export default function NuevoCampeonato() {
               }}
             >
               <h2>Nuevo Campeonato</h2>
-              <Grid container direction="row" justify="flex-end" alignItems="center">
-
+              <Grid container>
                 <Grid item sm = {12} xl = {12} marginTop= {'10px'} >
-                    <TextField required label='Nombre campeonato'  />
+                    <TextField required label='Nombre campeonato' variant = 'outlined' fullWidth/>
                 </Grid>
                 
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de inicio *"
                       inputFormat="yyyy-MM-dd"
                       value={value}
                       onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
+                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth/>}
+                    />
+                  </LocalizationProvider>                
+                </Grid>
+
+                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                      label="Fecha de término *"
+                      inputFormat="yyyy-MM-dd"
+                      value={value}
+                      onChange={handleChange}
+                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth/>}
                     />
                   </LocalizationProvider>                
                 </Grid>
@@ -151,20 +160,8 @@ export default function NuevoCampeonato() {
                     ampm={false}
                     value={value}
                     onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth/>}
                   />
-                  </LocalizationProvider>                
-                </Grid>
-
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DesktopDatePicker
-                      label="Fecha de término *"
-                      inputFormat="yyyy-MM-dd"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
                   </LocalizationProvider>                
                 </Grid>
 
@@ -173,10 +170,12 @@ export default function NuevoCampeonato() {
                     id='cuposMaximos'
                     select
                     label='Cupos '
+                    variant='outlined'
                     value={currency}
                     onChange={handleChange2}
                     helperTet='Por favor, seleccione la cantidad de cupos'
                     sx = {{m: 1, width: '35%'}}
+                    fullWidth
                   >
                     {datos.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
@@ -186,7 +185,7 @@ export default function NuevoCampeonato() {
                   </TextField>
                 </Grid>  
 
-                <br></br>
+              
                 <Box 
                   margin = 'center' 
                   sx = {{flexGrow: 20}}
@@ -250,7 +249,7 @@ export default function NuevoCampeonato() {
             </BackdropFilter>
           </Box>
           <div  mx = {10}>
-          <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
+            <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
               <Button 
                   className={classes.button}
                   type = "button"

@@ -59,7 +59,6 @@ const BarraSuperiorJugador = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -107,6 +106,11 @@ const BarraSuperiorJugador = () => {
                         <Typography textAlign="center">Campeonatos</Typography>
                     </Link>
                 </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Link underline='none' color='inherit' href = "/buscarcampeonato" className='btn'>
+                        <Typography textAlign="center">Buscar Campeonato</Typography>
+                    </Link>
+                </MenuItem>
 
             </Menu>
           </Box>
@@ -136,6 +140,14 @@ const BarraSuperiorJugador = () => {
                     variant='text' color='inherit' 
                 >
                     Campeonatos
+                </Button>
+            </Link>
+            <Link underline='none' color='inherit' href = "/buscarcampeonato" className='btn'>
+                <Button
+                    onClick={handleCloseNavMenu}
+                    variant='text' color='inherit' 
+                >
+                    Buscar Campeonato
                 </Button>
             </Link>
           </Box>

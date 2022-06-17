@@ -8,6 +8,7 @@ import { ListItemText, List, Collapse, ListItemButton, ListItemIcon, } from '@mu
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import { useForm } from '../../Shared/hooks/useForm'
 
 
 
@@ -73,8 +74,8 @@ export default function SignIn() {
     const [password, setPassword] = useState('')
     const [confpas,setConfpas] = useState('')
     const [usrVerf, setUsrVerf] = useState(false)
-    const [open, setOpen] = useState(true)
-    const [categoria, setCategoria] = useState('')
+    const [open, setOpen] = useState(false)
+    const [form, handleFormChange] = useForm({categoria:""})
     const handleEmail = (event) => setEmail(event.target.value) //el email se setea deacuerdo al valor que ingrese en el input
     const handlePassword = (event) => setPassword(event.target.value) //la password se setea deacuerdo al valor que ingrese en el input  
     const handleConfirm = (event) => setConfpas(event.target.value)
@@ -109,6 +110,7 @@ export default function SignIn() {
     const handleClick = () => {
         setOpen(!open);
     };
+
     return (
         <div>
             <Grid container component = 'main' className = {classes.root}>
@@ -194,7 +196,7 @@ export default function SignIn() {
                                 <ListItemIcon>
                                     <FormatListNumberedIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Categoria" />
+                                <ListItemText primary="Categoria" secondary = {form.categoria}/>
                                 {open ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
                             <List
@@ -203,31 +205,103 @@ export default function SignIn() {
                             >
                                 <Collapse in={open} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'primera'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Primera
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'segunda'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Segunda
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'tercera'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Tercera
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'cuarta'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Cuarta
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'quinta'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Quinta
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'sexta'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Sexta
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'DA'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Damas A
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'DB'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Damas B
                                         </ListItemButton>
-                                        <ListItemButton>
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                    const function1 = handleFormChange({categoria: 'DC'});
+                                                    const function2 = handleClick()
+                                                    function1()
+                                                    function2()
+                                                }
+                                            } 
+                                        >
                                             Damas C
                                         </ListItemButton>
                                     </List>

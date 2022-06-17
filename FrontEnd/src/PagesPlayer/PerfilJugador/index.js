@@ -180,7 +180,7 @@ export default function PerfilJugador() {
                             <h4 className={classes.text2}>Nombre: </h4>  
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                            <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
 
                         {/*Rut*/}
@@ -188,7 +188,7 @@ export default function PerfilJugador() {
                             <h4 className={classes.text2}>Apellido paterno: </h4>               
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                            <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
 
                         {/*Telefono*/}
@@ -196,7 +196,7 @@ export default function PerfilJugador() {
                             <h4 className={classes.text2}>Teléfono:</h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
 
                         {/*Direccion*/}
@@ -204,7 +204,7 @@ export default function PerfilJugador() {
                             <h4 className={classes.text2}>Dirección: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                            <TextField variant='outlined'   fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
 
                         {/*Puntaje*/}
@@ -212,7 +212,7 @@ export default function PerfilJugador() {
                             <h4 className={classes.text2}>Puntaje actual: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
 
                         {/*Categoria*/}
@@ -220,7 +220,7 @@ export default function PerfilJugador() {
                             <h4 className={classes.text2}>Categoría: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
                         
                         {/*Correo*/}
@@ -228,7 +228,7 @@ export default function PerfilJugador() {
                             <h4 className={classes.text2}>Correo electrónico: </h4>
                         </Grid>
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
+                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
 
                         <Grid item xs={12} container justify="center">
