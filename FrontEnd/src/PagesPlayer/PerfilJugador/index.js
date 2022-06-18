@@ -231,23 +231,7 @@ export default function PerfilJugador() {
                             <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
 
-                        <Grid item xs={12} container justify="center">
-                            <Button 
-                                style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
-                                type = "button"
-                                variant = 'contained'
-                                size='small'
-                                onClick = {abrirModalContra}
-                            >
-                                Cambiar contraseña
-                            </Button>
-                            <Modal
-                                open = {openContra}
-                                onClose = {cerrarModalContra}
-                            >
-                                {cambiarContraseña}
-                            </Modal>
-                        </Grid>  
+                        
                     </Grid>
                     <br></br>
                     </BackdropFilter>        

@@ -82,42 +82,44 @@ export default function SelectGanadores() {
                         <h2>Registrar Ganadores</h2>
                         <Grid container >
                             {/*Campeonato */}
-                            <Grid item sm = {6} xl = {12} marginTop= {'5px'}  >
-                                <TextField required label='ID de Campeonato' variant = 'outlined' fullWidth/>
+                            <Grid item sm = {6} xl = {12} marginTop= {'5px'} marginRight = {'80px'} marginLeft = {'80px'} >
+                                <TextField required label='ID de Campeonato' variant = 'outlined' fullWidth size = 'small'/>
                             </Grid>
+                            <br></br>
                             {/*Categoria*/}
-                            <Grid item sm = {6} xl = {12} marginTop= {'5px'}  >
-                                <TextField required label='Categoría' variant = 'outlined' fullWidth/>
+                            <Grid item sm = {6} xl = {12} marginTop= {'5px'} marginRight = {'80px'} marginLeft = {'80px'} >
+                                <TextField required label='Categoría' variant = 'outlined' fullWidth size = 'small'/>
                             </Grid>
+                            
                             {/*Primer Lugar*/}
-                            <Grid item sm = {3}>
+                            <Grid item xs = {12} sm = {3} marginTop= {'30px'}>
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField required label=' Rut Jugador 1' variant = 'outlined' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'45px'} marginRight = {'10px'}    >
+                                <TextField required label=' Rut Jugador 1' variant = 'outlined' fullWidth size = 'small' />
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField required label=' Rut Jugador 2' variant = 'outlined' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'45px'} marginRight = {'10px'} >
+                                <TextField required label=' Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
                             </Grid>
                             {/*Segundo Lugar*/}
-                            <Grid item sm = {3}>
+                            <Grid item xs = {12} sm = {3}>
                                 <h4 className={classes.text2}>Segundo Lugar:</h4>
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField required  label='Rut Jugador 1' variant = 'outlined' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'} >
+                                <TextField required  label='Rut Jugador 1' variant = 'outlined' fullWidth size = 'small' />
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
+                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
                             </Grid>
                             {/*Tercer Lugar*/}
-                            <Grid item sm = {3}>
+                            <Grid item xs = {12} sm = {3}>
                                 <h4 className={classes.text2}>Tercer Lugar:</h4>
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField required  label='Rut Jugador 1'variant = 'outlined' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
+                                <TextField required  label='Rut Jugador 1'variant = 'outlined' fullWidth size = 'small'/>
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
+                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
                             </Grid>
 
                         </Grid>

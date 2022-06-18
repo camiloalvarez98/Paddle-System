@@ -84,7 +84,7 @@ export default function PrincipalClub() {
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} />
+            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange}  />
             <br/>
             <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
             <br/>
@@ -137,7 +137,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Direccion:</h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
 
                             {/*Representante*/}
@@ -145,7 +145,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Representante:</h4>               
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
 
                             {/*Telefono*/}
@@ -153,7 +153,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Telefono:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
 
 
@@ -162,7 +162,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Comuna:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}}/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
                             
                         </Grid>
@@ -186,17 +186,7 @@ export default function PrincipalClub() {
                     >
                         {bodyEdit}
                     </Modal>
-                    <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
-                        <Button 
-                            className={classes.button}
-                            type = "button"
-                            variant = 'contained'
-                            size='small'
-                            onClick = {()=>abrirCerrarModalEdit()}
-                        >
-                            Volver
-                        </Button>
-                    </Link>
+                    
                 </div>
             </div>
             

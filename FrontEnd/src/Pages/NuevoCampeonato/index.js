@@ -58,12 +58,22 @@ export default function NuevoCampeonato() {
 
   const classes = useStyles()
   const [categoriesAc, setCategoriesAc] = useState([])
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [fechaI, setFechaI] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [fechaT, setFechaT] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [horaI, setHoraI] = React.useState(new Date('2014-08-18T21:11:54'));
   const [currency, setCurrency] = React.useState('');
+  const [error, setError] = useState(null);
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const handleChangeFI = (newValue) => {
+    setFechaI(newValue);
   };
+  const handleChangeFT = (newValue) => {
+    setFechaT(newValue);
+  };
+  const handleChangeHI = (newValue) => {
+    setHoraI(newValue);
+  };
+
 
   const handleCategoriesChange = e =>{
     const index = categoriesAc.indexOf(e.target.value)
@@ -125,52 +135,53 @@ export default function NuevoCampeonato() {
             >
               <h2>Nuevo Campeonato</h2>
               <Grid container>
-                <Grid item sm = {12} xl = {12} marginTop= {'10px'} >
-                    <TextField required label='Nombre campeonato' variant = 'outlined' fullWidth/>
+                <Grid item sm = {12} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
+                    <TextField required label='Nombre campeonato' variant = 'outlined' fullWidth size = 'small' />
                 </Grid>
                 
-                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {5} marginTop= {'10px'} marginLeft = {'90px'} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de inicio *"
                       inputFormat="yyyy-MM-dd"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth/>}
+                      value={fechaI}
+                      onChange={handleChangeFI}
+                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
                     />
                   </LocalizationProvider>                
                 </Grid>
 
-                <Grid item sm = {6} xl = {6} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {5} marginTop= {'10px'} marginRight = {'10px'} marginLeft = {'10px'} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de término *"
                       inputFormat="yyyy-MM-dd"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth/>}
+                      value={fechaT}
+                      onChange={handleChangeFT}
+                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
                     />
                   </LocalizationProvider>                
                 </Grid>
                 
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <TimePicker
                     label="Hora de inicio"
                     ampm={false}
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth/>}
+                    value={horaI}
+                    onChange={handleChangeHI}
+                    renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
                   />
                   </LocalizationProvider>                
                 </Grid>
 
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
                   <TextField 
                     id='cuposMaximos'
                     select
                     label='Cupos '
                     variant='outlined'
+                    size = 'small'
                     value={currency}
                     onChange={handleChange2}
                     helperTet='Por favor, seleccione la cantidad de cupos'

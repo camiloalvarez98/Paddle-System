@@ -120,11 +120,11 @@ export default function InsCampeonato() {
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Pareja:</h4>
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField variant='outlined' required  label='Rut Jugador 1' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'} >
+                                <TextField variant='outlined' required  label='Rut Jugador 1' fullWidth size = 'small'/>
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'}  >
-                                <TextField variant='outlined' required  label='Rut Jugador 2' fullWidth/>
+                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'5px'} marginLeft = {'5px'}>
+                                <TextField variant='outlined' required  label='Rut Jugador 2' fullWidth size = 'small'/>
                             </Grid>
                         </Grid>
                         <br></br>
