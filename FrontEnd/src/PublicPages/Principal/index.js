@@ -39,7 +39,7 @@ const useStyles = makeStyles (theme=>({
 export default function Principal() {
     const classes = useStyles()
     return (
-        <div>
+        <div align = 'center' marginBottom = '10px'>
             <Link to = '/loginClub'>
                 <Button 
                     className= {classes.button}
@@ -50,14 +50,14 @@ export default function Principal() {
                     Club
                 </Button>
             </Link>
-            <Link to = '/loginAdmin'>
+            <Link to = '/loginJugador'>
                 <Button
                     className= {classes.button}
                     type = "button"
                     variant = 'contained'
                     size='large'
                 >
-                    Admin
+                    Jugador
                 </Button>
             </Link>
         </div>

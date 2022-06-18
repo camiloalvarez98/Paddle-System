@@ -2,13 +2,14 @@ import React, {useEffect,useState} from 'react';
 //import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { makeStyles, styled } from '@material-ui/core';
+
+import { makeStyles, } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
-import {Edit, Delete} from '@material-ui/icons';
 import { Contenedor } from '../../Components';
-import { Link, NavLink,  } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -83,7 +84,7 @@ export default function PrincipalClub() {
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} />
+            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange}  />
             <br/>
             <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
             <br/>
@@ -111,7 +112,7 @@ export default function PrincipalClub() {
                           lg: 800,
                           xl: 1200,
                         }
-                      }}
+                    }}
                     color = 'contrastText'
                     mx = {20} //margen a todos los lados
                     border = {1}
@@ -126,15 +127,17 @@ export default function PrincipalClub() {
                             console.log("Rendered !");
                         }}
                     >
-                        <h2>Padel del mar</h2>
                         <br></br>
+                        <Avatar align = 'center' sx={{ width: 100, height: 100 }}>PM</Avatar>
+                        <h2>Padel del mar</h2>
+                       
                         <Grid container>
                             {/*Direccion*/}
                             <Grid item xs ={3}>
                                 <h4 className={classes.text2}>Direccion:</h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
 
                             {/*Representante*/}
@@ -142,7 +145,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Representante:</h4>               
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
 
                             {/*Telefono*/}
@@ -150,7 +153,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Telefono:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
 
 
@@ -159,7 +162,7 @@ export default function PrincipalClub() {
                                 <h4 className={classes.text2}>Comuna:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth/>
+                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
                             </Grid>
                             
                         </Grid>
@@ -183,17 +186,7 @@ export default function PrincipalClub() {
                     >
                         {bodyEdit}
                     </Modal>
-                    <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
-                        <Button 
-                            className={classes.button}
-                            type = "button"
-                            variant = 'contained'
-                            size='small'
-                            onClick = {()=>abrirCerrarModalEdit()}
-                        >
-                            Volver
-                        </Button>
-                    </Link>
+                    
                 </div>
             </div>
             

@@ -58,12 +58,22 @@ export default function NuevoCampeonato() {
 
   const classes = useStyles()
   const [categoriesAc, setCategoriesAc] = useState([])
-  console.log(categoriesAc)
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [fechaI, setFechaI] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [fechaT, setFechaT] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [horaI, setHoraI] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [currency, setCurrency] = React.useState('');
+  const [error, setError] = useState(null);
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const handleChangeFI = (newValue) => {
+    setFechaI(newValue);
   };
+  const handleChangeFT = (newValue) => {
+    setFechaT(newValue);
+  };
+  const handleChangeHI = (newValue) => {
+    setHoraI(newValue);
+  };
+
 
   const handleCategoriesChange = e =>{
     const index = categoriesAc.indexOf(e.target.value)
@@ -73,8 +83,6 @@ export default function NuevoCampeonato() {
       setCategoriesAc(categoriesAc.filter((categoriesAc) => categoriesAc !== e.target.value))
     }
   }
-
-  const [selects,setSelects]=useState();
 
   const datos = [
     { 
@@ -87,7 +95,7 @@ export default function NuevoCampeonato() {
     },
   ];
   
-  const [currency, setCurrency] = React.useState('');
+
   
   const handleChange2 = (event) => {
     setCurrency(event.target.value);
@@ -126,57 +134,59 @@ export default function NuevoCampeonato() {
               }}
             >
               <h2>Nuevo Campeonato</h2>
-              <Grid container direction="row" justify="flex-end" alignItems="center">
-
-                <Grid item sm = {12} xl = {12} marginTop= {'10px'} >
-                    <TextField required label='Nombre campeonato'  />
+              <Grid container>
+                <Grid item sm = {12} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
+                    <TextField required label='Nombre campeonato' variant = 'outlined' fullWidth size = 'small' />
                 </Grid>
                 
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {5} marginTop= {'10px'} marginLeft = {'90px'} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de inicio *"
                       inputFormat="yyyy-MM-dd"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
+                      value={fechaI}
+                      onChange={handleChangeFI}
+                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
                     />
                   </LocalizationProvider>                
                 </Grid>
-                
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <TimePicker
-                    label="Hora de inicio"
-                    ampm={false}
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                  </LocalizationProvider>                
-                </Grid>
 
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {5} marginTop= {'10px'} marginRight = {'10px'} marginLeft = {'10px'} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Fecha de término *"
                       inputFormat="yyyy-MM-dd"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
+                      value={fechaT}
+                      onChange={handleChangeFT}
+                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
                     />
                   </LocalizationProvider>                
                 </Grid>
+                
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <TimePicker
+                    label="Hora de inicio"
+                    ampm={false}
+                    value={horaI}
+                    onChange={handleChangeHI}
+                    renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
+                  />
+                  </LocalizationProvider>                
+                </Grid>
 
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  >
+                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
                   <TextField 
                     id='cuposMaximos'
                     select
                     label='Cupos '
+                    variant='outlined'
+                    size = 'small'
                     value={currency}
                     onChange={handleChange2}
                     helperTet='Por favor, seleccione la cantidad de cupos'
                     sx = {{m: 1, width: '35%'}}
+                    fullWidth
                   >
                     {datos.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
@@ -186,7 +196,7 @@ export default function NuevoCampeonato() {
                   </TextField>
                 </Grid>  
 
-                <br></br>
+              
                 <Box 
                   margin = 'center' 
                   sx = {{flexGrow: 20}}
@@ -250,7 +260,7 @@ export default function NuevoCampeonato() {
             </BackdropFilter>
           </Box>
           <div  mx = {10}>
-          <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
+            <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
               <Button 
                   className={classes.button}
                   type = "button"

@@ -51,7 +51,7 @@ export default function Lista() {
                                 <ListItemIcon>
                                     <CalendarTodayIcon/>
                                 </ListItemIcon>
-                                <ListItemText primary = 'Seleccionar ganadores'/>
+                                <ListItemText primary = 'Registrar ganadores'/>
                             </ListItem>
                         </Link>
                     </li>

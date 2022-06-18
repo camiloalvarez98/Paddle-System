@@ -2,13 +2,11 @@ import React, {useEffect,useState} from 'react';
 //import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { makeStyles, styled } from '@material-ui/core';
-import {Modal, Button, TextField } from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorJugador } from '../../Components';
-import { Link, NavLink,  } from 'react-router-dom'
+import { Link, NavLink  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -54,85 +52,50 @@ const useStyles = makeStyles((theme)=>({
 
 export default function CampeonatosJugador() {
     const classes = useStyles()
-    const [modalEdit, setModalEdit] = useState(false);
-    const [ClubSeleccionado, setClubSeleccionado] = useState({
-
-    })
-
-    const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
-        const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
-        if(name!==""){
-            setClubSeleccionado(prevState=>({
-                ...prevState,
-                [name]:value
-            }))
-        }
-
-    }
-
-
-
-    const abrirCerrarModalEdit =() =>{
-        setModalEdit(!modalEdit); //abre o cierra el modal
-    }
-
-    const bodyEdit = (
-        <div className= {classes.modal}>
-            <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange}/>
-            <br/>
-            <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
-            <br/>
-            <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange}/>
-            <br/>
-            <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange}/>
-            <br></br>
-            <div align = 'right'>
-                <Button>Guardar</Button>
-                <Button onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
-            </div>
-        </div>
-    )
 
     return (
-        <div>
+        <div className = 'App'>
             <ContenedorJugador/>
-            <div align = 'center'> 
+            <div align = 'center'>
                 <Box
                     sx = {{
                         width:{
-                          xs: 300,
-                          sm: 400,
-                          md: 600,
-                          lg: 800,
-                          xl: 1200,
+                            xs: 300,
+                            sm: 400,
+                            md: 600,
+                            lg: 800,
+                            xl: 1200,
                         }
-                      }}
+                    }}
                     color = 'contrastText'
-                    //backgroundColor = '#D8F3DC'
-                    mx = {25} //margen a todos los lados
-                    //p = {10} //padding
+                    mx = {25} 
                     border = {1}
                     borderColor = '#adc178'
-                    
                 >
                     <BackdropFilter
                         className="bluredForm"
-                        filter={"blur(5px) "}
+                        filter={"blur(5px)"}
                         html2canvasOpts={{
                             allowTaint: true
                         }}
                         onDraw={() => {
                             console.log("Rendered !");
-                        }}
+                        }}                       
                     >
-                    <br></br>
-                    <h1>Campeonatos</h1>  
-                    
+                        <TableContainer>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Nombre</TableCell>
+                                        <TableCell>Fecha</TableCell>
+                                        <TableCell>Partner</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                            </Table>
+                        </TableContainer>
                     </BackdropFilter>
                 </Box>
             </div>
-            
         </div>
         
     )

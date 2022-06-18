@@ -11,14 +11,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import { Link } from '@material-ui/core';
 import { useAuth } from '../../Context/AuthContext';
 import { useState } from 'react';
 
-const pages = ['Agregar Club', 'Clubes'];
-const settings = ['Perfil', 'Salir'];
 
 
 
@@ -62,7 +59,6 @@ const BarraSuperiorJugador = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -110,6 +106,11 @@ const BarraSuperiorJugador = () => {
                         <Typography textAlign="center">Campeonatos</Typography>
                     </Link>
                 </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Link underline='none' color='inherit' href = "/buscarcampeonato" className='btn'>
+                        <Typography textAlign="center">Buscar Campeonato</Typography>
+                    </Link>
+                </MenuItem>
 
             </Menu>
           </Box>
@@ -139,6 +140,14 @@ const BarraSuperiorJugador = () => {
                     variant='text' color='inherit' 
                 >
                     Campeonatos
+                </Button>
+            </Link>
+            <Link underline='none' color='inherit' href = "/buscarcampeonato" className='btn'>
+                <Button
+                    onClick={handleCloseNavMenu}
+                    variant='text' color='inherit' 
+                >
+                    Buscar Campeonato
                 </Button>
             </Link>
           </Box>

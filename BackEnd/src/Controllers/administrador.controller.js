@@ -18,7 +18,7 @@ administradorFunctions.getInfoPersonal = async(req,res)=> {
 //Información clubes
 administradorFunctions.getInfoClubes = async(req,res)=> {
     await pool
-        .query('select id_club,nombre_club,comuna_club,representante_club,direccion_club,telefono_club from club')
+        .query('select id_club, nombre_club from club')
         .then((result) => {
             res.status(200).json(result.rows);
         })
@@ -27,10 +27,9 @@ administradorFunctions.getInfoClubes = async(req,res)=> {
 
 //Actualizar club
 administradorFunctions.updateClub = async(req,res)=> {
-    console.log(req.body)
-    const { direccion_club,representante_club,telefono_club,comuna_club} = req.body;
+    const { direccion,representante,telefono,comuna} = req.body;
     await pool
-        .query('update club set direccion_club=$1,representante_club=$2,telefono_club=$3,comuna_club=$4 where id_club=$5',[direccion_club,representante_club,telefono_club,comuna_club,req.params.id_club])
+        .query('update club set direccion=$1,representante=$2,telefono=$3,comuna=$4 where id_club=$5',[direccion,representante,telefono,comuna,req.params.id_club])
         .then((result) => {
             res.json('Club actualizado correctamente');
         })
@@ -46,24 +45,5 @@ administradorFunctions.deleteClub = async(req, res)=>{
     })
     .catch((e) => console.log(e));
 }
-
-//Agregar club
-administradorFunctions.createClub = async(req,res)=>{
-    console.log(req.body)
-    const {nombre_club, direccion_club, representante_club, telefono_club, comuna_club } = req.body; 
-    await pool
-    .query('INSERT INTO club (nombre_club, comuna_club, representante_club, direccion_club, telefono_club) VALUES ($1,$2,$3,$4,$5)',[nombre_club,comuna_club,representante_club,direccion_club,telefono_club])
-    .then((result) => {
-        console.log(result);
-        res.json({
-        message: 'Club creado correctamente',
-        body: {
-            club: {nombre_club, comuna_club, representante_club,direccion_club, telefono_club}
-        }
-        });
-    })
-    .catch((e) => console.log(e));
-}
-
 
 module.exports = administradorFunctions;

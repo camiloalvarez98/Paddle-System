@@ -1,9 +1,9 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
-import { makeStyles , TextField, Button, Modal} from '@material-ui/core';
-//import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField } from '@material-ui/core';
+//import { makeStyles , TextField, Button, Modal} from '@material-ui/core';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
-import { TableContainer,Table,TableHead,TableBody,TableRow,TableCell,Paper} from '@mui/material'
+//import { TableContainer,Table,TableHead,TableBody,TableRow,TableCell,Paper} from '@mui/material'
 import Box from '@mui/material/Box';
 import BackdropFilter from "react-backdrop-filter";
 
@@ -58,8 +58,9 @@ export default function TablaClubes() {
         await axios.get('http://localhost:3001/api/Administrador/getClubes')
         .then(response =>{
            setData(response.data) 
-           console.log(response)
-        });
+           console.log(response.data)
+        })
+        
     }
     
     useEffect (() =>{
@@ -88,13 +89,14 @@ export default function TablaClubes() {
 
     //peticion delete
     const deleteClub = async() =>{
-        await axios.delete('http://localhost:3001/api/Administrador/deleteClub/'+ClubSeleccionado.id_club)
+        await axios.delete('http://localhost:3001/api/Administrador/deleteClub/'+ ClubSeleccionado.id_club)
         .then(response=>{
-            setData(data.filter(club=>club.id_club!==ClubSeleccionado.id_club)); //filtar los datos por cdsala
+            setData(data.filter(club=>club.id_club !== ClubSeleccionado.id_club)); //filtar los datos por cdsala
             abrirCerrarModalELiminar();
         })
     }
 
+   
     const abrirCerrarModalELiminar=() =>{
         setModalEliminar(!modalEliminar);
     }
@@ -141,73 +143,74 @@ export default function TablaClubes() {
         <div className = 'App'>
             <br/>
             <div align = 'center'>
-            </div>
-            <Box
-                sx = {{
-                    width:{
-                        xs: 300,
-                        sm: 400,
-                        md: 600,
-                        lg: 800,
-                        xl: 1200,
-                    }
-                }}
-                color = 'contrastText'
-                mx = {25} 
-                border = {1}
-                borderColor = '#adc178'
-                >
-                <BackdropFilter
-                        className="bluredForm"
-                        filter={"blur(5px)"}
-                        html2canvasOpts={{
-                            allowTaint: true
-                        }}
-                        onDraw={() => {
-                            console.log("Rendered !");
-                        }}
-                >
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Nombre club</TableCell>
-                                <TableCell>Editar</TableCell>
-                                <TableCell>Eliminar</TableCell>
-                            </TableRow>
-                        </TableHead> 
+            
+                <Box
+                    sx = {{
+                        width:{
+                            xs: 300,
+                            sm: 400,
+                            md: 600,
+                            lg: 800,
+                            xl: 1200,
+                        }
+                    }}
+                    color = 'contrastText'
+                    mx = {25} 
+                    border = {1}
+                    borderColor = '#adc178'
+                    >
+                    <BackdropFilter
+                            className="bluredForm"
+                            filter={"blur(5px)"}
+                            html2canvasOpts={{
+                                allowTaint: true
+                            }}
+                            onDraw={() => {
+                                console.log("Rendered !");
+                            }}
+                    >
+                        <TableContainer>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Nombre club</TableCell>
+                                        <TableCell>Editar</TableCell>
+                                        <TableCell>Eliminar</TableCell>
+                                    </TableRow>
+                                </TableHead> 
 
-                        <TableBody>
-                            {data.map(club =>(
-                                <TableRow sx={{ '&:last-child td, &:last-child th': {border: 0}}}>
-                                    <TableCell>{club.nombre_club}</TableCell>
-                                    <TableCell>
-                                    <Edit className = {classes.icons} onClick = {()=>seleccionarClub(club, 'Editar')}/>
-                                    <Modal
-                                        open = {modalEdit}
-                                        onClose = {abrirCerrarModalEdit}
-                                    >
-                                        {bodyEdit}
-                                    </Modal>
-                                    </TableCell>
-                                    <TableCell>
-                                    <Delete className = {classes.icons} onClick ={()=>seleccionarClub(club, 'Eliminar') }/>
-                                    <Modal
-                                        open = {modalEliminar}
-                                        onClose = {abrirCerrarModalELiminar}
-                                    >
-                                        {bodyEliminar}
-                                    </Modal>
-                                </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-    
-                </TableContainer>
-                </BackdropFilter>
-            </Box>     
-            </div>
+                                <TableBody>
+                                    {data.map(club =>(
+                                        <TableRow sx={{ '&:last-child td, &:last-child th': {border: 0}}}>
+                                            <TableCell>{club.nombre_club}</TableCell>
+                                            <TableCell>
+                                                <Edit className = {classes.icons} onClick = {()=>seleccionarClub(club, 'Editar')}/>
+                                                <Modal
+                                                    open = {modalEdit}
+                                                    onClose = {abrirCerrarModalEdit}
+                                                >
+                                                    {bodyEdit}
+                                                </Modal>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Delete className = {classes.icons} onClick ={()=>seleccionarClub(club, 'Eliminar') }/>
+                                                <Modal
+                                                    open = {modalEliminar}
+                                                    onClose = {abrirCerrarModalELiminar}
+                                                >
+                                                    {bodyEliminar}
+                                                </Modal>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+            
+                        </TableContainer>
+                    </BackdropFilter>
+                </Box>     
+            </div>                               
+        </div>
         
     )
 }
