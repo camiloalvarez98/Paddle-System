@@ -5,8 +5,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
-import {Edit, Delete} from '@material-ui/icons';
-import { Link, NavLink,  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
@@ -146,6 +144,7 @@ export default function Perfil() {
     return (
         <div>
             <ContenedorAdmin/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -158,10 +157,6 @@ export default function Perfil() {
                         }
                       }}
                     color = 'contrastText'
-                    //backgroundColor = '#D8F3DC'
-                    mx = {25} //margen a todos los lados
-                    //p = {30} //padding
-                    //borderRadius = '8px'
                     border = {1}
                     borderColor = '#adc178'
                 >
@@ -237,8 +232,6 @@ export default function Perfil() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<KeyboardReturnIcon/>}
-                        //onClick = {()=>abrirCerrarModalEdit()}
-                        //agregar función de volver a la página anterior
                     >
                         Volver
                     </Button>

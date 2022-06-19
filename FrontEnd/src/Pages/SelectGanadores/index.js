@@ -27,7 +27,6 @@ const useStyles = makeStyles (theme=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2) ,
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(5),
@@ -53,6 +52,7 @@ export default function SelectGanadores() {
     
         <div>
             <Contenedor/>
+            <br/>
             <div align = 'center'>
                 <Box 
                     sx = {{
@@ -65,7 +65,6 @@ export default function SelectGanadores() {
                         }
                       }}
                     color = 'contrastText'
-                    mx = {20} //margen a todos los lados
                     border = {1}
                                 
                 >

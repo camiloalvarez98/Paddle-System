@@ -56,6 +56,7 @@ export default function CampeonatosJugador() {
     return (
         <div className = 'App'>
             <ContenedorJugador/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{

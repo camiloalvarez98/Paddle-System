@@ -1,22 +1,14 @@
 import React, {useEffect,useState} from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import { Button, TextField } from '@material-ui/core';
-import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorAdmin , BarraSuperior} from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
-import {useNavigate} from 'react-router-dom'
-import {Principal} from '../Principal'
-import GroupsIcon from '@mui/icons-material/Groups';
 import SaveIcon from '@mui/icons-material/Save';
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import axios from 'axios';
-
-
-
 
 const useStyles = makeStyles((theme)=>({
     icons: {
@@ -38,7 +30,6 @@ const useStyles = makeStyles((theme)=>({
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(5),
         marginRigt: theme.spacing(5),
-        //si quiero agregar borde es con solid
         border: '2px',
         borderColor: '#4f772d'
     },
@@ -83,6 +74,7 @@ export default function AgregarClub() {
     return (
         <div>
             <ContenedorAdmin/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -114,30 +106,23 @@ export default function AgregarClub() {
                     <Grid container>
                         {/*Nombre*/}
                         <Grid item xs = {6} marginTop= {'10px'}  >
-                            <TextField 
-                                 
-                                name = 'nombre_club'  
-                                label='Nombre de club' 
-                                onChange = {handleChange} 
-                                defaultValue=''
-
-                            />
+                            <TextField name = 'nombre_club' variant='outlined' label='Nombre de club' onChange = {handleChange} defaultValue=''/>
                         </Grid>
                         {/*Direccion*/}
                         <Grid item xs = {6} marginTop= {'10px'}  >
-                            <TextField required name = 'direccion_club'  label='Dirección' onChange = {handleChange} defaultValue=''/>
+                            <TextField required name = 'direccion_club' variant='outlined' label='Dirección' onChange = {handleChange} defaultValue=''/>
                         </Grid>
                         {/*Representante*/}
                         <Grid item xs = {6} marginTop= {'10px'} >
-                            <TextField required name ='representante_club' label='Representante' onChange = {handleChange} defaultValue=''/>
+                            <TextField required name ='representante_club' variant='outlined' label='Representante' onChange = {handleChange} defaultValue=''/>
                         </Grid>
                         {/*Telefono*/}
                         <Grid item xs = {6} marginTop= {'10px'} >
-                            <TextField required name='telefono_club' label='Teléfono' onChange = {handleChange} defaultValue=''/>
+                            <TextField required name='telefono_club' variant='outlined' label='Teléfono' onChange = {handleChange} defaultValue=''/>
                         </Grid>
                         {/*Comuna*/}
                         <Grid item xs = {6} marginTop= {'10px'} >
-                            <TextField required name='comuna_club' label='Comuna' onChange = {handleChange} defaultValue=''/>
+                            <TextField required name='comuna_club' variant='outlined' label='Comuna' onChange = {handleChange} defaultValue=''/>
                         </Grid>
                     </Grid>
                     <br></br>

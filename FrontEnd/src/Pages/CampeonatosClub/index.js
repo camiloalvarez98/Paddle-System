@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles   } from '@material-ui/core';
 import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({
@@ -27,8 +26,8 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
-        marginTop: theme.spacing(8) ,
+        marginTop: theme.spacing(4) ,
+        marginBottom: theme.spacing(4),
         
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
@@ -47,6 +46,7 @@ export default function CampeonatosClub() {
     return (
         <div>
             <Contenedor/>
+            <br/>
             <div align = "center">
                 <Box 
                     sx = {{
@@ -59,11 +59,7 @@ export default function CampeonatosClub() {
                         }
                       }}
                     color = 'contrastText'
-                    mx = {20} //margen a todos los lados
-                    //p = {1} //padding
-                    //borderRadius = '8px'
                     border = {1}
-                            
                 >
                     <BackdropFilter
                         className="bluredForm"

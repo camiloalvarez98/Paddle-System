@@ -6,7 +6,6 @@ import Grid from '@mui/material/Grid';
 import { makeStyles, } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
 import { Contenedor } from '../../Components';
-import { Link } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(5),
@@ -75,8 +73,6 @@ export default function PrincipalClub() {
 
     }
 
-
-
     const abrirCerrarModalEdit =() =>{
         setModalEdit(!modalEdit); //abre o cierra el modal
     }
@@ -102,6 +98,7 @@ export default function PrincipalClub() {
     return (
         <div>
             <Contenedor/>
+            <br/>
             <div align = 'center'>
                 <Box 
                     sx = {{
@@ -114,7 +111,6 @@ export default function PrincipalClub() {
                         }
                     }}
                     color = 'contrastText'
-                    mx = {20} //margen a todos los lados
                     border = {1}
                 >
                     <BackdropFilter

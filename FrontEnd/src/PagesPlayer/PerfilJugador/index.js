@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme)=>({
 export default function PerfilJugador() {
     const classes = useStyles()
     const [modalEdit, setModalEdit] = useState(false);
-    const [openContra, setModalContra] = React.useState(false);
+    const [openContra, setOpenContra] = React.useState(false);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
     })
@@ -88,21 +88,16 @@ export default function PerfilJugador() {
 
     }
 
-
-
     const abrirCerrarModalEdit =() =>{
         setModalEdit(!modalEdit); //abre o cierra el modal
     }
 
-    
-    const abrirModalContra =() =>{
-        setModalContra(true); //abre o cierra el modal
+    const abrirContra =() =>{
+        setOpenContra(true);
     }
-
-    const cerrarModalContra =() =>{
-        setModalContra(false); //abre o cierra el modal
+    const cerrarContra = () => {
+        setOpenContra(false);
     }
-
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
@@ -127,7 +122,7 @@ export default function PerfilJugador() {
     const cambiarContraseña = (
         <div className= {classes.modal2}>
             <h3>Cambiar contraseña</h3>
-            <TextField name = 'contraseñaantigua' className={classes.inputMaterial} label='Contraseña antigua' onChange={handleChange}/>
+            <TextField name = 'contraseñaantigua' className={classes.inputMaterial} label='Antigua contraseña' onChange={handleChange}/>
             <br/>
             <TextField name = 'contraseñanueva1' className={classes.inputMaterial} label='Nueva contraseña' onChange={handleChange}/>
             <br/>
@@ -136,7 +131,7 @@ export default function PerfilJugador() {
             <br></br>
             <div align = 'right'>
                 <Button size='small'>Guardar</Button>
-                <Button size='small' onClick={cerrarModalContra}>Cancelar</Button>
+                <Button size='small' onClick={cerrarContra}>Cancelar</Button>
             </div>
         </div>
     )
@@ -144,6 +139,7 @@ export default function PerfilJugador() {
     return (
         <div>
             <ContenedorJugador/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -156,10 +152,6 @@ export default function PerfilJugador() {
                         }
                       }}
                     color = 'contrastText'
-                    //backgroundColor = '#D8F3DC'
-                    mx = {25} //margen a todos los lados
-                    //p = {30} //padding
-                    //borderRadius = '8px'
                     border = {1}
                     borderColor = '#adc178'
                 >
@@ -230,7 +222,23 @@ export default function PerfilJugador() {
                         <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                             <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                         </Grid>
-
+                        <Grid item xs={12} container justify="center">
+                            <Button 
+                                style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
+                                type = "button"
+                                variant = 'contained'
+                                size='small'
+                                onClick = {()=>abrirContra()}
+                            >
+                                Cambiar contraseña
+                            </Button>
+                            <Modal
+                                open = {openContra}
+                                close = {cerrarContra}
+                            >
+                                {cambiarContraseña}
+                            </Modal>
+                        </Grid>  
                         
                     </Grid>
                     <br></br>
@@ -243,8 +251,6 @@ export default function PerfilJugador() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<KeyboardReturnIcon/>}
-                        //onClick = {()=>abrirCerrarModalEdit()}
-                        //agregar función de volver a la página anterior
                     >
                         Volver
                     </Button>

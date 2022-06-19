@@ -19,6 +19,7 @@ export default function Home() {
   return (
     <div>
       <Contenedor />
+      <br/>
       <h1 className = { classes.text }>Bienvenidos</h1>
     </div>
   );

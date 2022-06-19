@@ -141,9 +141,7 @@ export default function TablaClubes() {
 
     return (
         <div className = 'App'>
-            <br/>
             <div align = 'center'>
-            
                 <Box
                     sx = {{
                         width:{
@@ -155,7 +153,6 @@ export default function TablaClubes() {
                         }
                     }}
                     color = 'contrastText'
-                    mx = {25} 
                     border = {1}
                     borderColor = '#adc178'
                     >

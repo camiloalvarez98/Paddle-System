@@ -103,7 +103,7 @@ const BarraSuperiorJugador = () => {
             >
                 <MenuItem onClick={handleCloseNavMenu}>
                     <Link underline='none' color='inherit' href = "/campeonatosjugador" className='btn'>
-                        <Typography textAlign="center">Campeonatos</Typography>
+                        <Typography textAlign="center">Campeonatos registrados</Typography>
                     </Link>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
@@ -139,7 +139,7 @@ const BarraSuperiorJugador = () => {
                     onClick={handleCloseNavMenu}
                     variant='text' color='inherit' 
                 >
-                    Campeonatos
+                    Campeonatos registrados
                 </Button>
             </Link>
             <Link underline='none' color='inherit' href = "/buscarcampeonato" className='btn'>
