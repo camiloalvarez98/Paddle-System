@@ -9,6 +9,7 @@ import BackdropFilter from "react-backdrop-filter";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { ContenedorAdmin } from '../../Components';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -70,12 +71,12 @@ const useStyles = makeStyles((theme)=>({
 export default function Perfil() {
     const classes = useStyles()
     const [openEditar, setOpenEditar] = React.useState(false);
+    const [data, setData] = useState([]);
     const [openContra, setOpenContra] = React.useState(false);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
     })
     
-
     const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
         const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
         if(name!==""){
@@ -87,7 +88,19 @@ export default function Perfil() {
 
     }
 
+    const correo_admin = localStorage.getItem('correo_admin')
 
+    const getJugador = async() =>{
+        await axios.get('http://localhost:3001/api/Administrador/getAdministrador/'+correo_admin)
+        .then(response =>{
+           setData(response.data) 
+           console.log(response.data)
+        })
+    }
+
+    useEffect (() =>{
+        getJugador();
+    },[])
 
     const abrirEditar =() =>{
         setOpenEditar(true); 
@@ -170,58 +183,59 @@ export default function Perfil() {
                             console.log("Rendered !");
                         }}
                     >
-                    <h2>Perfil administrador</h2>    
-                    <Grid container>
-                        {/*Nombre*/}
-                        <Grid item xs ={3}>
-                            <h4 className={classes.text2}>Nombre: </h4>  
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
-                        </Grid>
+                    <h2>Perfil administrador</h2>   
+                    {data.map((administrador)=> (
+                        <Grid container>
+                            {/*Nombre*/}
+                            <Grid item xs ={3}>
+                                <h4 className={classes.text2}>Nombre: </h4>  
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true}} defaultValue={administrador.nombre_administrador}/>
+                            </Grid>
 
-                        {/*Rut*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Rut: </h4>               
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
-                        </Grid>
+                            {/*Rut*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Rut: </h4>               
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}}  defaultValue={administrador.rut_administrador}/>
+                            </Grid>
 
-                        {/*Telefono*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Teléfono:</h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
-                        </Grid>
+                            {/*Telefono*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Teléfono:</h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}}  defaultValue={administrador.telefono_administrador}/>
+                            </Grid>
 
-
-                        {/*Direccion*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Dirección: </h4>
+                            {/*Direccion*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Dirección: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}}  defaultValue={administrador.direccion_administrador}/>
+                            </Grid>
+                            <Grid item xs={12} container justify="center">
+                                <Button 
+                                    style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
+                                    type = "button"
+                                    variant = 'contained'
+                                    size='small'
+                                    onClick = {()=>abrirContra()}
+                                >
+                                    Cambiar contraseña
+                                </Button>
+                                <Modal
+                                    open = {openContra}
+                                    close = {cerrarContra}
+                                >
+                                    {cambiarContraseña}
+                                </Modal>
+                            </Grid>  
                         </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  backgroundColor = {'#FFFFFF'} fullWidth size='small'/>
-                        </Grid>
-                        <Grid item xs={12} container justify="center">
-                            <Button 
-                                style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
-                                type = "button"
-                                variant = 'contained'
-                                size='small'
-                                onClick = {()=>abrirContra()}
-                            >
-                                Cambiar contraseña
-                            </Button>
-                            <Modal
-                                open = {openContra}
-                                close = {cerrarContra}
-                            >
-                                {cambiarContraseña}
-                            </Modal>
-                        </Grid>  
-                    </Grid>
+                    ))}
                     <br></br>
                     </BackdropFilter>        
                 </Box>

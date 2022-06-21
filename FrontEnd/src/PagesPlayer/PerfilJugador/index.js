@@ -11,6 +11,7 @@ import BackdropFilter from "react-backdrop-filter";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { ContenedorJugador } from '../../Components';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -73,6 +74,7 @@ export default function PerfilJugador() {
     const classes = useStyles()
     const [modalEdit, setModalEdit] = useState(false);
     const [openContra, setOpenContra] = React.useState(false);
+    const [data, setData] = useState([]);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
     })
@@ -87,7 +89,19 @@ export default function PerfilJugador() {
         }
 
     }
+    const correo = localStorage.getItem('correo_jugador')
+    const getJugador = async() =>{
+        await axios.get('http://localhost:3001/api/Jugador/getJugador/'+correo)
+        .then(response =>{
+           setData(response.data) 
+           console.log(response.data)
+        })
+    }
 
+    useEffect (() =>{
+        getJugador();
+    },[])
+                
     const abrirCerrarModalEdit =() =>{
         setModalEdit(!modalEdit); //abre o cierra el modal
     }
@@ -165,82 +179,83 @@ export default function PerfilJugador() {
                             console.log("Rendered !");
                         }}
                     >
-                    <h2>Perfil jugador</h2>    
-                    <Grid container>
-                        {/*Nombre*/}
-                        <Grid item xs ={3}>
-                            <h4 className={classes.text2}>Nombre: </h4>  
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
+                    <h2>Perfil jugador</h2>  
+                    {data.map((jugador)=>( 
+                        <Grid container>
+                            {/*Nombre*/}
+                            <Grid item xs ={3}>
+                                <h4 className={classes.text2}>Nombre: </h4>  
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}} defaultValue={jugador.nombre_jugador}/>
+                            </Grid>
 
-                        {/*Rut*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Apellido paterno: </h4>               
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
+                            {/*Rut*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Apellido paterno: </h4>               
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.apellido_paterno}/>
+                            </Grid>
 
-                        {/*Telefono*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Teléfono:</h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
+                            {/*Telefono*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Teléfono:</h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.telefono_jugador}/>
+                            </Grid>
 
-                        {/*Direccion*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Dirección: </h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'   fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
+                            {/*Direccion*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Dirección: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'   fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.direccion_jugador}/>
+                            </Grid>
 
-                        {/*Puntaje*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Puntaje actual: </h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
+                            {/*Puntaje*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Puntaje actual: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.puntaje_jugador}/>
+                            </Grid>
 
-                        {/*Categoria*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Categoría: </h4>
+                            {/*Categoria*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Categoría: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
+                            </Grid>
+                            
+                            {/*Correo*/}
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Correo electrónico: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.correo_jugador}/>
+                            </Grid>
+                            <Grid item xs={12} container justify="center">
+                                <Button 
+                                    style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
+                                    type = "button"
+                                    variant = 'contained'
+                                    size='small'
+                                    onClick = {()=>abrirContra()}
+                                >
+                                    Cambiar contraseña
+                                </Button>
+                                <Modal
+                                    open = {openContra}
+                                    close = {cerrarContra}
+                                >
+                                    {cambiarContraseña}
+                                </Modal>
+                            </Grid>  
                         </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-                        
-                        {/*Correo*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Correo electrónico: </h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-                        <Grid item xs={12} container justify="center">
-                            <Button 
-                                style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
-                                type = "button"
-                                variant = 'contained'
-                                size='small'
-                                onClick = {()=>abrirContra()}
-                            >
-                                Cambiar contraseña
-                            </Button>
-                            <Modal
-                                open = {openContra}
-                                close = {cerrarContra}
-                            >
-                                {cambiarContraseña}
-                            </Modal>
-                        </Grid>  
-                        
-                    </Grid>
+                    ))} 
                     <br></br>
                     </BackdropFilter>        
                 </Box>

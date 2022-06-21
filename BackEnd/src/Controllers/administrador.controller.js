@@ -5,9 +5,9 @@ let administradorFunctions = {};
 
 
 //Información administrador
-administradorFunctions.getInfoPersonal = async(req,res)=> {
+administradorFunctions.getAdministrador = async(req,res)=> {
     await pool
-        .query('select nombre_administrador,rut_administrador,telefono_administrador,direccion_administrador from administrador where rut_administrador = $1',[req.params.rut_administrador])
+        .query('select nombre_administrador,rut_administrador,telefono_administrador,direccion_administrador from administrador where correo_admin = $1',[req.params.correo_admin])
         .then((result) => {
             res.status(200).json(result.rows);
         })

@@ -82,7 +82,6 @@ export default function SignIn() {
     const classes = useStyles()
     const navigate = useNavigate();
 
-    
     /**
      * handleSubmit es la funcion que se ejecuta al presionar el boton 'crear', esta de debe invocar (onSubmit) cuando se cree el formulario
      * donde se ingresara la info necesaria, en este caso email y password

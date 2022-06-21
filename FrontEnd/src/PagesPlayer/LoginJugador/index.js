@@ -80,6 +80,7 @@ export default function LoginJugador() {
             await login(email, password)
             // history nos envia a home luego de iniciar sesion validamente
             navigate('/perfiljugador') 
+            localStorage.setItem('correo_jugador',email)
         }catch (error){
             setError('Datos incorrectos');
             setTimeout (()=> setError(''), 2500) //se setea el error a un string vacio dps de 1500ms
