@@ -2,7 +2,7 @@ import './App.css';
 import { AuthProvider } from './Context'
 import { BrowserRouter as Router, Route, Routes,} from 'react-router-dom';
 import { PrivateRoute, PrivateRoute2, PrivateRoute3} from './Components';
-import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato, SignUpClub, ForgotPassword } from './Pages'
+import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato, SignUpClub, ForgotPassword, InscritosCamp } from './Pages'
 import { PrincipalAdmin, AgregarClub , Perfil, LoginAdmin, SignUpAdmin} from './PagesAdministrador'
 import { PerfilJugador, CampeonatosJugador, LoginJugador, SignUpJugador, ForgotPassJug, BuscarCampeonato, InsCampeonato  } from './PagesPlayer';
 import { Principal } from './PublicPages'
@@ -27,6 +27,7 @@ function App() {
               <Route path = 'campeonatosclub' element = {<CampeonatosClub/>}/>
               <Route path = 'nuevocampeonato' element = {<NuevoCampeonato/>}/>
               <Route path = 'principalclub' element = {<PrincipalClub/>}/>
+              <Route path = 'inscritoscamp' element = {<InscritosCamp/>} />
             </Route>
             <Route path = 'loginClub' element = {<LoginClub/>}/>
             <Route path = 'signupclub' element = {<SignUpClub/>}/>

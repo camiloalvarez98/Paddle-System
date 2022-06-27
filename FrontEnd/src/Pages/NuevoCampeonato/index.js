@@ -2,7 +2,7 @@ import React, {useEffect,useState,Fragment} from 'react';
 //import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {  Button, TextField, makeStyles, FormControlLabel, Checkbox, FormControl, FormLabel, FormGroup  } from '@material-ui/core';
+import {  Button, TextField, makeStyles, FormControlLabel, Checkbox, FormControl, FormGroup  } from '@material-ui/core';
 import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
@@ -13,7 +13,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import MenuItem from '@mui/material/MenuItem';
-
+import swal from 'sweetalert'
 
 const useStyles = makeStyles((theme)=>({
   modal:{
@@ -58,22 +58,48 @@ export default function NuevoCampeonato() {
 
   const classes = useStyles()
   const [categoriesAc, setCategoriesAc] = useState([])
-  const [fechaI, setFechaI] = React.useState(new Date('2014-08-18T21:11:54'));
-  const [fechaT, setFechaT] = React.useState(new Date('2014-08-18T21:11:54'));
-  const [horaI, setHoraI] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [fechaI, setFechaI] = React.useState(new Date('2022-08-18T21:11:54'));
+  const [fechaT, setFechaT] = React.useState(new Date('2022-08-18T21:11:54'));
+  const [horaI, setHoraI] = React.useState(new Date('2022-08-18T21:11:54'));
   const [currency, setCurrency] = React.useState('');
-  const [error, setError] = useState(null);
+  const [errorF, setErrorF] = React.useState(false);
 
   const handleChangeFI = (newValue) => {
     setFechaI(newValue);
+    if(fechaT.getTime() >= fechaI.getTime()){
+      setErrorF(false)
+    }else{
+      setErrorF(true)
+    }
   };
   const handleChangeFT = (newValue) => {
     setFechaT(newValue);
+    if(fechaT.getTime() >= fechaI.getTime()){
+      setErrorF(false)
+    }else{
+      setErrorF(true)
+    }
   };
   const handleChangeHI = (newValue) => {
     setHoraI(newValue);
   };
 
+  const mostrarAlerta1 = () => {
+    if (errorF === true){
+      swal({
+        title: 'Cuidado!',
+        text: 'La fecha de termino no puede ser menor a la fecha de inicio',
+        icon: 'error'
+      })
+    }
+    else{
+      swal({
+        title: 'Campeonato crado con exito',
+        icon: 'success',
+        timer: '2000',
+      })
+    }
+  }
 
   const handleCategoriesChange = e =>{
     const index = categoriesAc.indexOf(e.target.value)
@@ -101,6 +127,9 @@ export default function NuevoCampeonato() {
     setCurrency(event.target.value);
   };
 
+  console.log(fechaI.getTime())
+  console.log(fechaT.getTime())
+  console.log(errorF)
 
   return (
     <div>
@@ -142,11 +171,12 @@ export default function NuevoCampeonato() {
                 <Grid item sm = {6} xl = {5} marginTop= {'10px'} marginLeft = {'90px'} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                      label="Fecha de inicio *"
+                      label="Fecha de inicio"
+                      type = 'date'
                       inputFormat="yyyy-MM-dd"
                       value={fechaI}
                       onChange={handleChangeFI}
-                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
+                      renderInput={(params) => <TextField {...params} required variant = 'outlined' fullWidth size = 'small'/>}
                     />
                   </LocalizationProvider>                
                 </Grid>
@@ -154,11 +184,12 @@ export default function NuevoCampeonato() {
                 <Grid item sm = {6} xl = {5} marginTop= {'10px'} marginRight = {'10px'} marginLeft = {'10px'} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                      label="Fecha de término *"
+                      label="Fecha de término"
                       inputFormat="yyyy-MM-dd"
+                      type = 'date'
                       value={fechaT}
                       onChange={handleChangeFT}
-                      renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
+                      renderInput={(params) => <TextField {...params} required error = {errorF}  variant = 'outlined' fullWidth size = 'small'/>}
                     />
                   </LocalizationProvider>                
                 </Grid>
@@ -170,7 +201,7 @@ export default function NuevoCampeonato() {
                     ampm={false}
                     value={horaI}
                     onChange={handleChangeHI}
-                    renderInput={(params) => <TextField {...params} variant = 'outlined' fullWidth size = 'small'/>}
+                    renderInput={(params) => <TextField {...params} required variant = 'outlined' fullWidth size = 'small'/>}
                   />
                   </LocalizationProvider>                
                 </Grid>
@@ -276,6 +307,7 @@ export default function NuevoCampeonato() {
                 type = "button"
                 variant = 'contained'
                 size='small'
+                onClick={() => mostrarAlerta1()}
                 endIcon = {<SaveIcon/>}
             >
                 Guardar

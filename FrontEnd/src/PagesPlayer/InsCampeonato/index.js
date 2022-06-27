@@ -131,7 +131,7 @@ export default function InsCampeonato() {
                     </BackdropFilter>
                 </Box>
                 <div mx = {10}>
-                    <Link style={{ textDecoration: 'none' }} color='inherit' to = '/perfiljugador'>
+                    <Link style={{ textDecoration: 'none' }} color='inherit' to = '/buscarcampeonato'>
                         <Button
                             className={classes.button}
                             type = "button"

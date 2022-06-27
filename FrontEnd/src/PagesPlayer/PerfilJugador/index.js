@@ -237,17 +237,7 @@ export default function PerfilJugador() {
                     </BackdropFilter>        
                 </Box>
                 <div  mx = {20}>
-                    <Button 
-                        className={classes.button}
-                        type = "button"
-                        variant = 'contained'
-                        size='small'
-                        endIcon = {<KeyboardReturnIcon/>}
-                        //onClick = {()=>abrirCerrarModalEdit()}
-                        //agregar función de volver a la página anterior
-                    >
-                        Volver
-                    </Button>
+
                     <Button 
                         className={classes.button}
                         type = "button"

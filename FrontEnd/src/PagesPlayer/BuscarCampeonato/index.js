@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorJugador } from '../../Components';
-import { Link, NavLink  } from 'react-router-dom'
+import { Link,} from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
 
@@ -86,16 +86,16 @@ export default function BuscarCampeonato() {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Nombre</TableCell>
-                                        <TableCell>Club</TableCell>
-                                        <TableCell>Fecha de Inicio</TableCell>
-                                        <TableCell>Fecha de Termino</TableCell>
-                                        <TableCell>Categorias</TableCell>
+                                        <TableCell align='center'> <h4>Nombre</h4></TableCell>
+                                        <TableCell align='center'><h4>Club</h4></TableCell>
+                                        <TableCell align='center'><h4>Fecha de Inicio</h4></TableCell>
+                                        <TableCell align='center'><h4>Fecha de Termino</h4></TableCell>
+                                        <TableCell align='center'><h4>Categoria</h4></TableCell>
                                         <TableCell/>
                                     </TableRow>
                                 </TableHead>
 
-                                <TableBody>
+                                <TableBody >
                                     <TableRow>
                                         <TableCell>Campeonato 1</TableCell>
                                         <TableCell>Campeonato 1</TableCell>
@@ -103,9 +103,11 @@ export default function BuscarCampeonato() {
                                         <TableCell>Campeonato 1</TableCell>
                                         <TableCell>Campeonato 1</TableCell>
                                         <TableCell>
-                                            <Button className={classes.button} variant = 'contained'>
-                                                Inscribirse
-                                            </Button>
+                                            <Link style={{ textDecoration: 'none' }}  color='inherit' to ='/inscampeonato'>
+                                                <Button className={classes.button} variant = 'contained'>
+                                                    Inscribirse
+                                                </Button>
+                                            </Link>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>

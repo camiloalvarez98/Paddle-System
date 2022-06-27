@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import {  LockOutlined as LockOutlinedIcon } from '@material-ui/icons'
 import { useAuth } from '../../Context/AuthContext'
 import { Link, useNavigate} from 'react-router-dom'
-import { ListItemText } from '@mui/material'
+import swal from 'sweetalert'
 
 
 
@@ -81,7 +81,11 @@ export default function LoginAdmin() {
             // history nos envia a home luego de iniciar sesion validamente
             navigate('/principalAdmin') 
         }catch (error){
-            setError('Datos incorrectos');
+            swal({
+                title: 'Error',
+                text: 'Datos incorrectos',
+                icon: 'error'
+            })
             setTimeout (()=> setError(''), 2500) //se setea el error a un string vacio dps de 1500ms
         }
     }
