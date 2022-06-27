@@ -77,6 +77,7 @@ export default function PrincipalClub() {
     }
 
     const correo_club = localStorage.getItem('correo_club')
+
     const getClub = async() =>{
         await axios.get('http://localhost:3001/api/Club/getClub/'+ correo_club)
         .then(response =>{

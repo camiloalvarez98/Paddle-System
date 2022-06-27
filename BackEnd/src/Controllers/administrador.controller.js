@@ -27,9 +27,9 @@ administradorFunctions.getInfoClubes = async(req,res)=> {
 
 //Actualizar club
 administradorFunctions.updateClub = async(req,res)=> {
-    const { direccion,representante,telefono,comuna} = req.body;
+    const { direccion_club,representante_club,telefono_club,comuna_club} = req.body;
     await pool
-        .query('update club set direccion=$1,representante=$2,telefono=$3,comuna=$4 where id_club=$5',[direccion,representante,telefono,comuna,req.params.id_club])
+        .query('update club set direccion_club=$1,representante_club=$2,telefono_club=$3,comuna_club=$4 where id_club=$5',[direccion_club,representante_club,telefono_club,comuna_club,req.params.id_club])
         .then((result) => {
             res.json('Club actualizado correctamente');
         })
