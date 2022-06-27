@@ -56,6 +56,7 @@ export default function BuscarCampeonato() {
     return (
         <div className = 'App'>
             <ContenedorJugador/>
+            <br></br>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -68,9 +69,9 @@ export default function BuscarCampeonato() {
                         }
                     }}
                     color = 'contrastText'
-                    mx = {25} 
+                    
                     border = {1}
-                    borderColor = '#adc178'
+                    
                 >
                     <BackdropFilter
                         className="bluredForm"
@@ -97,12 +98,12 @@ export default function BuscarCampeonato() {
 
                                 <TableBody >
                                     <TableRow>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>
+                                        <TableCell align='center'>Campeonato 1</TableCell>
+                                        <TableCell align='center'>Campeonato 1</TableCell>
+                                        <TableCell align='center'>Campeonato 1</TableCell>
+                                        <TableCell align='center'>Campeonato 1</TableCell>
+                                        <TableCell align='center'>Campeonato 1</TableCell>
+                                        <TableCell align='center'>
                                             <Link style={{ textDecoration: 'none' }}  color='inherit' to ='/inscampeonato'>
                                                 <Button className={classes.button} variant = 'contained'>
                                                     Inscribirse

@@ -144,6 +144,7 @@ export default function PerfilJugador() {
     return (
         <div>
             <ContenedorJugador/>
+            <br></br>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -157,7 +158,7 @@ export default function PerfilJugador() {
                       }}
                     color = 'contrastText'
                     //backgroundColor = '#D8F3DC'
-                    mx = {25} //margen a todos los lados
+                    //mx = {25} //margen a todos los lados
                     //p = {30} //padding
                     //borderRadius = '8px'
                     border = {1}

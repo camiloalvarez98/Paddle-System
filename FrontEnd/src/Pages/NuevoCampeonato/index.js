@@ -63,6 +63,7 @@ export default function NuevoCampeonato() {
   const [currency, setCurrency] = React.useState('');
   const [errorF, setErrorF] = React.useState(false);
 
+
   const handleChangeFI = (newValue) => {
     setFechaI(newValue);
     if(fechaT.getTime() >= fechaI.getTime()){
@@ -126,9 +127,8 @@ export default function NuevoCampeonato() {
     setCurrency(event.target.value);
   };
 
-  console.log(fechaI.getTime())
-  console.log(fechaT.getTime())
-  console.log(errorF)
+  
+
 
   return (
     <div>

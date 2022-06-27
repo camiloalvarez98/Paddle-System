@@ -53,10 +53,10 @@ export default function InscritosClub(){
                             <Table sx = {{ minWidth: 650 }} id = 'tables'>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>ID Pareja</TableCell>
-                                        <TableCell>Partner 1</TableCell>
-                                        <TableCell>Partner 2</TableCell>
-                                        <TableCell>Categoria</TableCell>
+                                        <TableCell align='center'>ID Pareja</TableCell>
+                                        <TableCell align='center'>Partner 1</TableCell>
+                                        <TableCell align='center'>Partner 2</TableCell>
+                                        <TableCell align='center'>Categoria</TableCell>
                                     </TableRow>
                                 </TableHead>
                             </Table>

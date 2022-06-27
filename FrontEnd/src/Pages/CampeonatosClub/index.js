@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles   } from '@material-ui/core';
 import { Contenedor } from "../../Components";
@@ -41,7 +41,19 @@ const useStyles = makeStyles((theme)=>({
 
 
 export default function CampeonatosClub() {
+    const [data, setData] = useState([]);
     const classes = useStyles()
+
+    const correo_club = localStorage.getItem('correo_club')
+    const getCampeonatos = async() =>{
+        await axios.get('http://localhost:3001/api/Club/getCampeonatos/' + correo_club)
+        .then(response =>{
+            setData(response.data)
+        })
+    }
+    useEffect (()=>{
+        getCampeonatos();
+    },[])
 
     return (
         <div>
@@ -83,6 +95,16 @@ export default function CampeonatosClub() {
                                             <TableCell align='center'><h4>Acciones</h4></TableCell>
                                         </TableRow>
                                     </TableHead>
+                                    <TableBody>
+                                        {data.map(campeonato =>(
+                                            <TableRow>
+                                                <TableCell align='center'>n1</TableCell>
+                                                <TableCell align='center'>{campeonato.id_campeonato}</TableCell>
+                                                <TableCell align='center'>{campeonato.fecha_inicio}</TableCell>
+                                                <TableCell align='center'>{campeonato.fecha_termino}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
                             </Table>
                         </TableContainer>
                     </BackdropFilter>

@@ -60,8 +60,10 @@ export default function PrincipalClub() {
     const [modalEdit, setModalEdit] = useState(false);
     const [data, setData] = useState([]);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
-
+        id_club: '' 
     })
+
+    
 
     const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
         const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
@@ -76,7 +78,7 @@ export default function PrincipalClub() {
 
     const correo_club = localStorage.getItem('correo_club')
     const getClub = async() =>{
-        await axios.get('http://localhost:3001/api/Club/getClub/'+correo_club)
+        await axios.get('http://localhost:3001/api/Club/getClub/'+ correo_club)
         .then(response =>{
            setData(response.data) 
            console.log(response.data)
@@ -139,10 +141,16 @@ export default function PrincipalClub() {
                         }}
                     >
                         <br></br>
-                        <Avatar align = 'center' sx={{ width: 100, height: 100 }}>PM</Avatar>
-                        <h2>Padel del mar</h2>
+                        
+                        
                         {data.map((club)=>(
+                            
                             <Grid container>
+                                <Grid item xs = {12}>
+                                    <h1>{club.nombre_club}</h1>
+                                </Grid>
+                                <br></br>
+                                <br></br>
                                 {/*Direccion*/}
                                 <Grid item xs ={3}>
                                     <h4 className={classes.text2}>Direccion:</h4>  

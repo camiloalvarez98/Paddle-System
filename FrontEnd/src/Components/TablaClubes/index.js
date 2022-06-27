@@ -170,17 +170,17 @@ export default function TablaClubes() {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Nombre club</TableCell>
-                                        <TableCell>Editar</TableCell>
-                                        <TableCell>Eliminar</TableCell>
+                                        <TableCell align='center'>Nombre club</TableCell>
+                                        <TableCell align='center'>Editar</TableCell>
+                                        <TableCell align='center'>Eliminar</TableCell>
                                     </TableRow>
                                 </TableHead> 
 
                                 <TableBody>
                                     {data.map(club =>(
                                         <TableRow sx={{ '&:last-child td, &:last-child th': {border: 0}}}>
-                                            <TableCell>{club.nombre_club}</TableCell>
-                                            <TableCell>
+                                            <TableCell align='center'>{club.nombre_club}</TableCell>
+                                            <TableCell align='center'>
                                                 <Edit className = {classes.icons} onClick = {()=>seleccionarClub(club, 'Editar')}/>
                                                 <Modal
                                                     open = {modalEdit}
@@ -189,7 +189,7 @@ export default function TablaClubes() {
                                                     {bodyEdit}
                                                 </Modal>
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell align='center'>
                                                 <Delete className = {classes.icons} onClick ={()=>seleccionarClub(club, 'Eliminar') }/>
                                                 <Modal
                                                     open = {modalEliminar}
