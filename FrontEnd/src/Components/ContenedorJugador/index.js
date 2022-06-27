@@ -22,7 +22,6 @@ export default function ContenedorJugador() {
   return (
     <div >
       <BarraSuperiorJugador/>
-        <div className={classes.toolbar} />
         <Box />
     </div>
   );

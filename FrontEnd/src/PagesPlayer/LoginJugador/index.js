@@ -79,6 +79,7 @@ export default function LoginJugador() {
             await login(email, password)
             // history nos envia a home luego de iniciar sesion validamente
             navigate('/perfiljugador') 
+            localStorage.setItem('correo_jugador',email)
         }catch (error){
             swal({
                 title: 'Error',

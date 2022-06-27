@@ -4,9 +4,9 @@ const e = require('express');
 let clubFunctions = {};
 
 //Información club
-clubFunctions.getInfo = async(req,res)=> {
+clubFunctions.getClub = async(req,res)=> {
     await pool
-        .query('select nombre_club, direccion_club, representante_club,telefono_club,comuna_club from club where id_club=$1',[req.params.id_club])
+        .query('select nombre_club, direccion_club, representante_club,telefono_club,comuna_club from club where correo_club=$1',[req.params.correo_club])
         .then((result) => {
             res.status(200).json(result.rows);
         })

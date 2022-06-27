@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme)=>({
   },
   button:{
       width: '20%',
-      //margin: theme.spacing(10,65,10),
       marginTop: theme.spacing(2) ,
       marginBottom: theme.spacing(2),
       marginLeft: theme.spacing(5),
@@ -134,10 +133,10 @@ export default function NuevoCampeonato() {
   return (
     <div>
         <Contenedor/>
+        <br/>
         <div align = 'center' >
           <Box
-            //sx = {{flexGrow: 20}}
-                        sx = {{
+            sx = {{
               width:{
                 xs: 300,
                 sm: 400,
@@ -147,9 +146,7 @@ export default function NuevoCampeonato() {
               }
             }}
             color = 'contrastText'
-            mx = {20} //margen a todos los lados
-            //p = {1} //padding
-            //borderRadius = '8px'
+            mx = {20}
             border = {1}
           >
             <BackdropFilter

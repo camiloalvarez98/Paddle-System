@@ -2,11 +2,10 @@ import React, {useEffect,useState} from 'react';
 //import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-
+import axios from 'axios';
 import { makeStyles, } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
 import { Contenedor } from '../../Components';
-import { Link } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(5),
@@ -60,6 +58,7 @@ const useStyles = makeStyles((theme)=>({
 export default function PrincipalClub() {
     const classes = useStyles()
     const [modalEdit, setModalEdit] = useState(false);
+    const [data, setData] = useState([]);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
 
     })
@@ -75,21 +74,33 @@ export default function PrincipalClub() {
 
     }
 
+    const correo_club = localStorage.getItem('correo_club')
+    const getClub = async() =>{
+        await axios.get('http://localhost:3001/api/Club/getClub/'+correo_club)
+        .then(response =>{
+           setData(response.data) 
+           console.log(response.data)
+        })
+    }
 
+    useEffect (() =>{
+        getClub();
+    },[])
+           
 
     const abrirCerrarModalEdit =() =>{
         setModalEdit(!modalEdit); //abre o cierra el modal
     }
-
+    
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange}  />
+            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} />
             <br/>
             <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
             <br/>
             <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange}/>
-            <br/>
+            <br/>   
             <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange}/>
             <br></br>
             <div align = 'right'>
@@ -102,6 +113,7 @@ export default function PrincipalClub() {
     return (
         <div>
             <Contenedor/>
+            <br/>
             <div align = 'center'>
                 <Box 
                     sx = {{
@@ -114,7 +126,6 @@ export default function PrincipalClub() {
                         }
                     }}
                     color = 'contrastText'
-                    mx = {20} //margen a todos los lados
                     border = {1}
                 >
                     <BackdropFilter
@@ -130,42 +141,42 @@ export default function PrincipalClub() {
                         <br></br>
                         <Avatar align = 'center' sx={{ width: 100, height: 100 }}>PM</Avatar>
                         <h2>Padel del mar</h2>
-                       
-                        <Grid container>
-                            {/*Direccion*/}
-                            <Grid item xs ={3}>
-                                <h4 className={classes.text2}>Direccion:</h4>  
-                            </Grid>
-                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
-                            </Grid>
+                        {data.map((club)=>(
+                            <Grid container>
+                                {/*Direccion*/}
+                                <Grid item xs ={3}>
+                                    <h4 className={classes.text2}>Direccion:</h4>  
+                                </Grid>
+                                <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
+                                    <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} defaultValue={club.nombre_club} size = 'small'/>
+                                </Grid>
 
-                            {/*Representante*/}
-                            <Grid item xs = {3}>
-                                <h4 className={classes.text2}>Representante:</h4>               
-                            </Grid>
-                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
-                            </Grid>
+                                {/*Representante*/}
+                                <Grid item xs = {3}>
+                                    <h4 className={classes.text2}>Representante:</h4>               
+                                </Grid>
+                                <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                    <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} defaultValue={club.representante_club} size = 'small'/>
+                                </Grid>
 
-                            {/*Telefono*/}
-                            <Grid item xs = {3}>
-                                <h4 className={classes.text2}>Telefono:</h4>
-                            </Grid>
-                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
-                            </Grid>
+                                {/*Telefono*/}
+                                <Grid item xs = {3}>
+                                    <h4 className={classes.text2}>Telefono:</h4>
+                                </Grid>
+                                <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                    <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} defaultValue={club.telefono_club} size = 'small'/>
+                                </Grid>
 
 
-                            {/*Comuna*/}
-                            <Grid item xs = {3}>
-                                <h4 className={classes.text2}>Comuna:</h4>
+                                {/*Comuna*/}
+                                <Grid item xs = {3}>
+                                    <h4 className={classes.text2}>Comuna:</h4>
+                                </Grid>
+                                <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                    <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} defaultValue={club.comuna_club} size = 'small'/>
+                                </Grid>
                             </Grid>
-                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} size = 'small'/>
-                            </Grid>
-                            
-                        </Grid>
+                        ))}
                         <br></br>
                     </BackdropFilter>
                 </Box>

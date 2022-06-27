@@ -79,6 +79,7 @@ export default function Login() {
         try{
             await login(email, password)
             // navigate nos envia a home luego de iniciar sesion validamente
+            localStorage.setItem('correo_club',email)
             navigate('/homeclub') 
         }catch (error){
             //setError('Datos incorrectos');

@@ -1,22 +1,14 @@
 import React, {useEffect,useState} from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import { makeStyles, styled } from '@material-ui/core';
 import { Button, TextField } from '@material-ui/core';
-import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorAdmin , BarraSuperior} from '../../Components';
 import { Link, NavLink,  } from 'react-router-dom'
-import {useNavigate} from 'react-router-dom'
-import {Principal} from '../Principal'
-import GroupsIcon from '@mui/icons-material/Groups';
 import SaveIcon from '@mui/icons-material/Save';
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
-
-
-
+import axios from 'axios';
 
 const useStyles = makeStyles((theme)=>({
     icons: {
@@ -38,7 +30,6 @@ const useStyles = makeStyles((theme)=>({
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(5),
         marginRigt: theme.spacing(5),
-        //si quiero agregar borde es con solid
         border: '2px',
         borderColor: '#4f772d'
     },
@@ -50,17 +41,19 @@ const useStyles = makeStyles((theme)=>({
 
 
 export default function AgregarClub() {
-    const navigate = useNavigate();
     const classes = useStyles()
-    const redireccionar= () => {
-        navigate.push(' /Principal');    
-    }
+    const [data, setData] = useState([]);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
-
+        id_club:'',
+        nombre_club:'',
+        comuna_club:'',
+        representante_club:'',
+        direccion_club: '',
+        telefono_club:''
     })
 
-    const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
-        const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
+    const handleChange=e=>{ 
+        const{name, value}=e.target; 
         if(name!==""){
             setClubSeleccionado(prevState=>({
                 ...prevState,
@@ -70,9 +63,18 @@ export default function AgregarClub() {
 
     }
 
+    //peticion post
+    const createClub = async()=>{
+        await axios.post('http://localhost:3001/api/Administrador/createClub',ClubSeleccionado)
+        .then(response =>{
+            setData(data.concat(response.data))
+        })
+    }
+
     return (
         <div>
             <ContenedorAdmin/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -85,14 +87,9 @@ export default function AgregarClub() {
                         }
                       }}
                     color = 'contrastText'
-                    //backgroundColor = '#D8F3DC'
-                    //blurRadius = {1}
-                    mx = {25} //margen a todos los lados
-                    //p = {30} //padding
-                    //borderRadius = '20px'
+                    mx = {25}
                     border = {1}
                     borderColor = '#adc178'
-                    
                 >
                     <BackdropFilter
                         className="bluredForm"
@@ -107,38 +104,32 @@ export default function AgregarClub() {
                     <br></br>
                     <h2>Agregar club</h2>
                     <Grid container>
-                        {/*Direccion*/}
-                        
+                        {/*Nombre*/}
                         <Grid item xs = {6} marginTop= {'10px'}  >
-                            <TextField required label='Dirección' />
+                            <TextField name = 'nombre_club' variant='outlined' label='Nombre de club' onChange = {handleChange} defaultValue=''/>
                         </Grid>
-
+                        {/*Direccion*/}
+                        <Grid item xs = {6} marginTop= {'10px'}  >
+                            <TextField required name = 'direccion_club' variant='outlined' label='Dirección' onChange = {handleChange} defaultValue=''/>
+                        </Grid>
                         {/*Representante*/}
-                        
                         <Grid item xs = {6} marginTop= {'10px'} >
-                            <TextField required label='Representante' />
+                            <TextField required name ='representante_club' variant='outlined' label='Representante' onChange = {handleChange} defaultValue=''/>
                         </Grid>
-
                         {/*Telefono*/}
-                       
                         <Grid item xs = {6} marginTop= {'10px'} >
-                            <TextField required label='Teléfono' />
+                            <TextField required name='telefono_club' variant='outlined' label='Teléfono' onChange = {handleChange} defaultValue=''/>
                         </Grid>
-
-
                         {/*Comuna*/}
-                        
                         <Grid item xs = {6} marginTop= {'10px'} >
-                            <TextField required label='Comuna' />
+                            <TextField required name='comuna_club' variant='outlined' label='Comuna' onChange = {handleChange} defaultValue=''/>
                         </Grid>
-                        
                     </Grid>
                     <br></br>
                     </BackdropFilter>    
                 </Box>
                 <div  mx = {20}>
-                    {/*boton guardar*/}
-                    <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/campeonatosclub'>
+                    <Link  style={{ textDecoration: 'none' }} color='inherit' to ='/principalAdmin'>
                         <Button 
                             className={classes.button}
                             type = "button"
@@ -155,6 +146,7 @@ export default function AgregarClub() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<SaveIcon/>}
+                        onClick={()=>createClub()}
                     >
                         Guardar
                     </Button>
