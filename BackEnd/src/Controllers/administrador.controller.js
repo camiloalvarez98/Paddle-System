@@ -7,7 +7,7 @@ let administradorFunctions = {};
 //Información administrador
 administradorFunctions.getAdministrador = async(req,res)=> {
     await pool
-        .query('select nombre_administrador,rut_administrador,telefono_administrador,direccion_administrador from administrador where correo_admin = $1',[req.params.correo_admin])
+        .query('select nombre_administrador,rut_administrador,apellido_paterno_administrador,telefono_administrador,direccion_administrador, correo_admin from administrador where correo_admin = $1',[req.params.correo_admin])
         .then((result) => {
             res.status(200).json(result.rows);
         })
@@ -18,7 +18,7 @@ administradorFunctions.getAdministrador = async(req,res)=> {
 //Información clubes
 administradorFunctions.getInfoClubes = async(req,res)=> {
     await pool
-        .query('select id_club, nombre_club from club')
+        .query('select id_club, nombre_club,representante_club,telefono_club,comuna_club,direccion_club from club')
         .then((result) => {
             res.status(200).json(result.rows);
         })
@@ -56,11 +56,22 @@ administradorFunctions.createClub = async(req,res)=>{
         res.json({
         message: 'Club creado correctamente',
         body: {
-            sala: {nombre_club,direccion_club, representante_club, telefono_club,comuna_club}
+            club: {nombre_club, direccion_club, representante_club, telefono_club, comuna_club }
         }
         });
     })
-        .catch((e) => console.log(e));
+    .catch((e) => console.log(e));
+}
+
+//Editar perfil
+administradorFunctions.updateInformacion = async(req,res)=> {
+    const { nombre_administrador,apellido_paterno_administrador,telefono_administrador,direccion_administrador} = req.body;
+    await pool
+        .query('update administrador set direccion_administrador=$1,nombre_administrador=$2,telefono_administrador=$3,apellido_paterno_administrador=$4 where correo_admin=$5',[direccion_administrador,nombre_administrador,telefono_administrador,apellido_paterno_administrador,req.params.correo_admin])
+        .then((result) => {
+            res.json('Administrador actualizado correctamente');
+        })
+        .catch((e)=> console.log(e));
 }
 
 module.exports = administradorFunctions;

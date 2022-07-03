@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {Edit, Delete} from '@material-ui/icons';
@@ -52,10 +52,104 @@ const useStyles = makeStyles((theme)=>({
 
 export default function BuscarCampeonato() {
     const classes = useStyles()
+    const [data,setData] = useState([]);
+    const [modalInscripcion, setModalInscripcion] = useState(false);
+    const key = localStorage.getItem('categoria_jugador')
+    const key2 = localStorage.getItem('correo_jugador')
+    const [campeonatoSeleccionado, setCampeonatoSeleccionado] = useState({
+        nombre_campeonato: '',
+        nombre_club : '',
+        fecha_inicio : '',
+        fecha_termino : '',
+        nombre_categoria : '',
+        id_campeonato: '',
+        id_categoria : ''
+    })
+    const [duplaSeleccionada,setDuplaSeleccionada] = useState({
+        rut_jugador1 : '',
+        rut_jugador2 : '',
+        id_campeonato : '',
+        id_categoria : ''    
+    })
+
+    const handleChange=e=>{
+        const{name, value}=e.target;
+        if(name!==""){
+            setDuplaSeleccionada(prevState=>({
+                ...prevState,
+                [name]:value
+            }))
+        }
+
+    }
+    const abrirCerrarModalInscripcion =() =>{
+        setModalInscripcion(!modalInscripcion); 
+    }
+    const correo = localStorage.getItem('correo_jugador')
+    const getJugador = async() =>{
+        await axios.get('http://localhost:3001/api/Jugador/getJugador/'+correo)
+        .then(response =>{
+            localStorage.setItem('rut_jugador',(response.data[0].rut_jugador))
+        })
+    }
+    useEffect (() =>{
+        getJugador();
+    },[])
+
+    const getCampeonatos = async() =>{
+        await axios.get('http://localhost:3001/api/Jugador/getCampeonatosCategoria/'+key+'/'+key2)
+        .then(response =>{
+           setData(response.data) 
+           console.log(response.data)
+        })
+    }
+
+    useEffect (() =>{
+        getCampeonatos();
+    },[])
+
+    const inscribirCampeonato = async()=>{
+        await axios.post('http://localhost:3001/api/Jugador/inscribirCampeonato',duplaSeleccionada)
+        .then(response =>{
+            setData(data.concat(response.data))
+        })
+    }
+
+    const seleccionarCampeonato=(campeonato)=>{
+        setCampeonatoSeleccionado(campeonato);
+    }
+
+    const inscribirse = (
+        <div className= {classes.modal}>
+            <h3>Inscripción a campeonato</h3>
+            <TextField InputProps={{readOnly: true}} name = 'nombre_campeonato' className={classes.inputMaterial} label='Campeonato' defaultValue={campeonatoSeleccionado.nombre_campeonato}/>
+            <br/>
+            <TextField InputProps={{readOnly: true}} name = 'id_campeonato' className={classes.inputMaterial} label='ID Campeonato' onChange={handleChange} defaultValue={campeonatoSeleccionado.id_campeonato}/>
+            <br/>
+            <TextField InputProps={{readOnly: true}} name = 'id_categoria' className={classes.inputMaterial} label='ID Categoria' onChange={handleChange} defaultValue={campeonatoSeleccionado.id_categoria}/>
+            <br/>
+            <TextField InputProps={{readOnly: true}} name = 'nombre_categoria' className={classes.inputMaterial} label='Categoria' defaultValue={campeonatoSeleccionado.nombre_categoria}/>
+            <br/>
+            <TextField InputProps={{readOnly: true}} name = 'nombre_club' className={classes.inputMaterial} label='Club' defaultValue={campeonatoSeleccionado.nombre_club}/>
+            <br/>
+            <TextField InputProps={{readOnly: true}} name = 'fecha_inicio' className={classes.inputMaterial} label='Fecha de inicio' defaultValue={campeonatoSeleccionado.fecha_inicio}/>
+            <br/>
+            <TextField InputProps={{readOnly: true}} name = 'fecha_termino' className={classes.inputMaterial} label='Fecha de termino' defaultValue={campeonatoSeleccionado.fecha_termino}/>
+            <br/>
+            <TextField InputProps={{readOnly: true}} name = 'rut_jugador1' className={classes.inputMaterial} label='Rut de jugador' onChange={handleChange} defaultValue={localStorage.getItem('rut_jugador')}/>
+            <br></br>
+            <TextField name = 'rut_jugador2' className={classes.inputMaterial} type='text' label='Rut de dupla' onChange={handleChange} />
+            <div align = 'right'>
+                <Button size='small' onClick={()=>inscribirCampeonato()}>Inscribirse</Button>
+                <Button size='small' onClick={()=>abrirCerrarModalInscripcion()}>Cancelar</Button>
+            </div>
+        </div>
+    )
 
     return (
         <div className = 'App'>
             <ContenedorJugador/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -86,28 +180,43 @@ export default function BuscarCampeonato() {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Nombre</TableCell>
-                                        <TableCell>Club</TableCell>
-                                        <TableCell>Fecha de Inicio</TableCell>
-                                        <TableCell>Fecha de Termino</TableCell>
-                                        <TableCell>Categorias</TableCell>
+                                        <TableCell align='center'>Nombre</TableCell>
+                                        <TableCell align='center'>Club</TableCell>
+                                        <TableCell align='center'>Fecha de inicio</TableCell>
+                                        <TableCell align='center'>Fecha de termino</TableCell>
+                                        <TableCell align='center'>Categoría</TableCell>
                                         <TableCell/>
                                     </TableRow>
                                 </TableHead>
 
                                 <TableBody>
-                                    <TableRow>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>Campeonato 1</TableCell>
-                                        <TableCell>
-                                            <Button className={classes.button} variant = 'contained'>
-                                                Inscribirse
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
+                                    {data.map(campeonato =>(
+                                        <TableRow>
+                                            <TableCell align='center'>{campeonato.nombre_campeonato}</TableCell>
+                                            <TableCell align='center'>{campeonato.nombre_club}</TableCell>
+                                            <TableCell align='center'>{campeonato.fecha_inicio}</TableCell>
+                                            <TableCell align='center'>{campeonato.fecha_termino}</TableCell>
+                                            <TableCell align='center'>{campeonato.nombre_categoria}</TableCell>
+                                            <TableCell align='center'>
+                                                <Button 
+                                                    className={classes.button} 
+                                                    variant = 'contained' 
+                                                    onClick={()=>{
+                                                        const funcion1 = seleccionarCampeonato(campeonato)
+                                                        const funcion2 = abrirCerrarModalInscripcion()
+                                                        }
+                                                    }
+                                                >
+                                                    Inscribirse
+                                                </Button>
+                                                <Modal
+                                                    open = {modalInscripcion}
+                                                >
+                                                    {inscribirse}
+                                                </Modal>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>

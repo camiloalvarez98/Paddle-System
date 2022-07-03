@@ -95,19 +95,19 @@ export default function PrincipalClub() {
     
     const bodyEdit = (
         <div className= {classes.modal}>
-            <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} />
-            <br/>
-            <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
-            <br/>
-            <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange}/>
-            <br/>   
-            <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange}/>
-            <br></br>
-            <div align = 'right'>
-                <Button>Guardar</Button>
-                <Button onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
-            </div>
+                <h3>Editar datos</h3>
+                <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} />
+                <br/>
+                <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
+                <br/>
+                <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange}/>
+                <br/>   
+                <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange}/>
+                <br></br>
+                <div align = 'right'>
+                    <Button>Guardar</Button>
+                    <Button onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
+                </div>
         </div>
     )
 

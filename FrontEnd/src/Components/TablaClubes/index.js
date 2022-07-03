@@ -114,13 +114,13 @@ export default function TablaClubes() {
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos de <b>{ClubSeleccionado.nombre_club}</b></h3>
-            <TextField name = 'direccion_club' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.direccion_club}/>
+            <TextField name = 'direccion_club' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {ClubSeleccionado.direccion_club}/>
             <br/>
-            <TextField name = 'representante_club' className={classes.inputMaterial} label='Representante' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.representante_club}/>
+            <TextField name = 'representante_club' className={classes.inputMaterial} label='Representante' onChange={handleChange} defaultValue = {ClubSeleccionado.representante_club}/>
             <br/>
-            <TextField name = 'telefono_club' className={classes.inputMaterial} label='Telefono' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.telefono_club}/>
+            <TextField name = 'telefono_club' className={classes.inputMaterial} label='Telefono' onChange={handleChange} defaultValue = {ClubSeleccionado.telefono_club}/>
             <br/>
-            <TextField name = 'comuna_club' className={classes.inputMaterial} label='Comuna' onChange={handleChange} defaultValue = {ClubSeleccionado && ClubSeleccionado.comuna_club}/>
+            <TextField name = 'comuna_club' className={classes.inputMaterial} label='Comuna' onChange={handleChange} defaultValue = {ClubSeleccionado.comuna_club}/>
             <br></br>
             <div align = 'right'>
                 <Button onClick={()=>editarClub()}>Editar Club</Button>
@@ -199,6 +199,7 @@ export default function TablaClubes() {
                                                 </Modal>
                                             </TableCell>
                                         </TableRow>
+            
                                     ))}
                                 </TableBody>
                             </Table>

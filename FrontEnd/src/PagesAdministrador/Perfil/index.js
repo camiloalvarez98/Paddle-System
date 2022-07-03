@@ -70,17 +70,22 @@ const useStyles = makeStyles((theme)=>({
 
 export default function Perfil() {
     const classes = useStyles()
-    const [openEditar, setOpenEditar] = React.useState(false);
+    const [modalEditar, setModalEditar] = useState(false);
     const [data, setData] = useState([]);
     const [openContra, setOpenContra] = React.useState(false);
-    const [ClubSeleccionado, setClubSeleccionado] = useState({
-
+    const [infoAdmin, setInfoAdmin] = useState({
+        nombre_administrador : '',
+        rut_administador : '',
+        telefono_administrador : '',
+        direccion_administrador : '',
+        apellido_paterno_administrador : '',
+        correo_admin : ''
     })
     
     const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
         const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
         if(name!==""){
-            setClubSeleccionado(prevState=>({
+            setInfoAdmin(prevState=>({
                 ...prevState,
                 [name]:value
             }))
@@ -102,11 +107,8 @@ export default function Perfil() {
         getJugador();
     },[])
 
-    const abrirEditar =() =>{
-        setOpenEditar(true); 
-    }
-    const cerrarEditar = () =>{
-        setOpenEditar(false);
+    const abrirCerrarEditar =() =>{
+        setModalEditar(!modalEditar); 
     }
 
     
@@ -117,22 +119,25 @@ export default function Perfil() {
         setOpenContra(false);
     }
 
+    const seleccionarAdmin=(administrador)=>{
+        setInfoAdmin(administrador);
+    }
+
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'nombre' className={classes.inputMaterial} label='Nombre' onChange={handleChange}/>
+            <TextField name = 'nombre_administrador' className={classes.inputMaterial} label='Nombre' onChange={handleChange} defaultValue = {infoAdmin.nombre_administrador}/>
             <br/>
-            <TextField name = 'rut' className={classes.inputMaterial} label='Rut' onChange={handleChange}/>
+            <TextField name = 'apellido_paterno_administrador' className={classes.inputMaterial} label='Apellido' onChange={handleChange} defaultValue = {infoAdmin.apellido_paterno_administrador}/>
             <br/>
-            <TextField name = 'telefono' className={classes.inputMaterial} label='Teléfono' onChange={handleChange}/>
+            <TextField name = 'telefono_administrador' className={classes.inputMaterial} label='Teléfono' onChange={handleChange} defaultValue = {infoAdmin.telefono_administrador}/>
             <br/>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange}/>
+            <TextField name = 'direccion_administrador' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {infoAdmin.direccion_administrador}/>
             <br/>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Contraseña' onChange={handleChange}/>
             <br></br>
             <div align = 'right'>
-                <Button>Guardar</Button>
-                <Button onClick={()=>cerrarEditar()}>Cancelar</Button>
+                <Button onClick={()=>editarAdministrador()}>Guardar</Button>
+                <Button onClick={()=>abrirCerrarEditar()}>Cancelar</Button>
             </div>
         </div>
     )
@@ -153,6 +158,26 @@ export default function Perfil() {
             </div>
         </div>
     )
+
+    
+    const editarAdministrador = async()=>{
+        await axios.put('http://localhost:3001/api/Administrador/updateInformacion/'+infoAdmin.correo_admin,infoAdmin)
+        .then(response =>{
+            var dataNueva = data; 
+            dataNueva.forEach(administrador=>{ 
+                if(infoAdmin.correo_admin === administrador.correo_admin){
+                    administrador.nombre_administrador = infoAdmin.nombre_administrador;
+                    administrador.apellido_paterno_administrador = infoAdmin.apellido_paterno_administrador;
+                    administrador.telefono_administrador = infoAdmin.telefono_administrador;
+                    administrador.direccion_administrador = infoAdmin.direccion_administrador;
+                }
+            })
+            console.log(dataNueva)
+            console.log(infoAdmin)
+            setData(dataNueva);
+            abrirCerrarEditar();
+        })
+    }
 
     return (
         <div>
@@ -194,6 +219,14 @@ export default function Perfil() {
                                 <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true}} defaultValue={administrador.nombre_administrador}/>
                             </Grid>
 
+                            {/*Apellido*/}
+                            <Grid item xs ={3}>
+                                <h4 className={classes.text2}>Apellido: </h4>  
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true}} defaultValue={administrador.apellido_paterno_administrador}/>
+                            </Grid>
+
                             {/*Rut*/}
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Rut: </h4>               
@@ -217,7 +250,7 @@ export default function Perfil() {
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
                                 <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}}  defaultValue={administrador.direccion_administrador}/>
                             </Grid>
-                            <Grid item xs={12} container justify="center">
+                            <Grid item xs={6} container justify="center">
                                 <Button 
                                     style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
                                     type = "button"
@@ -232,6 +265,26 @@ export default function Perfil() {
                                     close = {cerrarContra}
                                 >
                                     {cambiarContraseña}
+                                </Modal>
+                            </Grid>  
+                            <Grid item xs={6} container justify="center">
+                                <Button 
+                                    style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
+                                    type = "button"
+                                    variant = 'contained'
+                                    size='small'
+                                    onClick = {()=>{
+                                        const funcion1 = seleccionarAdmin(administrador)
+                                        const funcion2 = abrirCerrarEditar()
+                                        }
+                                    }
+                                >
+                                    Editar información
+                                </Button>
+                                <Modal
+                                    open = {modalEditar}
+                                >
+                                    {bodyEdit}
                                 </Modal>
                             </Grid>  
                         </Grid>
@@ -249,22 +302,6 @@ export default function Perfil() {
                     >
                         Volver
                     </Button>
-                    <Button 
-                        className={classes.button}
-                        type = "button"
-                        variant = 'contained'
-                        size='small'
-                        endIcon = {<ModeEditIcon/>}
-                        onClick = {()=>abrirEditar()}
-                    >
-                        Editar
-                    </Button>
-                    <Modal
-                        open = {openEditar}
-                        close = {cerrarEditar}
-                    >
-                        {bodyEdit}
-                    </Modal>
                 </div>
             </div>
         
