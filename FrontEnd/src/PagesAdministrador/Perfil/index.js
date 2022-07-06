@@ -161,6 +161,7 @@ export default function Perfil() {
 
     
     const editarAdministrador = async()=>{
+        console.log(infoAdmin)
         await axios.put('http://localhost:3001/api/Administrador/updateInformacion/'+infoAdmin.correo_admin,infoAdmin)
         .then(response =>{
             var dataNueva = data; 

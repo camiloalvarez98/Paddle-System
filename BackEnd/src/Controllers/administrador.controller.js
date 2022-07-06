@@ -34,6 +34,7 @@ administradorFunctions.updateClub = async(req,res)=> {
             res.json('Club actualizado correctamente');
         })
         .catch((e)=> console.log(e));
+        
 }
 
 //Eliminar club
@@ -69,7 +70,13 @@ administradorFunctions.updateInformacion = async(req,res)=> {
     await pool
         .query('update administrador set direccion_administrador=$1,nombre_administrador=$2,telefono_administrador=$3,apellido_paterno_administrador=$4 where correo_admin=$5',[direccion_administrador,nombre_administrador,telefono_administrador,apellido_paterno_administrador,req.params.correo_admin])
         .then((result) => {
-            res.json('Administrador actualizado correctamente');
+            res.json({
+                message: 'Administrador actualizado correctamente',
+                body: {
+                    administrador: {nombre_administrador,apellido_paterno_administrador,telefono_administrador,direccion_administrador }
+                }
+            });
+            
         })
         .catch((e)=> console.log(e));
 }

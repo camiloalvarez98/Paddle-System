@@ -109,6 +109,8 @@ export default function BuscarCampeonato() {
     },[])
 
     const inscribirCampeonato = async()=>{
+        console.log(duplaSeleccionada)
+        console.log(campeonatoSeleccionado)
         await axios.post('http://localhost:3001/api/Jugador/inscribirCampeonato',duplaSeleccionada)
         .then(response =>{
             setData(data.concat(response.data))
@@ -119,14 +121,20 @@ export default function BuscarCampeonato() {
         setCampeonatoSeleccionado(campeonato);
     }
 
+    const seleccionarDupla=(campeonato)=>{
+        setDuplaSeleccionada(campeonato)
+    }
+
+    const rut_ju =  localStorage.getItem('rut_jugador');
+
     const inscribirse = (
         <div className= {classes.modal}>
             <h3>Inscripción a campeonato</h3>
             <TextField InputProps={{readOnly: true}} name = 'nombre_campeonato' className={classes.inputMaterial} label='Campeonato' defaultValue={campeonatoSeleccionado.nombre_campeonato}/>
             <br/>
-            <TextField InputProps={{readOnly: true}} name = 'id_campeonato' className={classes.inputMaterial} label='ID Campeonato' onChange={handleChange} defaultValue={campeonatoSeleccionado.id_campeonato}/>
+            <TextField InputProps={{readOnly: true}} name = 'id_campeonato' className={classes.inputMaterial} label='ID Campeonato' defaultValue={campeonatoSeleccionado.id_campeonato}/>
             <br/>
-            <TextField InputProps={{readOnly: true}} name = 'id_categoria' className={classes.inputMaterial} label='ID Categoria' onChange={handleChange} defaultValue={campeonatoSeleccionado.id_categoria}/>
+            <TextField InputProps={{readOnly: true}} name = 'id_categoria' className={classes.inputMaterial} label='ID Categoria'defaultValue={campeonatoSeleccionado.id_categoria}/>
             <br/>
             <TextField InputProps={{readOnly: true}} name = 'nombre_categoria' className={classes.inputMaterial} label='Categoria' defaultValue={campeonatoSeleccionado.nombre_categoria}/>
             <br/>
@@ -136,7 +144,7 @@ export default function BuscarCampeonato() {
             <br/>
             <TextField InputProps={{readOnly: true}} name = 'fecha_termino' className={classes.inputMaterial} label='Fecha de termino' defaultValue={campeonatoSeleccionado.fecha_termino}/>
             <br/>
-            <TextField InputProps={{readOnly: true}} name = 'rut_jugador1' className={classes.inputMaterial} label='Rut de jugador' onChange={handleChange} defaultValue={localStorage.getItem('rut_jugador')}/>
+            <TextField InputProps={{readOnly: true}} name = 'rut_jugador1' className={classes.inputMaterial} label='Rut de jugador' onChange={handleChange} defaultValue={rut_ju}/>
             <br></br>
             <TextField name = 'rut_jugador2' className={classes.inputMaterial} type='text' label='Rut de dupla' onChange={handleChange} />
             <div align = 'right'>
@@ -204,6 +212,7 @@ export default function BuscarCampeonato() {
                                                     onClick={()=>{
                                                         const funcion1 = seleccionarCampeonato(campeonato)
                                                         const funcion2 = abrirCerrarModalInscripcion()
+                                                        const function3 = seleccionarDupla(campeonato)
                                                         }
                                                     }
                                                 >
