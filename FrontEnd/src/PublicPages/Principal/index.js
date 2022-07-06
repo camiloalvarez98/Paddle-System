@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { Link } from 'react-router-dom';
+import { ResponsiveAppBar } from '../../Components';
 
 const useStyles = makeStyles (theme=>({
 
@@ -39,7 +40,9 @@ const useStyles = makeStyles (theme=>({
 export default function Principal() {
     const classes = useStyles()
     return (
+        
         <div align = 'center' marginBottom = '10px'>
+            <ResponsiveAppBar/>
             <Link to = '/loginClub'>
                 <Button 
                     className= {classes.button}

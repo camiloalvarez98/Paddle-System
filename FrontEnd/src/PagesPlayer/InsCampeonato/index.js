@@ -1,8 +1,7 @@
-import React, {useEffect,useState} from 'react';
-//import axios from 'axios';
+import React from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorJugador } from '../../Components';
 import { Link } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
@@ -60,9 +59,8 @@ export default function InsCampeonato() {
     return (
         <div>
             <ContenedorJugador/>
-            <br></br>
+            <br/>
             <div align = 'center'>
-
                 <Box
                     sx = {{
                         width:{
@@ -74,8 +72,9 @@ export default function InsCampeonato() {
                         }
                     }}
                     color = 'contrastText'
+                    mx = {25} 
                     border = {1}
-                    
+                    borderColor = '#adc178'
                 >
                     <BackdropFilter
                         className="bluredForm"
@@ -87,7 +86,6 @@ export default function InsCampeonato() {
                             console.log("Rendered !");
                         }}                       
                     >
-                     
                         <h2>Inscripciones</h2>
                         <Grid container>
                             {/*Nombre Campeonato*/}

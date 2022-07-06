@@ -1,8 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
-import { ContenedorJugador } from '../../Components';
-import { Link, NavLink  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -35,7 +33,6 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '80%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2) ,
         
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
@@ -50,17 +47,14 @@ const useStyles = makeStyles((theme)=>({
 
   
 
-export default function CampeonatosJugador() {
+export default function TablaCampeonatos() {
     const classes = useStyles()
     const [data,setData] = useState([]);
     const [modalEliminar, setModalEliminar] = useState(false);
     const key = localStorage.getItem('correo_jugador')
     const [campeonatoSeleccionado, setCampeonatoSeleccionado] = useState({
-        nombre_campeonato : '',
-        fecha_inicio : '',
-        fecha_termino : '',
-        id_dupla : '',
-        nombre_club : ''
+        nombre_campeonato:'',
+        id_dupla:''
     })
 
     const getCampeonatos = async() =>{
@@ -81,7 +75,6 @@ export default function CampeonatosJugador() {
             setData(data.filter(club=>club.id_club !== campeonatoSeleccionado.id_dupla));
             abrirCerrarModalELiminar();
         })
-        console.log(campeonatoSeleccionado)
     }
 
     const abrirCerrarModalELiminar=() =>{
@@ -91,9 +84,9 @@ export default function CampeonatosJugador() {
     const seleccionarCampeonato=(campeonato)=>{
         setCampeonatoSeleccionado(campeonato);
         abrirCerrarModalELiminar()
+        console.log(campeonatoSeleccionado.id_dupla)
+        localStorage.setItem('nombre',campeonatoSeleccionado.nombre_campeonato)
     }
-    
-
 
     const bodyEliminar = (
         <div className={classes.modal}>
@@ -106,9 +99,6 @@ export default function CampeonatosJugador() {
     )
 
     return (
-        <div className = 'App'>
-            <ContenedorJugador/>
-            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -176,7 +166,6 @@ export default function CampeonatosJugador() {
                     </BackdropFilter>
                 </Box>
             </div>
-        </div>
         
     )
 }
