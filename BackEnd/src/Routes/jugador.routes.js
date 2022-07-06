@@ -19,6 +19,7 @@ router.put('/updateInformacion/:correo_jugador',jugadorFunctions.updateInformaci
 
 //Inscribirse a campeonato
 router.post('/inscribirCampeonato',jugadorFunctions.inscribirCampeonato);
+router.post('/createJugador',jugadorFunctions.createJugador);
 
 router.get("/",(req,res) => {
     res.json({"hola":"chao"});

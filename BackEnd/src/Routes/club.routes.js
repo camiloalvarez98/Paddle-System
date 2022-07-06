@@ -11,7 +11,9 @@ router.put('/updateClub/:correo_club', clubFunctions.updateClub);
 router.put('/selectGanadores/:id_campeonato',clubFunctions.regGanadores);
 
 
+
 router.post('/createCampeonato/:correo_club', clubFunctions.createCampeonato)
+router.post('/createCategoria/:id_campeonato',clubFunctions.campeonatoCategoria)
 
 router.delete('/eliminarCampeonato/:id_campeonato',clubFunctions.deleteCampeonato)
 

@@ -16,6 +16,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import axios from 'axios';
 
+
 const useStyles = makeStyles (theme=>({
 
     icons: {
@@ -61,11 +62,12 @@ export default function SelectGanadores() {
     const id_campeonato = localStorage.getItem('currentCamp')
     
     
+    
     const handleClick = () => {
         setOpen(!open);
     };
 
-
+    
     const handlej1 = e =>{
         const {name, value} = e.target;
         if(name !== ""){
@@ -83,6 +85,7 @@ export default function SelectGanadores() {
         console.log(id_dupla)
         console.log(id_campeonato)
         console.log(id_categoria)
+        
         await axios.put('http://localhost:3001/api/Club/selectGanadores/'+ id_campeonato, id_categoria, id_dupla)
         .then(()=>{
             var dataNueva = data;
@@ -251,33 +254,9 @@ export default function SelectGanadores() {
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
                             </Grid>
                             <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'45px'} marginRight = {'10px'}    >
-                                <TextField required label=' ID dupla' variant = 'outlined' fullWidth size = 'small' name = 'id_dupla' onChange={handlej1}/>
-                            </Grid>
-                            {/*Segundo Lugar
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'45px'} marginRight = {'10px'} >
-                                <TextField required label=' Rut Jugador 2' variant = 'outlined' fullWidth size = 'small' name = 'rut_jugador2' onChange={handlej2}/>
+                                <TextField required label=' ID dupla' variant = 'outlined' fullWidth size = 'small'  name = 'id_dupla' onChange={handlej1} />
                             </Grid>
                             
-                            <Grid item xs = {12} sm = {3}>
-                                <h4 className={classes.text2}>Segundo Lugar:</h4>
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'} >
-                                <TextField required  label='Rut Jugador 1' variant = 'outlined' fullWidth size = 'small' />
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
-                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
-                            {/*Tercer Lugar
-                            <Grid item xs = {12} sm = {3}>
-                                <h4 className={classes.text2}>Tercer Lugar:</h4>
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
-                                <TextField required  label='Rut Jugador 1'variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
-                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>*/}
-
                         </Grid>
                         <br></br>
                     </BackdropFilter>
