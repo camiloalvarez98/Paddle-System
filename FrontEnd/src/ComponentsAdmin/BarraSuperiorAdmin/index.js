@@ -11,16 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import { Link } from '@material-ui/core';
 import { useAuth } from '../../Context/AuthContext';
 import { useState } from 'react';
-
-const pages = ['Agregar Club', 'Clubes'];
-const settings = ['Perfil', 'Salir'];
-
-
 
 const BarraSuperiorAdmin = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -43,7 +37,7 @@ const BarraSuperiorAdmin = () => {
   };
 
   const [error, setError] = useState ('');
-  const { logout } = useAuth(); //esta funcion viene de /context/AuthContext
+  const { logout } = useAuth(); 
 
   const handleLogout = async () => {
     try{
@@ -110,13 +104,11 @@ const BarraSuperiorAdmin = () => {
                         <Typography textAlign="center">Agregar club</Typography>
                     </Link>
                 </MenuItem>
-                
                 <MenuItem onClick={handleCloseNavMenu}>
                     <Link underline='none' color='inherit' href = "/principalAdmin" className='btn'>
                         <Typography textAlign="center">Clubes</Typography>
                     </Link>
                 </MenuItem>
-
             </Menu>
           </Box>
           <SportsTennisIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -156,7 +148,6 @@ const BarraSuperiorAdmin = () => {
                 </Button>
             </Link>
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Menú personal">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

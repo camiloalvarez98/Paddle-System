@@ -1,8 +1,7 @@
-import React, {useEffect,useState} from 'react';
+import React from 'react';
 import { ContenedorAdmin , TablaClubes} from '../../Components';
 
 export default function Principal() {
-
     return (
         <div>
             <ContenedorAdmin/>
@@ -10,6 +9,5 @@ export default function Principal() {
             <TablaClubes/>
             <br/>
         </div>
-        
     )
 }

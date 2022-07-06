@@ -99,7 +99,14 @@ export default function CampeonatosJugador() {
         <div className={classes.modal}>
           <p>¿Estás seguro que deseas eliminar tu inscripción al campeonato <b>{campeonatoSeleccionado.nombre_campeonato}</b>? </p>
           <div align="right">
-            <Button color="secondary" onClick={()=>deleteInscripcion()}>Sí</Button>
+            <Button 
+                color="secondary" 
+                onClick={()=>{
+                    deleteInscripcion()
+                    window.location.reload(false);
+                }}
+            >Sí
+            </Button>
             <Button onClick={()=>abrirCerrarModalELiminar()}>No</Button>
           </div>
         </div>

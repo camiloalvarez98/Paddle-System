@@ -2,9 +2,7 @@ import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorJugador } from '../../Components';
-import { Link, NavLink  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
 
@@ -66,7 +64,6 @@ export default function BuscarCampeonato() {
         id_categoria : ''
     })
     const [duplaSeleccionada,setDuplaSeleccionada] = useState({
-        rut_jugador1 : '',
         rut_jugador2 : '',
         id_campeonato : '',
         id_categoria : ''    
@@ -109,9 +106,8 @@ export default function BuscarCampeonato() {
     },[])
 
     const inscribirCampeonato = async()=>{
-        console.log(duplaSeleccionada)
-        console.log(campeonatoSeleccionado)
-        await axios.post('http://localhost:3001/api/Jugador/inscribirCampeonato',duplaSeleccionada)
+        const rut_jugador1 = localStorage.getItem('rut_jugador')
+        await axios.post('http://localhost:3001/api/Jugador/inscribirCampeonato/'+rut_jugador1,duplaSeleccionada)
         .then(response =>{
             setData(data.concat(response.data))
         })
@@ -125,7 +121,6 @@ export default function BuscarCampeonato() {
         setDuplaSeleccionada(campeonato)
     }
 
-    const rut_ju =  localStorage.getItem('rut_jugador');
 
     const inscribirse = (
         <div className= {classes.modal}>
@@ -144,11 +139,18 @@ export default function BuscarCampeonato() {
             <br/>
             <TextField InputProps={{readOnly: true}} name = 'fecha_termino' className={classes.inputMaterial} label='Fecha de termino' defaultValue={campeonatoSeleccionado.fecha_termino}/>
             <br/>
-            <TextField InputProps={{readOnly: true}} name = 'rut_jugador1' className={classes.inputMaterial} label='Rut de jugador' onChange={handleChange} defaultValue={rut_ju}/>
+            <TextField InputProps={{readOnly: true}} name = 'rut_jugador1' className={classes.inputMaterial} label='Rut de jugador' defaultValue={localStorage.getItem('rut_jugador')}/>
             <br></br>
             <TextField name = 'rut_jugador2' className={classes.inputMaterial} type='text' label='Rut de dupla' onChange={handleChange} />
             <div align = 'right'>
-                <Button size='small' onClick={()=>inscribirCampeonato()}>Inscribirse</Button>
+                <Button 
+                    size='small' 
+                    onClick={()=>{
+                        inscribirCampeonato() 
+                        abrirCerrarModalInscripcion()
+                        window.location.reload(false);
+                    }}
+                >Inscribirse</Button>
                 <Button size='small' onClick={()=>abrirCerrarModalInscripcion()}>Cancelar</Button>
             </div>
         </div>
@@ -210,9 +212,9 @@ export default function BuscarCampeonato() {
                                                     className={classes.button} 
                                                     variant = 'contained' 
                                                     onClick={()=>{
-                                                        const funcion1 = seleccionarCampeonato(campeonato)
-                                                        const funcion2 = abrirCerrarModalInscripcion()
-                                                        const function3 = seleccionarDupla(campeonato)
+                                                        seleccionarCampeonato(campeonato)
+                                                        abrirCerrarModalInscripcion()
+                                                        seleccionarDupla(campeonato)
                                                         }
                                                     }
                                                 >

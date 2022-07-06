@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
+import { Link } from '@material-ui/core';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -56,7 +57,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            PadelCL
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -88,11 +89,11 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Link underline='none' color='inherit' href = "/signupjugador" className='btn'>
+                        <Typography textAlign="center">Registrarse</Typography>
+                    </Link>
                 </MenuItem>
-              ))}
             </Menu>
           </Box>
           <SportsTennisIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -112,24 +113,23 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            PadelCL
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Link underline='none' color='inherit' href = "/signupjugador" className='btn'>
+                <Button
+                    onClick={handleCloseNavMenu}
+                    variant='text' color='inherit' 
+                >
+                    Registrarse 
+                </Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Menú de ingreso">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar/>
               </IconButton>
             </Tooltip>
             <Menu
@@ -148,11 +148,27 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Link underline='none' color='inherit' href = "/loginAdmin" className='btn'>
+                        <Button variant='text' color='inherit'>
+                            <Typography variant='h7' textAlign="center">Login administrador</Typography>
+                        </Button>
+                    </Link>
                 </MenuItem>
-              ))}
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Link underline='none' color='inherit' href = "/loginjugador" className='btn'>
+                        <Button variant='text' color='inherit'>
+                            <Typography variant='h7' textAlign="center">Login jugador</Typography>
+                        </Button>
+                    </Link>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Link underline='none' color='inherit' href = "/loginClub" className='btn'>
+                        <Button variant='text' color='inherit'>
+                            <Typography variant='h7' textAlign="center">Login club</Typography>
+                        </Button>
+                    </Link>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

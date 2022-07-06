@@ -57,21 +57,19 @@ jugadorFunctions.updateInformacion = async(req,res)=> {
 
 //Inscribirse en campeonato
 jugadorFunctions.inscribirCampeonato = async(req,res)=>{
-    const { rut_jugador1, rut_jugador2, id_campeonato, id_categoria } = req.body; 
+    const {rut_jugador2, id_campeonato, id_categoria } = req.body; 
     await pool
-    .query('INSERT INTO dupla (rut_jugador1,rut_jugador2, id_campeonato, id_categoria) VALUES ($1,$2,$3,$4)',[rut_jugador1,rut_jugador2,id_campeonato,id_categoria])
+    .query('INSERT INTO dupla (rut_jugador1,rut_jugador2, id_campeonato, id_categoria) VALUES ($1,$2,$3,$4)',[req.params.rut_jugador1,rut_jugador2,id_campeonato,id_categoria])
     .then((result) => {
         console.log(result);
         res.json({
         message: 'Inscripcion creada correctamente',
         body: {
-            inscripcion: {rut_jugador1, rut_jugador2, id_campeonato, id_categoria }
+            inscripcion: { rut_jugador2, id_campeonato, id_categoria }
         }
         });
     })
         .catch((e) => console.log(e));
-        console.log(req.body)
-        console.log(rut_jugador1)
 }
 
 module.exports = jugadorFunctions;

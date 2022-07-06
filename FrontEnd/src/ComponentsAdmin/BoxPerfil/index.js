@@ -5,7 +5,6 @@ import { makeStyles} from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import { ContenedorJugador } from '../../Components';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme)=>({
@@ -19,6 +18,20 @@ const useStyles = makeStyles((theme)=>({
         top: '50%',
         left:'50%',
         transform: 'translate(-50%, -50%)'
+    },
+    modal2:{
+        position: 'absolute',
+        width: 300,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2,4,3),
+        top: '50%',
+        left:'50%',
+        transform: 'translate(-50%, -50%)'
+    },
+    icons: {
+        cursor: 'pointer'
     },
     inputMaterial:{
         width: '100%'
@@ -36,106 +49,99 @@ const useStyles = makeStyles((theme)=>({
         marginLeft: theme.spacing(4),
         marginRight: theme.spacing(4),
         marginBottom: theme.spacing(2),
-        
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
             width: '100%',
             height: '100%'
         }
     },
-  
 }));
 
-export default function PerfilJugador() {
+export default function BoxPerfil() {
     const classes = useStyles()
-    const [modalEdit, setModalEdit] = useState(false);
+    const [modalEditar, setModalEditar] = useState(false);
     const [data, setData] = useState([]);
-    const [jugadorSeleccionado, setJugadorSeleccionado] = useState({
-        rut_jugador : '',
-        nombre_jugador : '',
-        apellido_paterno: '',
-        telefono_jugador : '',
-        direccion_jugador : '',
-        puntaje_jugador : '',
-        categoria_jugador : '',
-        correo_jugador : ''
+    const [infoAdmin, setInfoAdmin] = useState({
+        nombre_administrador : '',
+        rut_administador : '',
+        telefono_administrador : '',
+        direccion_administrador : '',
+        apellido_paterno_administrador : '',
+        correo_admin : ''
     })
-    const handleChange=e=>{
+    const handleChange=e=>{ 
         const{name, value}=e.target;
         if(name!==""){
-            setJugadorSeleccionado(prevState=>({
+            setInfoAdmin(prevState=>({
                 ...prevState,
                 [name]:value
             }))
         }
-
     }
-    const correo = localStorage.getItem('correo_jugador')
+    const correo_admin = localStorage.getItem('correo_admin')
     const getJugador = async() =>{
-        await axios.get('http://localhost:3001/api/Jugador/getJugador/'+correo)
+        await axios.get('http://localhost:3001/api/Administrador/getAdministrador/'+correo_admin)
         .then(response =>{
            setData(response.data) 
            console.log(response.data)
-           localStorage.setItem('categoria_jugador',(data[0].categoria_jugador))
         })
     }
     useEffect (() =>{
         getJugador();
     },[])
-    const abrirCerrarModalEdit =() =>{
-        setModalEdit(!modalEdit); 
+    const abrirCerrarEditar =() =>{
+        setModalEditar(!modalEditar); 
     }
-    const seleccionarJugador=(jugador)=>{
-        setJugadorSeleccionado(jugador);
+    const seleccionarAdmin=(administrador)=>{
+        setInfoAdmin(administrador);
     }
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'nombre_jugador' className={classes.inputMaterial} label='Nombre' onChange={handleChange} defaultValue = {jugadorSeleccionado.nombre_jugador}/>
+            <TextField name = 'nombre_administrador' className={classes.inputMaterial} label='Nombre' onChange={handleChange} defaultValue = {infoAdmin.nombre_administrador}/>
             <br/>
-            <TextField name = 'apellido_paterno' className={classes.inputMaterial} label='Apellido paterno' onChange={handleChange} defaultValue = {jugadorSeleccionado.apellido_paterno}/>
+            <TextField name = 'apellido_paterno_administrador' className={classes.inputMaterial} label='Apellido' onChange={handleChange} defaultValue = {infoAdmin.apellido_paterno_administrador}/>
             <br/>
-            <TextField name = 'telefono_jugador' className={classes.inputMaterial} label='Teléfono' onChange={handleChange} defaultValue = {jugadorSeleccionado.telefono_jugador}/>
+            <TextField name = 'telefono_administrador' className={classes.inputMaterial} label='Teléfono' onChange={handleChange} defaultValue = {infoAdmin.telefono_administrador}/>
             <br/>
-            <TextField name = 'direccion_jugador' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {jugadorSeleccionado.direccion_jugador}/>
+            <TextField name = 'direccion_administrador' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {infoAdmin.direccion_administrador}/>
             <br/>
             <br></br>
             <div align = 'right'>
                 <Button 
-                    size='small' 
                     onClick={()=>{
-                        editarJugador()
-                        window.location.reload(false);
+                        editarAdministrador()
+                        window.location.reload(false)
                     }}
                 >
                     Guardar
                 </Button>
-                <Button size='small' onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
+                <Button onClick={()=>abrirCerrarEditar()}>Cancelar</Button>
             </div>
         </div>
     )
-
-    const editarJugador = async()=>{
-        await axios.put('http://localhost:3001/api/Jugador/updateInformacion/'+jugadorSeleccionado.correo_jugador,jugadorSeleccionado)
+    const editarAdministrador = async()=>{
+        console.log(infoAdmin)
+        await axios.put('http://localhost:3001/api/Administrador/updateInformacion/'+infoAdmin.correo_admin,infoAdmin)
         .then(response =>{
             var dataNueva = data; 
-            dataNueva.forEach(jugador=>{ 
-                if(jugadorSeleccionado.correo_jugador === jugador.correo_admin){
-                    jugador.nombre_jugador = jugadorSeleccionado.nombre_jugador;
-                    jugador.apellido_paterno = jugadorSeleccionado.apellido_paterno;
-                    jugador.telefono_jugador = jugadorSeleccionado.telefono_jugador;
-                    jugador.direccion_jugador = jugadorSeleccionado.direccion_jugador;
+            dataNueva.forEach(administrador=>{ 
+                if(infoAdmin.correo_admin === administrador.correo_admin){
+                    administrador.nombre_administrador = infoAdmin.nombre_administrador;
+                    administrador.apellido_paterno_administrador = infoAdmin.apellido_paterno_administrador;
+                    administrador.telefono_administrador = infoAdmin.telefono_administrador;
+                    administrador.direccion_administrador = infoAdmin.direccion_administrador;
                 }
             })
+            console.log(dataNueva)
+            console.log(infoAdmin)
             setData(dataNueva);
-            abrirCerrarModalEdit();
+            abrirCerrarEditar();
         })
     }
 
     return (
         <div>
-            <ContenedorJugador/>
-            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -161,67 +167,60 @@ export default function PerfilJugador() {
                             console.log("Rendered !");
                         }}
                     >
-                    <h2>Perfil jugador</h2>  
-                    {data.map((jugador)=>( 
+                    <h2>Perfil administrador</h2>   
+                    {data.map((administrador)=> (
                         <Grid container>
                             <Grid item xs ={3}>
                                 <h4 className={classes.text2}>Nombre: </h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}} defaultValue={jugador.nombre_jugador}/>
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true}} defaultValue={administrador.nombre_administrador}/>
+                            </Grid>
+                            <Grid item xs ={3}>
+                                <h4 className={classes.text2}>Apellido: </h4>  
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true}} defaultValue={administrador.apellido_paterno_administrador}/>
                             </Grid>
                             <Grid item xs = {3}>
-                                <h4 className={classes.text2}>Apellido paterno: </h4>               
+                                <h4 className={classes.text2}>Rut: </h4>               
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.apellido_paterno}/>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}}  defaultValue={administrador.rut_administrador}/>
                             </Grid>
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Teléfono:</h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.telefono_jugador}/>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}}  defaultValue={administrador.telefono_administrador}/>
                             </Grid>
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Dirección: </h4>
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined'   fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.direccion_jugador}/>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}}  defaultValue={administrador.direccion_administrador}/>
                             </Grid>
-                            <Grid item xs = {3}>
-                                <h4 className={classes.text2}>Puntaje actual: </h4>
-                            </Grid>
-                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.puntaje_jugador}/>
-                            </Grid>
-                            <Grid item xs = {3}>
-                                <h4 className={classes.text2}>Categoría: </h4>
-                            </Grid>
-                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                                <TextField name='categoria'  variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.categoria_jugador}/>
-                            </Grid>
-                            <Grid item xs={12} justify="center">
+                            <Grid item xs={12} container justify="center">
                                 <Button 
                                     style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
                                     type = "button"
                                     variant = 'contained'
                                     size='small'
                                     onClick = {()=>{
-                                        seleccionarJugador(jugador)
-                                        abrirCerrarModalEdit()
-                                        }
-                                    }
+                                        seleccionarAdmin(administrador)
+                                        abrirCerrarEditar()
+                                    }}
                                 >
                                     Editar información
                                 </Button>
                                 <Modal
-                                    open = {modalEdit}
+                                    open = {modalEditar}
                                 >
                                     {bodyEdit}
                                 </Modal>
                             </Grid>  
                         </Grid>
-                    ))} 
+                    ))}
                     <br></br>
                     </BackdropFilter>        
                 </Box>
@@ -238,6 +237,5 @@ export default function PerfilJugador() {
                 </div>
             </div>
         </div>
-        
     )
 }

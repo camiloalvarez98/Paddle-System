@@ -18,7 +18,7 @@ router.get('/getCampeonatosCategoria/:categoria_jugador/:correo_jugador',jugador
 router.put('/updateInformacion/:correo_jugador',jugadorFunctions.updateInformacion);
 
 //Inscribirse a campeonato
-router.post('/inscribirCampeonato',jugadorFunctions.inscribirCampeonato);
+router.post('/inscribirCampeonato/:rut_jugador1',jugadorFunctions.inscribirCampeonato);
 
 router.get("/",(req,res) => {
     res.json({"hola":"chao"});
