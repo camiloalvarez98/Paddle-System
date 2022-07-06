@@ -1,10 +1,13 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles   } from '@material-ui/core';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, makeStyles   } from '@material-ui/core';
 import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
 import { Link } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import GroupIcon from '@mui/icons-material/Group';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -26,8 +29,19 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        marginTop: theme.spacing(4) ,
-        marginBottom: theme.spacing(4),
+        //margin: theme.spacing(10,65,10),
+        marginTop: theme.spacing(2) ,
+        
+        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
+            margin: theme.spacing(0),
+            width: '100%',
+            height: '100%'
+        }
+    },
+    button2:{
+        width: '30%',
+        //margin: theme.spacing(10,65,10),
+        marginTop: theme.spacing(2) ,
         
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
@@ -42,18 +56,61 @@ const useStyles = makeStyles((theme)=>({
 
 export default function CampeonatosClub() {
     const [data, setData] = useState([]);
+    const [modalEliminar, setModalEliminar] = useState(false);
+    const [campSeleccionado, setCampSeleccionado] = useState({
+        id_campeonato: ''
+    })
     const classes = useStyles()
-
     const correo_club = localStorage.getItem('correo_club')
+    
+
     const getCampeonatos = async() =>{
         await axios.get('http://localhost:3001/api/Club/getCampeonatos/' + correo_club)
         .then(response =>{
             setData(response.data)
+            
         })
     }
     useEffect (()=>{
         getCampeonatos();
     },[])
+
+    //delete sala 
+    const deleteCampeonato = async() =>{
+        await axios.delete ('http://localhost:3001/api/Club/eliminarCampeonato/' + campSeleccionado.id_campeonato)
+        .then(response=>{
+            setData(data.filter(campeonato=>campeonato.id_campeonato !== campSeleccionado.id_club));
+            abrirCerrarModalELiminar();
+        })
+    }
+
+    const abrirCerrarModalELiminar=() =>{
+        setModalEliminar(!modalEliminar);
+    }
+
+    
+    const seleccionarCamp = (camp, caso) =>{
+        setCampSeleccionado(camp);
+        
+        abrirCerrarModalELiminar();
+    }
+
+    const seleccionarCamp2 = (camp, caso) =>{
+        setCampSeleccionado(camp)
+        //console.log(camp.id_campeonato)
+        localStorage.setItem('currentCamp',camp.id_campeonato)
+        
+    }
+
+    const bodyEliminar = (
+        <div className={classes.modal}>
+          <p>Estás seguro que deseas eliminar el campeonato <b>{campSeleccionado && campSeleccionado.id_campeonato}</b> ? </p>
+          <div align="right">
+            <Button color="secondary" onClick={()=>{const f1 = deleteCampeonato(); const f2 = abrirCerrarModalELiminar() ; f1(); f2() } }>Sí</Button>
+            <Button onClick={()=>abrirCerrarModalELiminar()}>No</Button>
+          </div>
+        </div>
+    )
 
     return (
         <div>
@@ -98,15 +155,33 @@ export default function CampeonatosClub() {
                                     <TableBody>
                                         {data.map(campeonato =>(
                                             <TableRow>
-                                                <TableCell align='center'>n1</TableCell>
-                                                <TableCell align='center'>{campeonato.id_campeonato}</TableCell>
-                                                <TableCell align='center'>{campeonato.fecha_inicio}</TableCell>
-                                                <TableCell align='center'>{campeonato.fecha_termino}</TableCell>
+                                                <TableCell align='center'>{campeonato.nombre_campeonato}</TableCell>
+                                                <TableCell  align='center'>{campeonato.id_campeonato}</TableCell>
+                                                <TableCell  align='center'>{campeonato.fecha_inicio}</TableCell>
+                                                <TableCell align ='center'>{campeonato.fecha_termino}</TableCell>
+                                                <TableCell align='center'>
+                                                    <Link style={{ textDecoration: 'none' }}  color='inherit'  to = '/inscritoscamp'>
+                                                        <GroupIcon  className= {classes.icons} onClick = {()=>seleccionarCamp2(campeonato)}/>
+                                                    </Link>
+                                                    &nbsp;&nbsp;&nbsp; 
+                                                    <Link style={{ textDecoration: 'none' }}  color='inherit'  to = '/selectganadores'>
+                                                        <EmojiEventsIcon  className= {classes.icons} onClick = {()=>seleccionarCamp2(campeonato)}/>
+                                                    </Link>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <DeleteIcon className= {classes.icons} onClick = {()=>seleccionarCamp(campeonato)}/>
+                                                    
+                                                </TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
                             </Table>
                         </TableContainer>
+                        <Modal
+                            open = {modalEliminar}
+                            onClose = {abrirCerrarModalELiminar}
+                        >
+                            {bodyEliminar}
+                        </Modal>
                     </BackdropFilter>
                 </Box>
                 <div  mx = {20}>

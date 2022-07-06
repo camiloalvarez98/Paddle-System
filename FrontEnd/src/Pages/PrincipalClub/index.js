@@ -7,8 +7,7 @@ import { makeStyles, } from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
 import { Contenedor } from '../../Components';
 import BackdropFilter from "react-backdrop-filter";
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -60,7 +59,11 @@ export default function PrincipalClub() {
     const [modalEdit, setModalEdit] = useState(false);
     const [data, setData] = useState([]);
     const [ClubSeleccionado, setClubSeleccionado] = useState({
-        id_club: '' 
+        id_club: '',
+        direccion:'',
+        representante:'',
+        telefono:'',
+        comuna:''
     })
 
     
@@ -89,7 +92,20 @@ export default function PrincipalClub() {
     useEffect (() =>{
         getClub();
     },[])
-           
+          
+   
+    const editarClub = async () =>{
+        await axios.put('http://localhost:3001/api/Club/updateClub/'+ correo_club, ClubSeleccionado)
+        .then(response => {
+            var dataNueva = data;
+            dataNueva.forEach(club =>{
+                club.direccion = ClubSeleccionado.direccion;
+                club.representante = ClubSeleccionado.representante;
+                club.telefono = ClubSeleccionado.telefono;
+                club.comuna = ClubSeleccionado.comuna
+            })
+        })
+    }
 
     const abrirCerrarModalEdit =() =>{
         setModalEdit(!modalEdit); //abre o cierra el modal
@@ -98,16 +114,16 @@ export default function PrincipalClub() {
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} />
+            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue={ClubSeleccionado.direccion} value = {ClubSeleccionado && ClubSeleccionado.direccion} />
             <br/>
-            <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange}/>
+            <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange} defaultValue = {ClubSeleccionado.representante} value = {ClubSeleccionado && ClubSeleccionado.representante}/>
             <br/>
-            <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange}/>
+            <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange} defaultValue = {ClubSeleccionado.telefono} value = {ClubSeleccionado && ClubSeleccionado.telefono}/>
             <br/>   
-            <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange}/>
+            <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange} defaultValue = {ClubSeleccionado.comuna} value = {ClubSeleccionado && ClubSeleccionado.comuna}/>
             <br></br>
             <div align = 'right'>
-                <Button>Guardar</Button>
+                <Button color = 'secondary' onClick={() => {const f1 = editarClub(); const f2 = abrirCerrarModalEdit(); f1(); f2()}}>Guardar</Button>
                 <Button onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
             </div>
         </div>
@@ -157,7 +173,7 @@ export default function PrincipalClub() {
                                     <h4 className={classes.text2}>Direccion:</h4>  
                                 </Grid>
                                 <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                                    <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} defaultValue={club.nombre_club} size = 'small'/>
+                                    <TextField variant='outlined' color = 'secondary' fullWidth inputProps={{readOnly: true,}} defaultValue={club.direccion_club} size = 'small'/>
                                 </Grid>
 
                                 {/*Representante*/}
