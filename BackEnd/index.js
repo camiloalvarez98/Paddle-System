@@ -19,8 +19,9 @@ app.use('/api/Jugador',require('./src/Routes/jugador.routes'));
 app.use('/api/Administrador',require('./src/Routes/administrador.routes'));
 app.use('/api/Club',require('./src/Routes/club.routes'));
 
+const PORT = process.env.PORT || 3000;
 
 //inicializador del server
-app.listen(3001, () => {
-    console.log(`Server started on port ${3001}`);
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 });
