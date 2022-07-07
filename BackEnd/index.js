@@ -19,7 +19,7 @@ app.use('/api/Jugador',require('./src/Routes/jugador.routes'));
 app.use('/api/Administrador',require('./src/Routes/administrador.routes'));
 app.use('/api/Club',require('./src/Routes/club.routes'));
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 
 //inicializador del server
 app.listen(PORT, () => {
