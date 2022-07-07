@@ -72,7 +72,7 @@ export default function PerfilJugador() {
     }
     const correo = localStorage.getItem('correo_jugador')
     const getJugador = async() =>{
-        await axios.get('http://localhost:3001/api/Jugador/getJugador/'+correo)
+        await axios.get('https://proyecto-topicos-back-jggmdvsoa-camiloalvarez98.vercel.app/api/Jugador/getJugador/'+correo)
         .then(response =>{
            setData(response.data) 
            console.log(response.data)
