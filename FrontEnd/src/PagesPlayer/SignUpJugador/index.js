@@ -82,6 +82,7 @@ export default function SignIn() {
     //const [categoria, setCategoria] = useState('')
     const classes = useStyles()
     const navigate = useNavigate();
+    const [puntaje_jugador, setPuntaje] = useState(0)
     const [usr, setUsr] = useState({
         nombre: '',
         apellido: '',
@@ -90,7 +91,8 @@ export default function SignIn() {
         password:'',
         telefono:'',
         direccion: '',
-        categoria: ''
+        categoria: '',
+        
     })
 
 
@@ -149,7 +151,7 @@ export default function SignIn() {
     const handleConfirm = (event) => setConfpas(event.target.value)
 
     const handleClick = () => {
-        //setUsr({...usr, categoria : form.categoria})
+        
         setOpen(!open);
         
     };
@@ -157,10 +159,44 @@ export default function SignIn() {
     //console.log(form.categoria)
     
     const createJugador = async() => {
-        console.log('ok')
-        console.log(usr)
-        
-        await axios.post('http://localhost:3001/api/Jugador/createJugador', usr, id_categoria)
+        const cat = id_categoria.id_categoria
+        console.log(id_categoria)
+        var puntaje = 0
+        switch(cat){
+            case '1':
+                puntaje += 600
+                break;
+            case "2":
+                puntaje += 400
+                break;
+            case '3':
+                puntaje += 300
+                break;
+            case '4':
+                puntaje += 200
+                break;
+            case '5':
+                puntaje += 100
+                break;
+            case '6':
+                puntaje += 0
+                break;
+            case 'DC':
+                puntaje += 0
+                break;
+            case 'DB':
+                puntaje += 150
+                break;
+            case 'DA':
+                puntaje += 300
+                break;
+            default:
+                console.log('me fue mal')
+        }
+
+        console.log(puntaje)
+    
+        await axios.post('http://localhost:3001/api/Jugador/createJugador/'+  id_categoria.id_categoria + '/' + puntaje ,usr)
         .then(response => {
             setData(data.concat(response.data))
             //console.log(data.concat(response.data))
@@ -296,7 +332,7 @@ export default function SignIn() {
                                     <List component="div" disablePadding>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    handleFormChange({categoria: '1'});
+                                                    handleFormChange({id_categoria: '1'});
                                                     //setUsr({...usr, categoria : '1'})
                                                     handleClick();
                                                    
@@ -307,7 +343,7 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    handleFormChange({categoria: '2'});
+                                                    handleFormChange({id_categoria: '2'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
 
@@ -318,7 +354,7 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    handleFormChange({categoria: '3'});
+                                                    handleFormChange({id_categoria: '3'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                     handleClick() 
                                                 }
@@ -328,7 +364,7 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    handleFormChange({categoria: '4'});
+                                                    handleFormChange({id_categoria: '4'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()    
                                                 }
@@ -341,7 +377,7 @@ export default function SignIn() {
                                             onClick={() => {
                                                     handleClick()  
                                                     //console.log(e.target.id)
-                                                    handleFormChange({categoria: '5'});
+                                                    handleFormChange({id_categoria: '5'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                    
                                                       
@@ -352,7 +388,7 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    handleFormChange({categoria: '6'});
+                                                    handleFormChange({id_categoria: '6'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                 }
@@ -362,7 +398,7 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    handleFormChange({categoria: 'DA'});
+                                                    handleFormChange({id_categoria: 'DA'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                     
@@ -374,7 +410,7 @@ export default function SignIn() {
                                         <ListItemButton 
                                             
                                             onClick={() => {
-                                                    handleFormChange({categoria: 'DB'});
+                                                    handleFormChange({id_categoria: 'DB'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                     
@@ -386,7 +422,7 @@ export default function SignIn() {
                                         <ListItemButton 
                                             
                                             onClick={() => {
-                                                    handleFormChange({categoria: 'DC'});
+                                                    handleFormChange({id_categoria: 'DC'});
                                                     //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                     

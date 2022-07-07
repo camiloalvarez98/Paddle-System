@@ -75,38 +75,10 @@ jugadorFunctions.inscribirCampeonato = async(req,res)=>{
 }
 
 jugadorFunctions.createJugador = async(req,res) =>{
-    const {nombre, apellido, rut, categoria, email, password, direccion, telefono} = req.body
-    const puntaje_jugador = 0
-    switch(categoria){
-        case '1':
-            puntaje_jugador = 600
-            break;
-        case '2':
-            puntaje_jugador = 400
-            break;
-        case '3':
-            puntaje_jugador = 300
-            break;
-        case '4':
-            puntaje_jugador = 200
-            break;
-        case '5':
-            puntaje_jugador = 100
-            break;
-        case '6':
-            puntaje_jugador = 0
-            break;
-        case 'DC':
-            puntaje_jugador = 0
-            break;
-        case 'DB':
-            puntaje_jugador = 150
-            break;
-        case 'DA':
-            puntaje_jugador = 300
-            break;
-
-    }
+    const {nombre, apellido, rut, email, password, direccion, telefono} = req.body
+    
+    const categoria = req.params.id_categoria
+    const puntaje_jugador = req.params.puntaje
     console.log(nombre, apellido, rut, categoria, email, password, puntaje_jugador)
     await pool
         .query('INSERT INTO jugador (rut_jugador, nombre_jugador, apellido_paterno, contraseña_jugador, telefono_jugador, direccion_jugador, puntaje_jugador, correo_jugador, categoria_jugador) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
