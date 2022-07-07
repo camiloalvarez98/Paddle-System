@@ -1,9 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
-//import { makeStyles , TextField, Button, Modal} from '@material-ui/core';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
-//import { TableContainer,Table,TableHead,TableBody,TableRow,TableCell,Paper} from '@mui/material'
 import Box from '@mui/material/Box';
 import BackdropFilter from "react-backdrop-filter";
 
@@ -29,7 +27,6 @@ const useStyles = makeStyles((theme)=>({
 
 export default function TablaClubes() {
     const classes = useStyles();
-
     const [data, setData] = useState([]);
     const [modalEdit, setModalEdit] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
@@ -42,8 +39,8 @@ export default function TablaClubes() {
         telefono_club:''
     })
 
-    const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
-        const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
+    const handleChange=e=>{ 
+        const{name, value}=e.target; 
         if(name!==""){
             setClubSeleccionado(prevState=>({
                 ...prevState,
@@ -52,8 +49,6 @@ export default function TablaClubes() {
         }
 
     }
-
-    //peticion get
     const getClubes = async() =>{
         await axios.get('http://localhost:3001/api/Administrador/getClubes')
         .then(response =>{
@@ -62,33 +57,25 @@ export default function TablaClubes() {
         })
         
     }
-    
     useEffect (() =>{
         getClubes();
     },[])
-    
-    
-    //petición put
     const editarClub = async()=>{
-        await axios.put('http://localhost:3001/api/Administrador/updateClub/'+ ClubSeleccionado.id_club, ClubSeleccionado)
+        await axios.put('http://localhost:3001/api/Administrador/updateClub/'+ClubSeleccionado.id_club,ClubSeleccionado)
         .then(response =>{
-            var dataNueva = data; //guarda los nuevos datos de la sala
-            dataNueva.forEach(club=>{ //recorre el arrego con los nuevos datos de la sala 
+            var dataNueva = data;
+            dataNueva.forEach(club=>{ 
                 if(ClubSeleccionado.id_club === club.id_club){
-                    club.direccion = ClubSeleccionado.direccion;
-                    club.representante = ClubSeleccionado.representante;
-                    club.telefono = ClubSeleccionado.telefono;
-                    club.comuna = ClubSeleccionado.comuna;
-                    club.id_club = ClubSeleccionado.id_club;
+                    club.direccion_club = ClubSeleccionado.direccion_club;
+                    club.representante_club = ClubSeleccionado.representante_club;
+                    club.telefono_club = ClubSeleccionado.telefono_club;
+                    club.comuna_club = ClubSeleccionado.comuna_club;
                 }
             })
             setData(dataNueva);
             abrirCerrarModalEdit();
         })
     }
-    
-
-    //peticion delete
     const deleteClub = async() =>{
         await axios.delete('http://localhost:3001/api/Administrador/deleteClub/'+ ClubSeleccionado.id_club)
         .then(response=>{
@@ -96,8 +83,6 @@ export default function TablaClubes() {
             abrirCerrarModalELiminar();
         })
     }
-
-   
     const abrirCerrarModalELiminar=() =>{
         setModalEliminar(!modalEliminar);
     }
@@ -110,21 +95,26 @@ export default function TablaClubes() {
         setClubSeleccionado(club);
         (caso === 'Editar')?abrirCerrarModalEdit():abrirCerrarModalELiminar()
     }
-
-
     const bodyEdit = (
         <div className= {classes.modal}>
-            <h3>Editar datos</h3>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.direccion}/>
+            <h3>Editar datos de <b>{ClubSeleccionado.nombre_club}</b></h3>
+            <TextField name = 'direccion_club' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {ClubSeleccionado.direccion_club}/>
             <br/>
-            <TextField name = 'representante' className={classes.inputMaterial} label='Representante' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.representante}/>
+            <TextField name = 'representante_club' className={classes.inputMaterial} label='Representante' onChange={handleChange} defaultValue = {ClubSeleccionado.representante_club}/>
             <br/>
-            <TextField name = 'telefono' className={classes.inputMaterial} label='Telefono' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.telefono}/>
+            <TextField name = 'telefono_club' className={classes.inputMaterial} label='Telefono' onChange={handleChange} defaultValue = {ClubSeleccionado.telefono_club}/>
             <br/>
-            <TextField name = 'comuna' className={classes.inputMaterial} label='Comuna' onChange={handleChange} value = {ClubSeleccionado && ClubSeleccionado.comuna}/>
+            <TextField name = 'comuna_club' className={classes.inputMaterial} label='Comuna' onChange={handleChange} defaultValue = {ClubSeleccionado.comuna_club}/>
             <br></br>
             <div align = 'right'>
-                <Button onClick={()=>editarClub()}>Editar Club</Button>
+                <Button
+                    onClick={()=>{
+                        editarClub()
+                        window.location.reload(false)
+                    }}
+                >
+                    Editar Club
+                </Button>
                 <Button onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
             </div>
         </div>
@@ -132,9 +122,17 @@ export default function TablaClubes() {
 
     const bodyEliminar = (
         <div className={classes.modal}>
-          <p>¿Estás seguro que deseas eliminar el club <b>{ClubSeleccionado.nombre_club && ClubSeleccionado.id_club}</b> ? </p>
+          <p>¿Estás seguro que deseas eliminar el club <b>{ClubSeleccionado.nombre_club}</b>? </p>
           <div align="right">
-            <Button color="secondary" onClick={()=>deleteClub()}>Sí</Button>
+            <Button 
+                color="secondary" 
+                onClick={()=>{
+                    deleteClub()
+                    window.location.reload(false)
+                }}
+            >
+                Sí
+            </Button>
             <Button onClick={()=>abrirCerrarModalELiminar()}>No</Button>
           </div>
         </div>
@@ -142,9 +140,7 @@ export default function TablaClubes() {
 
     return (
         <div className = 'App'>
-            <br/>
             <div align = 'center'>
-            
                 <Box
                     sx = {{
                         width:{
@@ -156,7 +152,6 @@ export default function TablaClubes() {
                         }
                     }}
                     color = 'contrastText'
-                    mx = {25} 
                     border = {1}
                     borderColor = '#adc178'
                     >
@@ -203,6 +198,7 @@ export default function TablaClubes() {
                                                 </Modal>
                                             </TableCell>
                                         </TableRow>
+            
                                     ))}
                                 </TableBody>
                             </Table>

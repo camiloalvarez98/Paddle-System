@@ -1,8 +1,7 @@
-import React, {useEffect,useState} from 'react';
-//import axios from 'axios';
+import React from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorJugador } from '../../Components';
 import { Link } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
@@ -60,6 +59,7 @@ export default function InsCampeonato() {
     return (
         <div>
             <ContenedorJugador/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{

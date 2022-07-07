@@ -1,12 +1,12 @@
 import React, {useEffect,useState} from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import {Edit, Delete} from '@material-ui/icons';
 import { ContenedorJugador } from '../../Components';
 import { Link, NavLink  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Tooltip from '@mui/material/Tooltip';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -52,10 +52,70 @@ const useStyles = makeStyles((theme)=>({
 
 export default function CampeonatosJugador() {
     const classes = useStyles()
+    const [data,setData] = useState([]);
+    const [modalEliminar, setModalEliminar] = useState(false);
+    const key = localStorage.getItem('correo_jugador')
+    const [campeonatoSeleccionado, setCampeonatoSeleccionado] = useState({
+        nombre_campeonato : '',
+        fecha_inicio : '',
+        fecha_termino : '',
+        id_dupla : '',
+        nombre_club : ''
+    })
+
+    const getCampeonatos = async() =>{
+        await axios.get('http://localhost:3001/api/Jugador/getCampeonatos/'+key)
+        .then(response =>{
+           setData(response.data) 
+           console.log(response.data)
+        })
+    }
+
+    useEffect (() =>{
+        getCampeonatos();
+    },[])
+
+    const deleteInscripcion = async() =>{
+        await axios.delete('http://localhost:3001/api/Jugador/deleteInscripcion/'+ campeonatoSeleccionado.id_dupla)
+        .then(response=>{
+            setData(data.filter(club=>club.id_club !== campeonatoSeleccionado.id_dupla));
+            abrirCerrarModalELiminar();
+        })
+        console.log(campeonatoSeleccionado)
+    }
+
+    const abrirCerrarModalELiminar=() =>{
+        setModalEliminar(!modalEliminar);
+    }
+
+    const seleccionarCampeonato=(campeonato)=>{
+        setCampeonatoSeleccionado(campeonato);
+        abrirCerrarModalELiminar()
+    }
+    
+
+
+    const bodyEliminar = (
+        <div className={classes.modal}>
+          <p>¿Estás seguro que deseas eliminar tu inscripción al campeonato <b>{campeonatoSeleccionado.nombre_campeonato}</b>? </p>
+          <div align="right">
+            <Button 
+                color="secondary" 
+                onClick={()=>{
+                    deleteInscripcion()
+                    window.location.reload(false);
+                }}
+            >Sí
+            </Button>
+            <Button onClick={()=>abrirCerrarModalELiminar()}>No</Button>
+          </div>
+        </div>
+    )
 
     return (
         <div className = 'App'>
             <ContenedorJugador/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -86,11 +146,38 @@ export default function CampeonatosJugador() {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Nombre</TableCell>
-                                        <TableCell>Fecha</TableCell>
-                                        <TableCell>Partner</TableCell>
+                                        <TableCell align='center'>Nombre</TableCell>
+                                        <TableCell align='center'>ID dupla</TableCell>
+                                        <TableCell align='center'>Fecha inicio</TableCell>
+                                        <TableCell align='center'>Fecha termino</TableCell>
+                                        <TableCell align='center'>Partner</TableCell>
+                                        <TableCell align='center'></TableCell>
                                     </TableRow>
                                 </TableHead>
+                                <TableBody>
+                                    {data.map(campeonato => (
+                                        <TableRow>
+                                            <TableCell align='center'>{campeonato.nombre_campeonato}</TableCell>
+                                            <TableCell align='center'>{campeonato.id_dupla}</TableCell>
+                                            <TableCell align='center'>{campeonato.fecha_inicio}</TableCell>
+                                            <TableCell align='center'>{campeonato.fecha_termino}</TableCell>
+                                            <TableCell align='center'>{campeonato.nombre_club}</TableCell>
+                                            <TableCell align='center'>
+                                                <Tooltip title='Eliminar inscripción'>
+                                                    <Button>
+                                                        <HighlightOffIcon className = {classes.icons} onClick ={()=>seleccionarCampeonato(campeonato, 'Eliminar') }/>
+                                                        <Modal
+                                                            open = {modalEliminar}
+                                                            onClose = {abrirCerrarModalELiminar}
+                                                        >
+                                                            {bodyEliminar}
+                                                        </Modal>
+                                                    </Button>
+                                                </Tooltip>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
                             </Table>
                         </TableContainer>
                     </BackdropFilter>

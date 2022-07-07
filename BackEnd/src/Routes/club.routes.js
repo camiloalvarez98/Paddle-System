@@ -3,7 +3,7 @@ const router = Router();
 const clubFunctions = require('../Controllers/club.controller');
 
 //Información club
-router.get('/getInfo/:id_club',clubFunctions.getInfo);
+router.get('/getClub/:correo_club',clubFunctions.getClub);
 
 router.get("/",(req,res) => {
     res.json({"hola":"chao"});

@@ -1,17 +1,12 @@
 import React, {useEffect,useState} from 'react';
-//import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { makeStyles, styled } from '@material-ui/core';
+import { makeStyles} from '@material-ui/core';
 import {Modal, Button, TextField } from '@material-ui/core';
-import {Edit, Delete} from '@material-ui/icons';
-import { Link, NavLink,  } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { ContenedorJugador } from '../../Components';
-
+import axios from 'axios';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -25,20 +20,6 @@ const useStyles = makeStyles((theme)=>({
         left:'50%',
         transform: 'translate(-50%, -50%)'
     },
-    modal2:{
-        position: 'absolute',
-        width: 300,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2,4,3),
-        top: '50%',
-        left:'50%',
-        transform: 'translate(-50%, -50%)'
-    },
-    icons: {
-        cursor: 'pointer'
-    },
     inputMaterial:{
         width: '100%'
     },
@@ -51,7 +32,6 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2) ,
         marginLeft: theme.spacing(4),
         marginRight: theme.spacing(4),
@@ -66,84 +46,96 @@ const useStyles = makeStyles((theme)=>({
   
 }));
 
-
-  
-
 export default function PerfilJugador() {
     const classes = useStyles()
     const [modalEdit, setModalEdit] = useState(false);
-    const [openContra, setModalContra] = React.useState(false);
-    const [ClubSeleccionado, setClubSeleccionado] = useState({
-
+    const [data, setData] = useState([]);
+    const [jugadorSeleccionado, setJugadorSeleccionado] = useState({
+        rut_jugador : '',
+        nombre_jugador : '',
+        apellido_paterno: '',
+        telefono_jugador : '',
+        direccion_jugador : '',
+        puntaje_jugador : '',
+        categoria_jugador : '',
+        correo_jugador : ''
     })
-
-    const handleChange=e=>{ //alamcenamos lo que se escribe en el textfield
-        const{name, value}=e.target; //name es una propiedad que le di a cada textfield mas abajo
+    const handleChange=e=>{
+        const{name, value}=e.target;
         if(name!==""){
-            setClubSeleccionado(prevState=>({
+            setJugadorSeleccionado(prevState=>({
                 ...prevState,
                 [name]:value
             }))
         }
 
     }
-
-
-
+    const correo = localStorage.getItem('correo_jugador')
+    const getJugador = async() =>{
+        await axios.get('http://localhost:3001/api/Jugador/getJugador/'+correo)
+        .then(response =>{
+           setData(response.data) 
+           console.log(response.data)
+           localStorage.setItem('categoria_jugador',(data[0].categoria_jugador))
+        })
+    }
+    useEffect (() =>{
+        getJugador();
+    },[])
     const abrirCerrarModalEdit =() =>{
-        setModalEdit(!modalEdit); //abre o cierra el modal
+        setModalEdit(!modalEdit); 
     }
-
-    
-    const abrirModalContra =() =>{
-        setModalContra(true); //abre o cierra el modal
+    const seleccionarJugador=(jugador)=>{
+        setJugadorSeleccionado(jugador);
     }
-
-    const cerrarModalContra =() =>{
-        setModalContra(false); //abre o cierra el modal
-    }
-
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
-            <TextField name = 'nombre' className={classes.inputMaterial} label='Nombre' onChange={handleChange}/>
+            <TextField name = 'nombre_jugador' className={classes.inputMaterial} label='Nombre' onChange={handleChange} defaultValue = {jugadorSeleccionado.nombre_jugador}/>
             <br/>
-            <TextField name = 'apellidoPaterno' className={classes.inputMaterial} label='Apellido paterno' onChange={handleChange}/>
+            <TextField name = 'apellido_paterno' className={classes.inputMaterial} label='Apellido paterno' onChange={handleChange} defaultValue = {jugadorSeleccionado.apellido_paterno}/>
             <br/>
-            <TextField name = 'telefono' className={classes.inputMaterial} label='Teléfono' onChange={handleChange}/>
+            <TextField name = 'telefono_jugador' className={classes.inputMaterial} label='Teléfono' onChange={handleChange} defaultValue = {jugadorSeleccionado.telefono_jugador}/>
             <br/>
-            <TextField name = 'direccion' className={classes.inputMaterial} label='Direccion' onChange={handleChange}/>
-            <br/>
-            <TextField name = 'correo' className={classes.inputMaterial} label='Correo electrónico' onChange={handleChange}/>
+            <TextField name = 'direccion_jugador' className={classes.inputMaterial} label='Direccion' onChange={handleChange} defaultValue = {jugadorSeleccionado.direccion_jugador}/>
             <br/>
             <br></br>
             <div align = 'right'>
-                <Button size='small'>Guardar</Button>
+                <Button 
+                    size='small' 
+                    onClick={()=>{
+                        editarJugador()
+                        window.location.reload(false);
+                    }}
+                >
+                    Guardar
+                </Button>
                 <Button size='small' onClick={()=>abrirCerrarModalEdit()}>Cancelar</Button>
             </div>
         </div>
     )
 
-    const cambiarContraseña = (
-        <div className= {classes.modal2}>
-            <h3>Cambiar contraseña</h3>
-            <TextField name = 'contraseñaantigua' className={classes.inputMaterial} label='Contraseña antigua' onChange={handleChange}/>
-            <br/>
-            <TextField name = 'contraseñanueva1' className={classes.inputMaterial} label='Nueva contraseña' onChange={handleChange}/>
-            <br/>
-            <TextField name = 'contraseñanueva2' className={classes.inputMaterial} label='Repetir contraseña' onChange={handleChange}/>
-            <br/>
-            <br></br>
-            <div align = 'right'>
-                <Button size='small'>Guardar</Button>
-                <Button size='small' onClick={cerrarModalContra}>Cancelar</Button>
-            </div>
-        </div>
-    )
+    const editarJugador = async()=>{
+        await axios.put('http://localhost:3001/api/Jugador/updateInformacion/'+jugadorSeleccionado.correo_jugador,jugadorSeleccionado)
+        .then(response =>{
+            var dataNueva = data; 
+            dataNueva.forEach(jugador=>{ 
+                if(jugadorSeleccionado.correo_jugador === jugador.correo_admin){
+                    jugador.nombre_jugador = jugadorSeleccionado.nombre_jugador;
+                    jugador.apellido_paterno = jugadorSeleccionado.apellido_paterno;
+                    jugador.telefono_jugador = jugadorSeleccionado.telefono_jugador;
+                    jugador.direccion_jugador = jugadorSeleccionado.direccion_jugador;
+                }
+            })
+            setData(dataNueva);
+            abrirCerrarModalEdit();
+        })
+    }
 
     return (
         <div>
             <ContenedorJugador/>
+            <br/>
             <div align = 'center'>
                 <Box
                     sx = {{
@@ -156,10 +148,6 @@ export default function PerfilJugador() {
                         }
                       }}
                     color = 'contrastText'
-                    //backgroundColor = '#D8F3DC'
-                    mx = {25} //margen a todos los lados
-                    //p = {30} //padding
-                    //borderRadius = '8px'
                     border = {1}
                     borderColor = '#adc178'
                 >
@@ -173,87 +161,80 @@ export default function PerfilJugador() {
                             console.log("Rendered !");
                         }}
                     >
-                    <h2>Perfil jugador</h2>    
-                    <Grid container>
-                        {/*Nombre*/}
-                        <Grid item xs ={3}>
-                            <h4 className={classes.text2}>Nombre: </h4>  
+                    <h2>Perfil jugador</h2>  
+                    {data.map((jugador)=>( 
+                        <Grid container>
+                            <Grid item xs ={3}>
+                                <h4 className={classes.text2}>Nombre: </h4>  
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true}} defaultValue={jugador.nombre_jugador}/>
+                            </Grid>
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Apellido paterno: </h4>               
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.apellido_paterno}/>
+                            </Grid>
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Teléfono:</h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.telefono_jugador}/>
+                            </Grid>
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Dirección: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'   fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.direccion_jugador}/>
+                            </Grid>
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Puntaje actual: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.puntaje_jugador}/>
+                            </Grid>
+                            <Grid item xs = {3}>
+                                <h4 className={classes.text2}>Categoría: </h4>
+                            </Grid>
+                            <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
+                                <TextField name='categoria'  variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}} defaultValue={jugador.categoria_jugador}/>
+                            </Grid>
+                            <Grid item xs={12} justify="center">
+                                <Button 
+                                    style={{margin: '0 auto',marginTop: '20px', display: "flex"}}
+                                    type = "button"
+                                    variant = 'contained'
+                                    size='small'
+                                    onClick = {()=>{
+                                        seleccionarJugador(jugador)
+                                        abrirCerrarModalEdit()
+                                        }
+                                    }
+                                >
+                                    Editar información
+                                </Button>
+                                <Modal
+                                    open = {modalEdit}
+                                >
+                                    {bodyEdit}
+                                </Modal>
+                            </Grid>  
                         </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
-                            <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-
-                        {/*Rut*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Apellido paterno: </h4>               
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-
-                        {/*Telefono*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Teléfono:</h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-
-                        {/*Direccion*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Dirección: </h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'   fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-
-                        {/*Puntaje*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Puntaje actual: </h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-
-                        {/*Categoria*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Categoría: </h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-                        
-                        {/*Correo*/}
-                        <Grid item xs = {3}>
-                            <h4 className={classes.text2}>Correo electrónico: </h4>
-                        </Grid>
-                        <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'}>
-                            <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
-                        </Grid>
-
-                        
-                    </Grid>
+                    ))} 
                     <br></br>
                     </BackdropFilter>        
                 </Box>
                 <div  mx = {20}>
-
                     <Button 
                         className={classes.button}
                         type = "button"
                         variant = 'contained'
                         size='small'
-                        endIcon = {<ModeEditIcon/>}
-                        onClick = {()=>abrirCerrarModalEdit()}
+                        endIcon = {<KeyboardReturnIcon/>}
                     >
-                        Editar
+                        Volver
                     </Button>
-                    <Modal
-                        open = {modalEdit}
-                        close = {abrirCerrarModalEdit}
-                    >
-                        {bodyEdit}
-                    </Modal>
                 </div>
             </div>
         </div>

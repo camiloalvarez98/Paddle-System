@@ -78,6 +78,7 @@ export default function LoginAdmin() {
 
         try{
             await login(email, password)
+            localStorage.setItem('correo_admin',email)
             // history nos envia a home luego de iniciar sesion validamente
             navigate('/principalAdmin') 
         }catch (error){
