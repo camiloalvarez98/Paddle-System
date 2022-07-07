@@ -184,6 +184,7 @@ export default function NuevoCampeonato() {
   }
 
   console.log('idCamp', id_camp)
+  
   const catCamp = async() =>{
     for(let i = 0; i<categoriesAc.length; i ++){
       console.log(categoriesAc[i])
