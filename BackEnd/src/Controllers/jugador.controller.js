@@ -58,6 +58,7 @@ jugadorFunctions.updateInformacion = async(req,res)=> {
 //Inscribirse en campeonato
 jugadorFunctions.inscribirCampeonato = async(req,res)=>{
     const {rut_jugador2, id_campeonato, id_categoria } = req.body; 
+    console.log(req.body)
     await pool
     .query('INSERT INTO dupla (rut_jugador1,rut_jugador2, id_campeonato, id_categoria) VALUES ($1,$2,$3,$4)',[req.params.rut_jugador1,rut_jugador2,id_campeonato,id_categoria])
     .then((result) => {
@@ -69,7 +70,7 @@ jugadorFunctions.inscribirCampeonato = async(req,res)=>{
         }
         });
     })
-        .catch((e) => console.log(e));
+    .catch((e) => console.log(e));
 }
 
 jugadorFunctions.createJugador = async(req,res) =>{
