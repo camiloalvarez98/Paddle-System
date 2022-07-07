@@ -161,14 +161,6 @@ const BarraSuperiorClub = () => {
                     Nuevo campeonato
                 </Button>
             </Link>
-            <Link underline='none' color='inherit' href = "/selectganadores" className='btn'>
-                <Button
-                    onClick={handleCloseNavMenu}
-                    variant='text' color='inherit' 
-                >
-                    Registrar ganador
-                </Button>
-            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

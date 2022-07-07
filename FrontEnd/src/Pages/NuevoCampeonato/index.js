@@ -1,5 +1,5 @@
-import React, {useEffect,useState,Fragment} from 'react';
-//import axios from 'axios';
+import React, {useCallback, useEffect,useState} from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {  Button, TextField, makeStyles, FormControlLabel, Checkbox, FormControl, FormGroup  } from '@material-ui/core';
@@ -14,6 +14,8 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import MenuItem from '@mui/material/MenuItem';
 import swal from 'sweetalert'
+
+
 
 const useStyles = makeStyles((theme)=>({
   modal:{
@@ -57,27 +59,67 @@ export default function NuevoCampeonato() {
 
   const classes = useStyles()
   const [categoriesAc, setCategoriesAc] = useState([])
+  const [data, setData] = useState([]);
   const [fechaI, setFechaI] = React.useState(new Date('2022-08-18T21:11:54'));
   const [fechaT, setFechaT] = React.useState(new Date('2022-08-18T21:11:54'));
   const [horaI, setHoraI] = React.useState(new Date('2022-08-18T21:11:54'));
   const [currency, setCurrency] = React.useState('');
+  const [fecha_if, setFecha_i] = useState('')
+  const [fecha_t, setFecha_t] = useState({})
   const [errorF, setErrorF] = React.useState(false);
+  const correo_club = localStorage.getItem('correo_club')
+  const [id_camp, setId_camp] = useState('')
+  const [categoria, setCategoria] = useState('')
+  
+ 
+ 
+ const [nCamp, setNcamp] = useState({
+    fecha_i: '',
+    fecha_t: '',
+    nombre_campeonato: ''
+  })
+ 
+
+
+  
+  const handleChange = e =>{
+    const {name, value} = e.target;
+    if(name !== ""){
+      setNcamp(prevState =>({
+          ...prevState,
+          [name]:value
+      }))
+    }
+  }
+
 
   const handleChangeFI = (newValue) => {
     setFechaI(newValue);
-    if(fechaT.getTime() >= fechaI.getTime()){
+    const dia = newValue.getDate()
+    const mes = newValue.getMonth() + 1
+    const anio = newValue.getFullYear()
+    const fecha_in = (anio + '-' + mes + '-' + dia)
+    setFecha_i(fecha_in)
+    setNcamp({...nCamp, fecha_i: fecha_in})
+    /*if(fechaT >= fechaI){
       setErrorF(false)
     }else{
       setErrorF(true)
-    }
+    }*/
   };
   const handleChangeFT = (newValue) => {
     setFechaT(newValue);
-    if(fechaT.getTime() >= fechaI.getTime()){
+    const dia = newValue.getDate()
+    const mes = newValue.getMonth() + 1
+    const anio = newValue.getFullYear()
+    const fecha_te = (anio + '-' + mes + '-' + dia)
+    setFecha_t(fecha_te)
+    setNcamp({...nCamp, fecha_t: fecha_te})
+    /*if(fechaT >= fechaI){
       setErrorF(false)
     }else{
       setErrorF(true)
-    }
+    }*/
   };
   const handleChangeHI = (newValue) => {
     setHoraI(newValue);
@@ -126,9 +168,35 @@ export default function NuevoCampeonato() {
     setCurrency(event.target.value);
   };
 
-  console.log(fechaI.getTime())
-  console.log(fechaT.getTime())
-  console.log(errorF)
+
+  
+  const createCamp = async() =>{
+    
+    await axios.post('http://localhost:3001/api/Club/createCampeonato/' + correo_club, nCamp)
+    .then(response => {
+      setId_camp(response.data.campeonato)
+      setData(data.concat(response.data))
+      //aca mandar otra ruta para q agregue las categorias 
+      //mostrarAlerta1()
+    })   
+    .catch((e) => console.log(e))
+    setTimeout(()=>  3500)
+  }
+
+  console.log('idCamp', id_camp)
+  const catCamp = async() =>{
+    for(let i = 0; i<categoriesAc.length; i ++){
+      console.log(categoriesAc[i])
+      setCategoria(categoriesAc[i])
+      //console.log(categoria)
+      console.log(id_camp)
+      /*await axios.post('http://localhost:3001/api/Club/createCategoria/'+ id_camp, categorias)
+      .then(response => {
+        setData(data.concat(response.data))
+      })
+      .catch((e) => console.log(e))*/
+    }
+  }
 
   return (
     <div>
@@ -162,7 +230,8 @@ export default function NuevoCampeonato() {
               <h2>Nuevo Campeonato</h2>
               <Grid container>
                 <Grid item sm = {12} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
-                    <TextField required label='Nombre campeonato' variant = 'outlined' fullWidth size = 'small' />
+                    <TextField required label='Nombre campeonato' variant = 'outlined' fullWidth size = 'small' name = 'nCamp' 
+                    onChange={handleChange}/>
                 </Grid>
                 
                 <Grid item sm = {6} xl = {5} marginTop= {'10px'} marginLeft = {'90px'} >
@@ -172,8 +241,9 @@ export default function NuevoCampeonato() {
                       type = 'date'
                       inputFormat="yyyy-MM-dd"
                       value={fechaI}
+                      name = 'fecha_i'
                       onChange={handleChangeFI}
-                      renderInput={(params) => <TextField {...params} required variant = 'outlined' fullWidth size = 'small'/>}
+                      renderInput={(params) => <TextField {...params} name = 'fecha_i' required variant = 'outlined' fullWidth size = 'small' />}
                     />
                   </LocalizationProvider>                
                 </Grid>
@@ -184,24 +254,17 @@ export default function NuevoCampeonato() {
                       label="Fecha de término"
                       inputFormat="yyyy-MM-dd"
                       type = 'date'
-                      value={fechaT}
-                      onChange={handleChangeFT}
-                      renderInput={(params) => <TextField {...params} required error = {errorF}  variant = 'outlined' fullWidth size = 'small'/>}
+                      value ={fechaT}
+                      name = 'fecha_t'
+                      
+                      onChange= {handleChangeFT}
+
+                      renderInput={(params) => <TextField {...params} name = 'fecha_t' required error = {errorF}  variant = 'outlined' fullWidth size = 'small' />}
                     />
                   </LocalizationProvider>                
                 </Grid>
                 
-                <Grid item sm = {6} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <TimePicker
-                    label="Hora de inicio"
-                    ampm={false}
-                    value={horaI}
-                    onChange={handleChangeHI}
-                    renderInput={(params) => <TextField {...params} required variant = 'outlined' fullWidth size = 'small'/>}
-                  />
-                  </LocalizationProvider>                
-                </Grid>
+
 
                 <Grid item sm = {6} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
                   <TextField 
@@ -304,7 +367,7 @@ export default function NuevoCampeonato() {
                 type = "button"
                 variant = 'contained'
                 size='small'
-                onClick={() => mostrarAlerta1()}
+                onClick={() => {createCamp(); catCamp()}}
                 endIcon = {<SaveIcon/>}
             >
                 Guardar

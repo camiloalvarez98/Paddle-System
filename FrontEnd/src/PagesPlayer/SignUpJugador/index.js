@@ -9,6 +9,9 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import { useForm } from '../../Shared/hooks/useForm'
+import axios from 'axios';
+import { fromUnixTime } from 'date-fns';
+
 
 
 const useStyles = makeStyles(theme=>({
@@ -20,9 +23,9 @@ const useStyles = makeStyles(theme=>({
     },
     container:{
         opacity: '0.8',
-        height: '85%', 
-        marginTop: theme.spacing(5), 
-        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{ 
+        height: '85%', //largo del contenedor
+        marginTop: theme.spacing(5), //altura del contenedor
+        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{ //responsive
             marginTop: 0,
             width: '100%',
             height: '100%'
@@ -39,13 +42,16 @@ const useStyles = makeStyles(theme=>({
         margin: theme.spacing(6),
         marginTop: -40,
         backgroundColor: theme.palette.secondary.main 
+       
     },
     form:{
         width: '100%',
         marginTop: theme.spacing(1)
     },
     button:{
-        margin: theme.spacing(3, 0, 2)
+        margin: theme.spacing(3, 0, 2), //mrgen general
+        //backgroundColor: theme.palette.secondary.main
+        
     },
     input:{
         flex: 1, 
@@ -64,41 +70,141 @@ const useStyles = makeStyles(theme=>({
 }))
 
 export default function SignIn() {
-    const { signup } = useAuth() 
+    const { signup } = useAuth() //esta funcion viene de /context/AuthContext
     const [error, setError] = useState(null);
+    const [data, setData] = useState([]);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confpas,setConfpas] = useState('')
     const [usrVerf, setUsrVerf] = useState(false)
     const [open, setOpen] = useState(false)
-    const [form, handleFormChange] = useForm({categoria:""})
-    const handleEmail = (event) => setEmail(event.target.value) 
-    const handlePassword = (event) => setPassword(event.target.value) 
-    const handleConfirm = (event) => setConfpas(event.target.value)
+    const [id_categoria, handleFormChange] = useForm({id_categoria:""})
+    //const [categoria, setCategoria] = useState('')
     const classes = useStyles()
     const navigate = useNavigate();
+    const [puntaje_jugador, setPuntaje] = useState(0)
+    const [usr, setUsr] = useState({
+        nombre: '',
+        apellido: '',
+        rut:'',
+        email:'',
+        password:'',
+        telefono:'',
+        direccion: '',
+        categoria: '',
+        
+    })
+
+
+    const handleChange = e =>{
+        const {name, value} = e.target;
+        if(name !== ""){
+          setUsr(prevState =>({
+              ...prevState,
+              [name]:value
+          }))
+        }
+    }
+    /**
+     * handleSubmit es la funcion que se ejecuta al presionar el boton 'crear', esta de debe invocar (onSubmit) cuando se cree el formulario
+     * donde se ingresara la info necesaria, en este caso email y password
+     * 
+     */
 
     const handleSubmit = async(event) => {
-        event.preventDefault(); 
+        event.preventDefault(); //para evitar que se recarge
         
-        if (password !== confpas){
+        if (usr.password !== confpas){
             setError('Contraseñas no coinciden')
             setTimeout(()=> setError(''), 2500)
-        
-        }else{
+        }
+        else if (usr.nombre === ''){
+            setError('Falta el nombre!')
+            setTimeout(()=> setError(''), 2500)
+        }
+        else if(usr.apellido === ''){
+            setError('Falta el apellido!')
+            setTimeout(()=> setError(''), 2500)
+        }
+        else if (usr.rut === ''){
+            setError('Falta el rut!')
+            setTimeout(()=> setError(''), 2500)
+        }
+        else if(id_categoria === ""){
+            setError('Falta la categoria!')
+            setTimeout(()=> setError(''), 2500)
+        }
+        else{
             try{
-                await signup(email, password) 
-                navigate('/perfiljugador') 
+                await signup(usr.email, usr.password) //aqui ya se verifico que ambas contrasenias sean iguales, por lo tanto, un error aca solo seria del servidor
+                navigate('/loginJugador') //se crea la cuenta y se redirige al proytecto raiz
             } catch(prop){
                 setError('Server Error')
                 setTimeout(()=> setError(''), 2500)             
             }
         }
     }
+    const handleEmail = (event) => setEmail(event.target.value) //el email se setea deacuerdo al valor que ingrese en el input
+
+    const handlePassword = (event) => setPassword(event.target.value) //la password se setea deacuerdo al valor que ingrese en el input  
+
+    const handleConfirm = (event) => setConfpas(event.target.value)
 
     const handleClick = () => {
+        
         setOpen(!open);
+        
     };
+   
+    //console.log(form.categoria)
+    
+    const createJugador = async() => {
+        const cat = id_categoria.id_categoria
+        console.log(id_categoria)
+        var puntaje = 0
+        switch(cat){
+            case '1':
+                puntaje += 600
+                break;
+            case "2":
+                puntaje += 400
+                break;
+            case '3':
+                puntaje += 300
+                break;
+            case '4':
+                puntaje += 200
+                break;
+            case '5':
+                puntaje += 100
+                break;
+            case '6':
+                puntaje += 0
+                break;
+            case 'DC':
+                puntaje += 0
+                break;
+            case 'DB':
+                puntaje += 150
+                break;
+            case 'DA':
+                puntaje += 300
+                break;
+            default:
+                console.log('me fue mal')
+        }
+
+        console.log(puntaje)
+    
+        await axios.post('http://localhost:3001/api/Jugador/createJugador/'+  id_categoria.id_categoria + '/' + puntaje ,usr)
+        .then(response => {
+            setData(data.concat(response.data))
+            //console.log(data.concat(response.data))
+            console.log("jugador creado")
+        })
+    }
+    
+  
 
     return (
         <div>
@@ -108,19 +214,21 @@ export default function SignIn() {
                         {error && <p className= 'error'>{error}</p>}
                         <br/>
                         <Avatar className = {classes.avatar}>
-                            <PersonAddAltOutlinedIcon/> 
+                            <PersonAddAltOutlinedIcon/> {/**icono de addUser */}
                         </Avatar>
                         <Typography component = 'h1' variant = 'h4'> Sign Up </Typography>
                         <form className = {classes.form} onSubmit = {handleSubmit}>
                             <br/>
-                            {/*
+                            
                             <TextField
                                 variant = 'outlined'
                                 color='secondary'
                                 fullWidth
                                 required
+                                name = 'nombre'
                                 autoFocus //enfocado en input de usuario
-                                placeholder='Nombre'
+                                label ='Nombre'
+                                onChange={handleChange}
                             />
                             <br/>
                             <br/>
@@ -129,8 +237,10 @@ export default function SignIn() {
                                 color='secondary'
                                 fullWidth
                                 required
+                                name = 'apellido'
                                 autoFocus //enfocado en input de usuario
-                                placeholder='Apellido Paterno'
+                                label ='Apellido Paterno'
+                                onChange={handleChange}
                             />
                             <br/>
                             <br/>
@@ -139,20 +249,45 @@ export default function SignIn() {
                                 color='secondary'
                                 fullWidth
                                 required
+                                name = 'rut'
                                 autoFocus //enfocado en input de usuario
-                                placeholder='Apellido Materno'
+                                label ='Rut'
+                                onChange={handleChange}
                             />
                             <br/>
-                            <br/>*/}
+                            <br/>
+                            <TextField
+                                variant = 'outlined'
+                                color='secondary'
+                                fullWidth
+                                name ='telefono'
+                                autoFocus //enfocado en input de usuario
+                                label = 'Telefono'
+                                onChange = {handleChange}                           
+                            />
+                            <br/>
+                            <br/>
+                            <TextField
+                                variant = 'outlined'
+                                color='secondary'
+                                fullWidth
+                                name ='direccion'
+                                autoFocus //enfocado en input de usuario
+                                label = 'Direccion' 
+                                onChange = {handleChange}                           
+                            />
+                            <br/>
+                            <br/>
                             <TextField
                                 variant = 'outlined'
                                 color='secondary'
                                 fullWidth
                                 required
+                                name ='email'
                                 autoFocus //enfocado en input de usuario
-                                placeholder = 'Correo'
+                                label = 'Correo'
                                 type = 'email' 
-                                onChange = {handleEmail}                               
+                                onChange = {handleChange}                           
                             />
                             <br/>
                             <br/>
@@ -162,10 +297,11 @@ export default function SignIn() {
                                 color='secondary'
                                 fullWidth
                                 required
+                                name = 'password'
                                 autoFocus //enfocado en input de usuario
-                                placeholder = 'Contraseña'
+                                label = 'Contraseña'
                                 type = 'password' //eso encripta la password por pantalla
-                                onChange = {handlePassword}
+                                onChange = {handleChange}
                             />
                             <br/>
                             <br/>
@@ -175,7 +311,7 @@ export default function SignIn() {
                                 fullWidth
                                 required
                                 autoFocus //enfocado en input de usuario
-                                placeholder = 'Confirmar contraseña'
+                                label = 'Confirmar contraseña'
                                 type = 'password' //eso encripta la password por pantalla
                                 onChange = {handleConfirm}
                             />
@@ -185,7 +321,7 @@ export default function SignIn() {
                                 <ListItemIcon>
                                     <FormatListNumberedIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Categoria" secondary = {form.categoria}/>
+                                <ListItemText primary="Categoria" secondary ={id_categoria.categoria} />
                                 {open ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
                             <List
@@ -196,10 +332,10 @@ export default function SignIn() {
                                     <List component="div" disablePadding>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'primera'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: '1'});
+                                                    //setUsr({...usr, categoria : '1'})
+                                                    handleClick();
+                                                   
                                                 }
                                             } 
                                         >
@@ -207,10 +343,10 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'segunda'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: '2'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                    handleClick()
+
                                                 }
                                             } 
                                         >
@@ -218,10 +354,9 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'tercera'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: '3'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                    handleClick() 
                                                 }
                                             } 
                                         >
@@ -229,21 +364,23 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'cuarta'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: '4'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                    handleClick()    
                                                 }
                                             } 
                                         >
                                             Cuarta
                                         </ListItemButton>
                                         <ListItemButton 
+                                            id = '5'
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'quinta'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleClick()  
+                                                    //console.log(e.target.id)
+                                                    handleFormChange({id_categoria: '5'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                   
+                                                      
                                                 }
                                             } 
                                         >
@@ -251,10 +388,9 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'sexta'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: '6'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                    handleClick()
                                                 }
                                             } 
                                         >
@@ -262,32 +398,34 @@ export default function SignIn() {
                                         </ListItemButton>
                                         <ListItemButton 
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'DA'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: 'DA'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                    handleClick()
+                                                    
                                                 }
                                             } 
                                         >
                                             Damas A
                                         </ListItemButton>
                                         <ListItemButton 
+                                            
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'DB'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: 'DB'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                    handleClick()
+                                                    
                                                 }
                                             } 
                                         >
                                             Damas B
                                         </ListItemButton>
                                         <ListItemButton 
+                                            
                                             onClick={() => {
-                                                    const function1 = handleFormChange({categoria: 'DC'});
-                                                    const function2 = handleClick()
-                                                    function1()
-                                                    function2()
+                                                    handleFormChange({id_categoria: 'DC'});
+                                                    //setUsr({...usr, categoria : form.categoria})
+                                                    handleClick()
+                                                    
                                                 }
                                             } 
                                         >
@@ -301,12 +439,13 @@ export default function SignIn() {
                                 value = 'signup'
                                 fullWidth
                                 variant = 'contained'
-                                className = {classes.button}                                
+                                className = {classes.button}   
+                                onClick = {() => createJugador()}                             
                             >
                                 Crear
                             </Button>
                     
-                            <Link to = '/'>
+                            <Link to = '/loginJugador'>
                                 <ListItemText secondary = 'Regresar' className = {classes.text}/>
                             </Link>
                             <br/><br/>
@@ -314,8 +453,6 @@ export default function SignIn() {
                     </div>
                 </Container>
             </Grid>  
-            <br/>
-            <br/>
         </div>
     )
 }

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import { Contenedor } from "../../Components";
 import Box from '@mui/material/Box';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, makeStyles   } from '@material-ui/core';
+import { Table, TableContainer, TableHead, TableCell, TableRow, Button, makeStyles, TableBody   } from '@material-ui/core';
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 const useStyles = makeStyles ((theme) =>({
     button:{
@@ -25,17 +27,37 @@ const useStyles = makeStyles ((theme) =>({
 
 export default function InscritosClub(){
     const classes = useStyles()
+    const [data, setData] = useState([]);
+    const id_campeonato = localStorage.getItem('currentCamp')
+    const id_categoria = localStorage.getItem('currentCategoria')
     
+    const getCampeonatoById = async () => {
+        await axios.get('http://localhost:3001/api/Club/getInscritos/'+id_campeonato+'/'+id_categoria)
+        .then(response =>{
+            setData(response.data)
+        })
+
+    }
+    useEffect (() =>{
+        getCampeonatoById();
+    },[])
+
     return(
         <div>
             <Contenedor/>
+            <br></br>
             <div align = 'center'>
                 <Box
-                    sx = {{flexGrow: 20}}
+                    sx = {{
+                        width:{
+                          xs: 300,
+                          sm: 400,
+                          md: 600,
+                          lg: 800,
+                          xl: 1200,
+                        }
+                      }}
                     color = 'contrastText'
-                    mx = {20} //margen a todos los lados
-                    //p = {1} //padding
-                    //borderRadius = '8px'
                     border = {1}
                 >
                     <BackdropFilter
@@ -53,12 +75,23 @@ export default function InscritosClub(){
                             <Table sx = {{ minWidth: 650 }} id = 'tables'>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>ID Pareja</TableCell>
-                                        <TableCell>Partner 1</TableCell>
-                                        <TableCell>Partner 2</TableCell>
-                                        <TableCell>Categoria</TableCell>
+                                        <TableCell align='center'>ID Pareja</TableCell>
+                                        <TableCell align='center'>Partner 1</TableCell>
+                                        <TableCell align='center'>Partner 2</TableCell>
+                                        <TableCell align='center'>Categoria</TableCell>
                                     </TableRow>
                                 </TableHead>
+
+                                <TableBody>
+                                    {data.map(campeonato => (
+                                        <TableRow>
+                                            <TableCell align = 'center'>{campeonato.id_dupla}</TableCell>
+                                            <TableCell align = 'center'>{campeonato.rut_jugador1}</TableCell>
+                                            <TableCell align = 'center'>{campeonato.rut_jugador2}</TableCell>
+                                            <TableCell align = 'center'>{campeonato.id_categoria}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
                             </Table>
                         </TableContainer>
 

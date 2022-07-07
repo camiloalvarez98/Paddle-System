@@ -72,4 +72,18 @@ jugadorFunctions.inscribirCampeonato = async(req,res)=>{
         .catch((e) => console.log(e));
 }
 
+jugadorFunctions.createJugador = async(req,res) =>{
+    const {nombre, apellido, rut, email, password, direccion, telefono} = req.body
+    
+    const categoria = req.params.id_categoria
+    const puntaje_jugador = req.params.puntaje
+    console.log(nombre, apellido, rut, categoria, email, password, puntaje_jugador)
+    await pool
+        .query('INSERT INTO jugador (rut_jugador, nombre_jugador, apellido_paterno, contraseña_jugador, telefono_jugador, direccion_jugador, puntaje_jugador, correo_jugador, categoria_jugador) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
+        [rut, nombre, apellido, password, telefono, direccion, puntaje_jugador, email, categoria])
+        .then(()=>{
+            res.json("Jugador anadido con exito!")
+        })
+        .catch((e) => console.log(e))
+}
 module.exports = jugadorFunctions;

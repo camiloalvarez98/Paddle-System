@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState }from 'react'
 import { Contenedor } from "../../Components";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -9,6 +9,16 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
 import { Link } from 'react-router-dom';
 import {TextField} from '@material-ui/core';
+import { useForm } from '../../Shared/hooks/useForm'
+import { ListItemText, List, Collapse, ListItemButton, ListItemIcon, } from '@mui/material'
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import axios from 'axios';
+import  { Redirect } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom';
+
+
 
 const useStyles = makeStyles (theme=>({
 
@@ -46,8 +56,51 @@ const useStyles = makeStyles (theme=>({
 }))
 
 export default function SelectGanadores() {
-
     const classes = useStyles()
+    const [open, setOpen] = useState(false)
+    const [data, setData] = useState([]);
+    const [id_dupla, setIdDupla] = useState('')
+    const [rut_jugador2, setRutJugador2] = useState('')
+    const id_campeonato = localStorage.getItem('currentCamp')
+    const id_categoria = localStorage.getItem('currentCategoria')
+    
+    
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
+    
+    const handlej1 = e =>{
+        const {name, value} = e.target;
+        if(name !== ""){
+          setIdDupla(prevState =>({
+              ...prevState,
+              [name]:value
+          }))
+        }
+    }
+
+
+
+    
+    const setGanadores = async () =>{
+        console.log(id_dupla)
+        await axios.put('http://localhost:3001/api/Club/selectGanadores/'+id_campeonato+'/'+id_categoria,id_dupla)
+        .then(()=>{
+            var dataNueva = data;
+            dataNueva.forEach(winner =>{
+                winner.id_dupla = id_dupla
+            })
+            console.log('Dupla ganadora registrada')
+        })
+        .catch((e) => {
+            if(e.request.status === 500){
+                console.log('error')
+            }
+        }); 
+    }
+
+    
     return (
     
         <div>
@@ -80,47 +133,19 @@ export default function SelectGanadores() {
                     >
                         <h2>Registrar Ganadores</h2>
                         <Grid container >
-                            {/*Campeonato */}
+                            {/*Campeonato 
                             <Grid item sm = {6} xl = {12} marginTop= {'5px'} marginRight = {'80px'} marginLeft = {'80px'} >
                                 <TextField required label='ID de Campeonato' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
+                            </Grid>*/}
                             <br></br>
-                            {/*Categoria*/}
-                            <Grid item sm = {6} xl = {12} marginTop= {'5px'} marginRight = {'80px'} marginLeft = {'80px'} >
-                                <TextField required label='Categoría' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
-                            
                             {/*Primer Lugar*/}
                             <Grid item xs = {12} sm = {3} marginTop= {'30px'}>
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
                             </Grid>
                             <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'45px'} marginRight = {'10px'}    >
-                                <TextField required label=' Rut Jugador 1' variant = 'outlined' fullWidth size = 'small' />
+                                <TextField required label=' ID dupla' variant = 'outlined' fullWidth size = 'small'  name = 'id_dupla' onChange={handlej1} />
                             </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'45px'} marginRight = {'10px'} >
-                                <TextField required label=' Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
-                            {/*Segundo Lugar*/}
-                            <Grid item xs = {12} sm = {3}>
-                                <h4 className={classes.text2}>Segundo Lugar:</h4>
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'} >
-                                <TextField required  label='Rut Jugador 1' variant = 'outlined' fullWidth size = 'small' />
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
-                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
-                            {/*Tercer Lugar*/}
-                            <Grid item xs = {12} sm = {3}>
-                                <h4 className={classes.text2}>Tercer Lugar:</h4>
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
-                                <TextField required  label='Rut Jugador 1'variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
-                            <Grid item xs = {12} sm = {4} xl = {4} marginTop= {'15px'} marginRight = {'10px'}>
-                                <TextField required  label='Rut Jugador 2' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>
-
+                            
                         </Grid>
                         <br></br>
                     </BackdropFilter>
@@ -143,6 +168,10 @@ export default function SelectGanadores() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<SaveIcon/>}
+                        onClick = {() => {
+                            setGanadores()
+                            window.location.href = '/campeonatosclub';
+                        }}
                     >
                         Guardar
                     </Button>
