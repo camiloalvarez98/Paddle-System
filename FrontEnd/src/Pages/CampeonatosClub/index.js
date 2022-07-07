@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme)=>({
     button:{
         width: '20%',
         //margin: theme.spacing(10,65,10),
-        marginTop: theme.spacing(2) ,
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(4),
         
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
@@ -99,7 +100,7 @@ export default function CampeonatosClub() {
         setCampSeleccionado(camp)
         //console.log(camp.id_campeonato)
         localStorage.setItem('currentCamp',camp.id_campeonato)
-        
+        localStorage.setItem('currentCategoria',camp.id_categoria)
     }
 
     const bodyEliminar = (
@@ -146,7 +147,9 @@ export default function CampeonatosClub() {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align='center'><h4>Nombre</h4></TableCell>
-                                            <TableCell align='center'><h4>ID</h4></TableCell>
+                                            <TableCell align='center'><h4>ID campeonato</h4></TableCell>
+                                            <TableCell align='center'><h4>ID categoria</h4></TableCell>
+                                            <TableCell align='center'><h4>Nombre categoría</h4></TableCell>
                                             <TableCell align='center'><h4>Fecha Inicio</h4></TableCell>
                                             <TableCell align='center'><h4>Fecha Termino</h4></TableCell>
                                             <TableCell align='center'><h4>Acciones</h4></TableCell>
@@ -157,6 +160,8 @@ export default function CampeonatosClub() {
                                             <TableRow>
                                                 <TableCell align='center'>{campeonato.nombre_campeonato}</TableCell>
                                                 <TableCell  align='center'>{campeonato.id_campeonato}</TableCell>
+                                                <TableCell  align='center'>{campeonato.id_categoria}</TableCell>
+                                                <TableCell  align='center'>{campeonato.nombre_categoria}</TableCell>
                                                 <TableCell  align='center'>{campeonato.fecha_inicio}</TableCell>
                                                 <TableCell align ='center'>{campeonato.fecha_termino}</TableCell>
                                                 <TableCell align='center'>

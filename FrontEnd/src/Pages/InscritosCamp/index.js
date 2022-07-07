@@ -29,9 +29,10 @@ export default function InscritosClub(){
     const classes = useStyles()
     const [data, setData] = useState([]);
     const id_campeonato = localStorage.getItem('currentCamp')
+    const id_categoria = localStorage.getItem('currentCategoria')
     
     const getCampeonatoById = async () => {
-        await axios.get('http://localhost:3001/api/Club/getInscritos/' + id_campeonato)
+        await axios.get('http://localhost:3001/api/Club/getInscritos/'+id_campeonato+'/'+id_categoria)
         .then(response =>{
             setData(response.data)
         })

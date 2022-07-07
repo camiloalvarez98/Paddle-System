@@ -5,10 +5,10 @@ const clubFunctions = require('../Controllers/club.controller');
 //Información club
 router.get('/getClub/:correo_club',clubFunctions.getClub);
 router.get('/getCampeonatos/:correo_club',clubFunctions.getCampeonatos);
-router.get('/getInscritos/:id_campeonato', clubFunctions.getInscritos);
+router.get('/getInscritos/:id_campeonato/:id_categoria', clubFunctions.getInscritos);
 
 router.put('/updateClub/:correo_club', clubFunctions.updateClub);
-router.put('/selectGanadores/:id_campeonato',clubFunctions.regGanadores);
+router.put('/selectGanadores/:id_campeonato/:id_categoria',clubFunctions.regGanadores);
 
 
 

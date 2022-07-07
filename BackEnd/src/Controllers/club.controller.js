@@ -17,7 +17,7 @@ clubFunctions.getClub = async(req,res)=> {
 //inscritos en campeonato
 clubFunctions.getInscritos = async(req,res)=>{
     await pool
-        .query('SELECT id_dupla, rut_jugador1, rut_jugador2, id_categoria FROM dupla where id_campeonato = $1', [req.params.id_campeonato])
+        .query('SELECT id_dupla, rut_jugador1, rut_jugador2, id_categoria FROM dupla where id_campeonato = $1 and id_categoria = $2', [req.params.id_campeonato,req.params.id_categoria])
         .then((result) =>{
             res.status(200).json(result.rows)
         })
@@ -83,15 +83,12 @@ clubFunctions.campeonatoCategoria = async (req,res) => {
             res.json("categoria ingresada con exito")
         })
         .catch((e) => console.log(e))
-    
-    
-    
 }
 
 //mostrar campeonatos
 clubFunctions.getCampeonatos = async (req,res) => {
     await pool
-        .query('SELECT nombre_campeonato, id_campeonato, fecha_inicio, fecha_termino FROM campeonato WHERE id_club = (SELECT id_club FROM club WHERE correo_club = $1)', [req.params.correo_club])
+        .query('select campeonato.nombre_campeonato,campeonato.id_campeonato,campeonato_categoria.id_categoria,categoria.nombre_categoria,campeonato.fecha_inicio,campeonato.fecha_termino from campeonato  inner join campeonato_categoria on campeonato.id_campeonato = campeonato_categoria.id_campeonato inner join club on campeonato.id_club = club.id_club inner join categoria on campeonato_categoria.id_categoria = categoria.id_categoria where club.correo_club = $1 and campeonato_categoria.id_dupla_ganadora is null', [req.params.correo_club])
         .then((result) =>{
             res.status(200).json(result.rows);
         })
@@ -111,46 +108,34 @@ clubFunctions.deleteCampeonato = async (req, res) =>{
 
 //registrar ganadores
 clubFunctions.regGanadores = async function(req,res) {
-    const { id_categoria, id_dupla } = req.body;
-
-    console.log(id_categoria)
-    console.log(id_dupla)
-
+    const { id_dupla } = req.body
     updatedb = async function(){
         await pool
-            .query('UPDATE campeonato_categoria set id_dupla_ganadora = $1 WHERE id_categoria = $2 and id_campeonato = $3',[id_dupla, id_categoria, req.params.id_campeonato])
+            .query('UPDATE campeonato_categoria set id_dupla_ganadora = $1 WHERE id_categoria = $2 and id_campeonato = $3',[id_dupla, req.params.id_categoria, req.params.id_campeonato])
             .then(() =>{
-                res.json("tabla campeonao_categoria actualizada")
-                //res.status(500).json({error: 'Ha Ocurrido un error'});
-               
+                console.log('realizado')
             })
             .catch((e) => console.log(e)); 
     }
-    updatedb();
-
+    updatedb()
     updateJugador1 = async function(){
         await pool 
-            .query('UPDATE jugador SET puntaje_jugador = puntaje_jugador + 50 WHERE rut_jugador = (SELECT rut_jugador1 FROM dupla WHERE id_dupla = $1 ) ', [id_dupla])
+            .query('update jugador set puntaje_jugador = puntaje_jugador + (select puntaje_premio from campeonato_categoria where id_campeonato = $1 and id_categoria = $2) where rut_jugador = (SELECT rut_jugador1 FROM dupla WHERE id_dupla = $3)', [req.params.id_campeonato,req.params.id_categoria,id_dupla])
             .then(() =>{
-                res.json("Tabla jugador1 actualizada")
-                //res.status(500).json({error: 'Ha Ocurrido un error'});
+                console.log('realizado')
             })
             .catch((e) => console.log(e)); 
     }
-    updateJugador1();
-
+    updateJugador1()
     updateJugador2 = async function(){
         await pool 
-            .query('UPDATE jugador SET puntaje_jugador = puntaje_jugador + 50 WHERE rut_jugador = (SELECT rut_jugador2 FROM dupla WHERE id_dupla = $1 )', [id_dupla])
+            .query('update jugador set puntaje_jugador = puntaje_jugador + (select puntaje_premio from campeonato_categoria where id_campeonato = $1 and id_categoria = $2) where rut_jugador = (SELECT rut_jugador2 FROM dupla WHERE id_dupla = $3)', [req.params.id_campeonato,req.params.id_categoria,id_dupla])
             .then(() =>{
-                res.json("Tabla jugador2 actualizada")
-                //res.status(500).json({error: 'Ha Ocurrido un error'});
+                console.log('realizado')
             })
             .catch((e) => console.log(e)); 
     }
-    updateJugador2();
-
-
+    updateJugador2()
 }
 
     

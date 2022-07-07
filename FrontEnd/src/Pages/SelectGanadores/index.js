@@ -15,6 +15,9 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import axios from 'axios';
+import  { Redirect } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom';
+
 
 
 const useStyles = makeStyles (theme=>({
@@ -56,11 +59,10 @@ export default function SelectGanadores() {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [data, setData] = useState([]);
-    const [id_categoria, handleFormChange] = useForm({id_categoria:""})
     const [id_dupla, setIdDupla] = useState('')
     const [rut_jugador2, setRutJugador2] = useState('')
     const id_campeonato = localStorage.getItem('currentCamp')
-    
+    const id_categoria = localStorage.getItem('currentCategoria')
     
     
     const handleClick = () => {
@@ -83,14 +85,10 @@ export default function SelectGanadores() {
     
     const setGanadores = async () =>{
         console.log(id_dupla)
-        console.log(id_campeonato)
-        console.log(id_categoria)
-        
-        await axios.put('http://localhost:3001/api/Club/selectGanadores/'+ id_campeonato, id_categoria, id_dupla)
+        await axios.put('http://localhost:3001/api/Club/selectGanadores/'+id_campeonato+'/'+id_categoria,id_dupla)
         .then(()=>{
             var dataNueva = data;
             dataNueva.forEach(winner =>{
-                winner.categoria = id_categoria;
                 winner.id_dupla = id_dupla
             })
             console.log('Dupla ganadora registrada')
@@ -140,115 +138,6 @@ export default function SelectGanadores() {
                                 <TextField required label='ID de Campeonato' variant = 'outlined' fullWidth size = 'small'/>
                             </Grid>*/}
                             <br></br>
-                            {/*Categoria*/}
-                            <Grid item sm = {6} xl = {12} marginTop= {'5px'} marginRight = {'80px'} marginLeft = {'80px'} >
-                                <ListItemButton onClick={handleClick}>
-                                    <ListItemIcon>
-                                        <FormatListNumberedIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Categoria" secondary = {id_categoria.categoria}/>
-                                    {open ? <ExpandLess /> : <ExpandMore />}
-                                </ListItemButton>
-                                <List
-                                    sx={{ width: '100%', maxWidth: 360,  }}
-                                    component="nav"
-                                >
-                                    <Collapse in={open} timeout="auto" unmountOnExit>
-                                        <List component="div" disablePadding>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: '1'});
-                                                        handleClick();
-                                                    }
-                                                } 
-                                               
-                                            >
-                                                Primera
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: '2'});
-                                                        handleClick();
-                            
-                                                    }
-                                                } 
-                                            >
-                                                Segunda
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: '3'});
-                                                        handleClick();
-                                                    }
-                                                } 
-                                            >
-                                                Tercera
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: '4'});
-                                                        handleClick();
-                                                    
-                                                    }
-                                                } 
-                                            >
-                                                Cuarta
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: '5'});
-                                                        handleClick();
-                                                        
-                                                    }
-                                                } 
-                                            >
-                                                Quinta
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: '6'});
-                                                        handleClick()
-                                                        
-                                                    }
-                                                } 
-                                            >
-                                                Sexta
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: 'DA'});
-                                                        handleClick()
-                                                        
-                                                    }
-                                                } 
-                                            >
-                                                Damas A
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: 'DB'});
-                                                        handleClick()
-                                                        
-                                                    }
-                                                } 
-                                            >
-                                                Damas B
-                                            </ListItemButton>
-                                            <ListItemButton 
-                                                onClick={() => {
-                                                        handleFormChange({id_categoria: 'DC'});
-                                                        handleClick()
-                                                    
-                                                    }
-                                                } 
-                                            >
-                                                Damas C
-                                            </ListItemButton>
-                                        </List>
-                                    </Collapse>
-                                </List>
-                            </Grid>
-                            
                             {/*Primer Lugar*/}
                             <Grid item xs = {12} sm = {3} marginTop= {'30px'}>
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
@@ -279,7 +168,10 @@ export default function SelectGanadores() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<SaveIcon/>}
-                        onClick = {() => setGanadores()}
+                        onClick = {() => {
+                            setGanadores()
+                            window.location.href = '/campeonatosclub';
+                        }}
                     >
                         Guardar
                     </Button>
