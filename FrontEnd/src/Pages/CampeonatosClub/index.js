@@ -2,12 +2,12 @@ import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, makeStyles   } from '@material-ui/core';
-import { Contenedor } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupIcon from '@mui/icons-material/Group';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { BarraSuperiorClub } from '../../Components';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(4),
         
@@ -41,9 +40,7 @@ const useStyles = makeStyles((theme)=>({
     },
     button2:{
         width: '30%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2) ,
-        
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
             width: '100%',
@@ -52,8 +49,6 @@ const useStyles = makeStyles((theme)=>({
     },
   
 }));
-
-
 
 export default function CampeonatosClub() {
     const [data, setData] = useState([]);
@@ -65,8 +60,6 @@ export default function CampeonatosClub() {
     const classes = useStyles()
     const correo_club = localStorage.getItem('correo_club')
     
-   
-
     const getCampeonatos = async() =>{
         await axios.get('http://localhost:3001/api/Club/getCampeonatos/' + correo_club)
         .then(response =>{
@@ -78,8 +71,6 @@ export default function CampeonatosClub() {
         getCampeonatos();
     },[])
 
-    
-    //delete sala 
     const deleteCampeonato = async() =>{
         await axios.delete ('http://localhost:3001/api/Club/eliminarCampeonato/' + campSeleccionado.id_campeonato + '/' +campSeleccionado.id_categoria)
         .then(response=>{
@@ -101,7 +92,6 @@ export default function CampeonatosClub() {
 
     const seleccionarCamp2 = (camp, caso) =>{
         setCampSeleccionado(camp)
-        //console.log(camp.id_campeonato)
         localStorage.setItem('currentCamp',camp.id_campeonato)
         localStorage.setItem('currentCategoria',camp.id_categoria)
     }
@@ -118,7 +108,7 @@ export default function CampeonatosClub() {
 
     return (
         <div>
-            <Contenedor/>
+            <BarraSuperiorClub/>
             <br/>
             <div align = "center">
                 <Box 

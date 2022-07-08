@@ -1,9 +1,9 @@
-import React, {useCallback, useEffect,useState} from 'react';
+import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {  Button, TextField, makeStyles, FormControlLabel, Checkbox, FormControl, FormGroup  } from '@material-ui/core';
-import { Contenedor } from "../../Components";
+import { BarraSuperiorClub } from "../../Components";
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from 'react-router-dom';
@@ -11,11 +11,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import MenuItem from '@mui/material/MenuItem';
 import swal from 'sweetalert'
-
-
 
 const useStyles = makeStyles((theme)=>({
   modal:{
@@ -69,7 +66,6 @@ export default function NuevoCampeonato() {
   const [errorF, setErrorF] = React.useState(false);
   const correo_club = localStorage.getItem('correo_club')
   const [id_camp, setId_camp] = useState(null)
-  const [categoria, setCategoria] = useState(null)
   
  
  
@@ -79,9 +75,6 @@ export default function NuevoCampeonato() {
     nombre_campeonato: ''
   })
  
-
-
-  
   const handleChange = e =>{
     const {name, value} = e.target;
     if(name !== ""){
@@ -101,11 +94,6 @@ export default function NuevoCampeonato() {
     const fecha_in = (anio + '-' + mes + '-' + dia)
     setFecha_i(fecha_in)
     setNcamp({...nCamp, fecha_i: fecha_in})
-    /*if(fechaT >= fechaI){
-      setErrorF(false)
-    }else{
-      setErrorF(true)
-    }*/
   };
   const handleChangeFT = (newValue) => {
     setFechaT(newValue);
@@ -115,11 +103,6 @@ export default function NuevoCampeonato() {
     const fecha_te = (anio + '-' + mes + '-' + dia)
     setFecha_t(fecha_te)
     setNcamp({...nCamp, fecha_t: fecha_te})
-    /*if(fechaT >= fechaI){
-      setErrorF(false)
-    }else{
-      setErrorF(true)
-    }*/
   };
   const handleChangeHI = (newValue) => {
     setHoraI(newValue);
@@ -162,8 +145,6 @@ export default function NuevoCampeonato() {
     },
   ];
   
-
-  
   const handleChange2 = (event) => {
     setCurrency(event.target.value);
   };
@@ -171,16 +152,10 @@ export default function NuevoCampeonato() {
 
   
   const createCamp = async() =>{
-    console.log('crate campeonato')
     await axios.post('http://localhost:3001/api/Club/createCampeonato/' + correo_club, nCamp)
     .then(response => {
       setId_camp(response.data.campeonato)
-      //console.log('data',response.data.campeonato)
       setData(data.concat(response.data))
-      
-     
-      //aca mandar otra ruta para q agregue las categorias 
-      //mostrarAlerta1()
     })   
     .catch((e) => console.log(e))
   }
@@ -189,7 +164,7 @@ export default function NuevoCampeonato() {
   
   useEffect (() =>{
     if(id_camp){
-      let x = categoriesAc //categoria
+      let x = categoriesAc 
       console.log(categoriesAc)
       categCamp(x)
       window.location.reload(false);
@@ -197,17 +172,7 @@ export default function NuevoCampeonato() {
     
   },[id_camp])
 
-  /*
-  useEffect(() =>{
-    if(categoria){
-      
-    }
-  },[categoria])
-  */
-  
   const categCamp = async (x) =>{
-    console.log(id_camp)
-    console.log(x)
     await axios.post('http://localhost:3001/api/Club/createCategoria', {id_camp:id_camp, cat: x})
     .then(response => {
       setData(data.concat(response.data))
@@ -222,25 +187,10 @@ export default function NuevoCampeonato() {
       icon:'success'
     })
   }
-  /*
-  const catCamp = async() =>{
-      console.log('antes de entrar el set time')
-    
-      console.log('dentro del set time')
-      console.log(id_camp)
-      //console.log('data',data)
-      for(let i = 0; i<categoriesAc.length; i ++){
-        //console.log(categoriesAc[i])
-        setCategoria(categoriesAc[i])
-        //console.log('cat', categoriesAc[i])
-      }
-    
-
-  }*/
 
   return (
     <div>
-        <Contenedor/>
+        <BarraSuperiorClub/>
         <br/>
         <div align = 'center' >
           <Box
@@ -303,9 +253,6 @@ export default function NuevoCampeonato() {
                     />
                   </LocalizationProvider>                
                 </Grid>
-                
-
-
                 <Grid item sm = {6} xl = {12} marginTop= {'10px'}  marginRight = {'40px'} marginLeft = {'40px'} >
                   <TextField 
                     id='cuposMaximos'
@@ -326,8 +273,6 @@ export default function NuevoCampeonato() {
                     ))}
                   </TextField>
                 </Grid>  
-
-              
                 <Box 
                   margin = 'center' 
                   sx = {{flexGrow: 20}}

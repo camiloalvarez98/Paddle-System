@@ -16,9 +16,6 @@ import { Link } from '@material-ui/core';
 import { useAuth } from '../../Context/AuthContext';
 import { useState } from 'react';
 
-
-
-
 const BarraSuperiorJugador = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);

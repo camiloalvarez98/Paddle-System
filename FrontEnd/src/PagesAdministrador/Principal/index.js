@@ -1,10 +1,11 @@
 import React from 'react';
-import { ContenedorAdmin , TablaClubes} from '../../Components';
+import { TablaClubes} from '../../Components';
+import { BarraSuperiorAdmin } from '../../ComponentsAdmin';
 
 export default function Principal() {
     return (
         <div>
-            <ContenedorAdmin/>
+            <BarraSuperiorAdmin/>
             <br/>
             <TablaClubes/>
             <br/>

@@ -19,9 +19,9 @@ const useStyles = makeStyles(theme=>({
     },
     container:{
         opacity: '0.8',
-        height: '80%', //largo del contenedor
-        marginTop: theme.spacing(10), //altura del contenedor
-        [theme.breakpoints.down(400 + theme.spacing(4)+4)]:{ //responsive
+        height: '80%', 
+        marginTop: theme.spacing(10), 
+        [theme.breakpoints.down(400 + theme.spacing(4)+4)]:{ 
             marginTop: 0,
             width: '100%',
             height: '100%'
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme=>({
         marginTop: theme.spacing(1)
     },
     button:{
-        margin: theme.spacing(3, 0, 2) //mrgen general
+        margin: theme.spacing(3, 0, 2) 
         
     },
 
@@ -62,58 +62,51 @@ const useStyles = makeStyles(theme=>({
 }))
 
 export default function Login() {
-    const { login } = useAuth(); //esta funcion viene de /context/AuthContext
+    const { login } = useAuth(); 
     const [error, setError] = useState(null);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const classes = useStyles();
     const navigate = useNavigate();
-
-    const handleEmail = (event) => setEmail(event.target.value) //el email se setea deacuerdo al valor que ingrese en el input
-    const handlePassword = (event) => setPassword(event.target.value) //la password se setea deacuerdo al valor que ingrese en el input
-
-    
-    const handleSubmit = async(event) => { //usaremos login, que es asincrona por eso colocamos asyn en esta funcion
+    const handleEmail = (event) => setEmail(event.target.value) 
+    const handlePassword = (event) => setPassword(event.target.value)
+    const handleSubmit = async(event) => { 
         event.preventDefault();
-
         try{
             await login(email, password)
-            // navigate nos envia a home luego de iniciar sesion validamente
             localStorage.setItem('correo_club',email)
             navigate('/homeclub') 
         }catch (error){
-            //setError('Datos incorrectos');
             swal({
                 title: 'Error',
                 text: 'Datos incorrectos',
                 icon: 'error'
             })
-            setTimeout (()=> setError(''), 2500) //se setea el error a un string vacio dps de 1500ms
+            setTimeout (()=> setError(''), 2500)
         }
     }
     
 
     return (
         <div>
-            
             <Grid container component ='main' className={classes.root}>
                 <Container component={Paper} elevation={5} maxWidth = 'xs' className = {classes.container}> 
                     <div className = {classes.div}>
                         {error && <p className= 'error'>{error}</p>}
                         
                         <Avatar className = {classes.avatar} > 
-                            <LockOutlinedIcon / /*ICONO DE CANDADO*/> 
+                            <LockOutlinedIcon/> 
                         </Avatar>
                         <Typography component = 'h1' variant = 'h4'> Ingreso Club </Typography>
                         
                         <form className = {classes.form} onSubmit = {handleSubmit}>  
                             <br/>
-                            <TextField //input de usuario
+                            <TextField 
                                 variant = 'outlined'
                                 color = 'secondary'
                                 fullWidth
                                 required
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 placeholder = 'Correo '
                                 type = 'email'
                                 onChange = {handleEmail}
@@ -125,9 +118,9 @@ export default function Login() {
                                 color = 'secondary'
                                 fullWidth
                                 required
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 placeholder = 'Contraseña'
-                                type = 'password' //eso encripta la password por pantalla
+                                type = 'password' 
                                 onChange = {handlePassword}         
                             />
                             <Button

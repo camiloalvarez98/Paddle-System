@@ -1,5 +1,5 @@
 import React, { useState }from 'react'
-import { Contenedor } from "../../Components";
+import { BarraSuperiorClub } from "../../Components";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@material-ui/core/styles'
@@ -9,16 +9,7 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
 import { Link } from 'react-router-dom';
 import {TextField} from '@material-ui/core';
-import { useForm } from '../../Shared/hooks/useForm'
-import { ListItemText, List, Collapse, ListItemButton, ListItemIcon, } from '@mui/material'
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import axios from 'axios';
-import  { Redirect } from 'react-router-dom'
-import { HashRouter } from 'react-router-dom';
-
-
 
 const useStyles = makeStyles (theme=>({
 
@@ -60,16 +51,13 @@ export default function SelectGanadores() {
     const [open, setOpen] = useState(false)
     const [data, setData] = useState([]);
     const [id_dupla, setIdDupla] = useState('')
-    const [rut_jugador2, setRutJugador2] = useState('')
     const id_campeonato = localStorage.getItem('currentCamp')
     const id_categoria = localStorage.getItem('currentCategoria')
-    
     
     const handleClick = () => {
         setOpen(!open);
     };
 
-    
     const handlej1 = e =>{
         const {name, value} = e.target;
         if(name !== ""){
@@ -80,11 +68,7 @@ export default function SelectGanadores() {
         }
     }
 
-
-
-    
     const setGanadores = async () =>{
-        console.log(id_dupla)
         await axios.put('http://localhost:3001/api/Club/selectGanadores/'+id_campeonato+'/'+id_categoria,id_dupla)
         .then(()=>{
             var dataNueva = data;
@@ -104,7 +88,7 @@ export default function SelectGanadores() {
     return (
     
         <div>
-            <Contenedor/>
+            <BarraSuperiorClub/>
             <br/>
             <div align = 'center'>
                 <Box 
@@ -133,12 +117,7 @@ export default function SelectGanadores() {
                     >
                         <h2>Registrar Ganadores</h2>
                         <Grid container >
-                            {/*Campeonato 
-                            <Grid item sm = {6} xl = {12} marginTop= {'5px'} marginRight = {'80px'} marginLeft = {'80px'} >
-                                <TextField required label='ID de Campeonato' variant = 'outlined' fullWidth size = 'small'/>
-                            </Grid>*/}
                             <br></br>
-                            {/*Primer Lugar*/}
                             <Grid item xs = {12} sm = {3} marginTop= {'30px'}>
                                 <h4 className={classes.text2}>Primer Lugar:</h4>
                             </Grid>

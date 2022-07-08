@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import { Contenedor } from "../../Components";
+import { BarraSuperiorClub } from "../../Components";
 import Box from '@mui/material/Box';
 import { Table, TableContainer, TableHead, TableCell, TableRow, Button, makeStyles, TableBody   } from '@material-ui/core';
 import BackdropFilter from "react-backdrop-filter";
@@ -11,7 +11,6 @@ import axios from 'axios';
 const useStyles = makeStyles ((theme) =>({
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2) ,
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(5),
@@ -44,7 +43,7 @@ export default function InscritosClub(){
 
     return(
         <div>
-            <Contenedor/>
+            <BarraSuperiorClub/>
             <br></br>
             <div align = 'center'>
                 <Box

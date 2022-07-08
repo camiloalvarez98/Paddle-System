@@ -1,8 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { ContenedorJugador } from '../../Components';
+import { BarraSuperiorJugador } from '../../Components';
 import BackdropFilter from "react-backdrop-filter";
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField, makeStyles} from '@material-ui/core';
 
@@ -33,9 +32,7 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '80%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2) ,
-        
         [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{
             margin: theme.spacing(0),
             width: '100%',
@@ -160,7 +157,7 @@ export default function BuscarCampeonato() {
 
     return (
         <div className = 'App'>
-            <ContenedorJugador/>
+            <BarraSuperiorJugador/>
             <br/>
             <div align = 'center'>
                 <Box

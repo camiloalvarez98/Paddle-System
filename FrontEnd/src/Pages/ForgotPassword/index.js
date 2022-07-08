@@ -1,7 +1,7 @@
 import React, { useRef, useState} from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../Context/AuthContext'
-import { Grid, Container, Paper, Avatar, Typography, Button, TextField} from '@material-ui/core'
+import { Grid, Container, Paper, Avatar, Typography, Button} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { ListItemText } from '@mui/material'
 import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme=>({
     },
     container:{
         opacity: '0.8',
-        height: '70%', //largo del contenedor
-        marginTop: theme.spacing(20), //altura del contenedor
-        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{ //responsive
+        height: '70%', 
+        marginTop: theme.spacing(20),
+        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{ 
             marginTop: 0,
             width: '100%',
             height: '100%'
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme=>({
         marginTop: theme.spacing(1)
     },
     button:{
-        margin: theme.spacing(3, 0, 2) //mrgen general
+        margin: theme.spacing(3, 0, 2) 
         
     },
     input:{
@@ -67,7 +67,7 @@ export default function ForgotPassword() {
     
     const classes = useStyles()
     const emailRef = useRef();
-    const { resetPassword } = useAuth(); //esta funcion viene de /context/AuthContext
+    const { resetPassword } = useAuth(); 
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);

@@ -10,7 +10,6 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import { useForm } from '../../Shared/hooks/useForm'
 import axios from 'axios';
-import { fromUnixTime } from 'date-fns';
 
 
 
@@ -23,9 +22,9 @@ const useStyles = makeStyles(theme=>({
     },
     container:{
         opacity: '0.8',
-        height: '85%', //largo del contenedor
-        marginTop: theme.spacing(5), //altura del contenedor
-        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{ //responsive
+        height: '85%',
+        marginTop: theme.spacing(5), 
+        [theme.breakpoints.down(400 + theme.spacing(2)+2)]:{ 
             marginTop: 0,
             width: '100%',
             height: '100%'
@@ -49,9 +48,7 @@ const useStyles = makeStyles(theme=>({
         marginTop: theme.spacing(1)
     },
     button:{
-        margin: theme.spacing(3, 0, 2), //mrgen general
-        //backgroundColor: theme.palette.secondary.main
-        
+        margin: theme.spacing(3, 0, 2),
     },
     input:{
         flex: 1, 
@@ -70,19 +67,16 @@ const useStyles = makeStyles(theme=>({
 }))
 
 export default function SignIn() {
-    const { signup } = useAuth() //esta funcion viene de /context/AuthContext
+    const { signup } = useAuth() 
     const [error, setError] = useState(null);
     const [data, setData] = useState([]);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confpas,setConfpas] = useState('')
-    const [usrVerf, setUsrVerf] = useState(false)
     const [open, setOpen] = useState(false)
     const [id_categoria, handleFormChange] = useForm({id_categoria:""})
-    //const [categoria, setCategoria] = useState('')
     const classes = useStyles()
     const navigate = useNavigate();
-    const [puntaje_jugador, setPuntaje] = useState(0)
     const [usr, setUsr] = useState({
         nombre: '',
         apellido: '',
@@ -95,7 +89,6 @@ export default function SignIn() {
         
     })
 
-
     const handleChange = e =>{
         const {name, value} = e.target;
         if(name !== ""){
@@ -105,14 +98,9 @@ export default function SignIn() {
           }))
         }
     }
-    /**
-     * handleSubmit es la funcion que se ejecuta al presionar el boton 'crear', esta de debe invocar (onSubmit) cuando se cree el formulario
-     * donde se ingresara la info necesaria, en este caso email y password
-     * 
-     */
 
     const handleSubmit = async(event) => {
-        event.preventDefault(); //para evitar que se recarge
+        event.preventDefault(); 
         
         if (usr.password !== confpas){
             setError('Contraseñas no coinciden')
@@ -136,17 +124,17 @@ export default function SignIn() {
         }
         else{
             try{
-                await signup(usr.email, usr.password) //aqui ya se verifico que ambas contrasenias sean iguales, por lo tanto, un error aca solo seria del servidor
-                navigate('/loginJugador') //se crea la cuenta y se redirige al proytecto raiz
+                await signup(usr.email, usr.password) 
+                navigate('/loginJugador') 
             } catch(prop){
                 setError('Server Error')
                 setTimeout(()=> setError(''), 2500)             
             }
         }
     }
-    const handleEmail = (event) => setEmail(event.target.value) //el email se setea deacuerdo al valor que ingrese en el input
+    const handleEmail = (event) => setEmail(event.target.value)
 
-    const handlePassword = (event) => setPassword(event.target.value) //la password se setea deacuerdo al valor que ingrese en el input  
+    const handlePassword = (event) => setPassword(event.target.value) 
 
     const handleConfirm = (event) => setConfpas(event.target.value)
 
@@ -155,12 +143,9 @@ export default function SignIn() {
         setOpen(!open);
         
     };
-   
-    //console.log(form.categoria)
     
     const createJugador = async() => {
         const cat = id_categoria.id_categoria
-        console.log(id_categoria)
         var puntaje = 0
         switch(cat){
             case '1':
@@ -199,7 +184,6 @@ export default function SignIn() {
         await axios.post('http://localhost:3001/api/Jugador/createJugador/'+  id_categoria.id_categoria + '/' + puntaje ,usr)
         .then(response => {
             setData(data.concat(response.data))
-            //console.log(data.concat(response.data))
             console.log("jugador creado")
         })
     }
@@ -209,12 +193,12 @@ export default function SignIn() {
     return (
         <div>
             <Grid container component = 'main' className = {classes.root}>
-                <Container component={Paper} elevation={5} maxWidth = 'xs' className = {classes.container}>{/** caja contenedora blanca */}
+                <Container component={Paper} elevation={5} maxWidth = 'xs' className = {classes.container}>
                     <div className = {classes.div}>
                         {error && <p className= 'error'>{error}</p>}
                         <br/>
                         <Avatar className = {classes.avatar}>
-                            <PersonAddAltOutlinedIcon/> {/**icono de addUser */}
+                            <PersonAddAltOutlinedIcon/> 
                         </Avatar>
                         <Typography component = 'h1' variant = 'h4'> Sign Up </Typography>
                         <form className = {classes.form} onSubmit = {handleSubmit}>
@@ -226,7 +210,7 @@ export default function SignIn() {
                                 fullWidth
                                 required
                                 name = 'nombre'
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 label ='Nombre'
                                 onChange={handleChange}
                             />
@@ -238,7 +222,7 @@ export default function SignIn() {
                                 fullWidth
                                 required
                                 name = 'apellido'
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 label ='Apellido Paterno'
                                 onChange={handleChange}
                             />
@@ -250,7 +234,7 @@ export default function SignIn() {
                                 fullWidth
                                 required
                                 name = 'rut'
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 label ='Rut'
                                 onChange={handleChange}
                             />
@@ -261,7 +245,7 @@ export default function SignIn() {
                                 color='secondary'
                                 fullWidth
                                 name ='telefono'
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 label = 'Telefono'
                                 onChange = {handleChange}                           
                             />
@@ -272,7 +256,7 @@ export default function SignIn() {
                                 color='secondary'
                                 fullWidth
                                 name ='direccion'
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 label = 'Direccion' 
                                 onChange = {handleChange}                           
                             />
@@ -284,7 +268,7 @@ export default function SignIn() {
                                 fullWidth
                                 required
                                 name ='email'
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 label = 'Correo'
                                 type = 'email' 
                                 onChange = {handleChange}                           
@@ -298,9 +282,9 @@ export default function SignIn() {
                                 fullWidth
                                 required
                                 name = 'password'
-                                autoFocus //enfocado en input de usuario
+                                autoFocus 
                                 label = 'Contraseña'
-                                type = 'password' //eso encripta la password por pantalla
+                                type = 'password' 
                                 onChange = {handleChange}
                             />
                             <br/>
@@ -310,9 +294,9 @@ export default function SignIn() {
                                 color='secondary'
                                 fullWidth
                                 required
-                                autoFocus //enfocado en input de usuario
+                                autoFocus
                                 label = 'Confirmar contraseña'
-                                type = 'password' //eso encripta la password por pantalla
+                                type = 'password' 
                                 onChange = {handleConfirm}
                             />
                             <br/>
@@ -333,7 +317,6 @@ export default function SignIn() {
                                         <ListItemButton 
                                             onClick={() => {
                                                     handleFormChange({id_categoria: '1'});
-                                                    //setUsr({...usr, categoria : '1'})
                                                     handleClick();
                                                    
                                                 }
@@ -344,7 +327,6 @@ export default function SignIn() {
                                         <ListItemButton 
                                             onClick={() => {
                                                     handleFormChange({id_categoria: '2'});
-                                                    //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
 
                                                 }
@@ -355,7 +337,6 @@ export default function SignIn() {
                                         <ListItemButton 
                                             onClick={() => {
                                                     handleFormChange({id_categoria: '3'});
-                                                    //setUsr({...usr, categoria : form.categoria})
                                                     handleClick() 
                                                 }
                                             } 
@@ -365,7 +346,6 @@ export default function SignIn() {
                                         <ListItemButton 
                                             onClick={() => {
                                                     handleFormChange({id_categoria: '4'});
-                                                    //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()    
                                                 }
                                             } 
@@ -376,11 +356,7 @@ export default function SignIn() {
                                             id = '5'
                                             onClick={() => {
                                                     handleClick()  
-                                                    //console.log(e.target.id)
                                                     handleFormChange({id_categoria: '5'});
-                                                    //setUsr({...usr, categoria : form.categoria})
-                                                   
-                                                      
                                                 }
                                             } 
                                         >
@@ -389,7 +365,6 @@ export default function SignIn() {
                                         <ListItemButton 
                                             onClick={() => {
                                                     handleFormChange({id_categoria: '6'});
-                                                    //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                 }
                                             } 
@@ -399,7 +374,6 @@ export default function SignIn() {
                                         <ListItemButton 
                                             onClick={() => {
                                                     handleFormChange({id_categoria: 'DA'});
-                                                    //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                     
                                                 }
@@ -411,7 +385,6 @@ export default function SignIn() {
                                             
                                             onClick={() => {
                                                     handleFormChange({id_categoria: 'DB'});
-                                                    //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                     
                                                 }
@@ -423,7 +396,6 @@ export default function SignIn() {
                                             
                                             onClick={() => {
                                                     handleFormChange({id_categoria: 'DC'});
-                                                    //setUsr({...usr, categoria : form.categoria})
                                                     handleClick()
                                                     
                                                 }

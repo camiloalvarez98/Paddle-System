@@ -1,9 +1,10 @@
 import './App.css';
 import { AuthProvider } from './Context'
 import { BrowserRouter as Router, Route, Routes,} from 'react-router-dom';
-import { PrivateRoute, PrivateRoute2, PrivateRoute3} from './Components';
+import { PrivateRoute, PrivateRoute3} from './Components';
+import { PrivateRoute2 } from './ComponentsAdmin';
 import { PrincipalClub, SelectGanadores, CampeonatosClub, LoginClub, NuevoCampeonato, SignUpClub, ForgotPassword, InscritosCamp } from './Pages'
-import { PrincipalAdmin, AgregarClub , Perfil, LoginAdmin, SignUpAdmin} from './PagesAdministrador'
+import { PrincipalAdmin, AgregarClub , Perfil, LoginAdmin} from './PagesAdministrador'
 import { PerfilJugador, CampeonatosJugador, LoginJugador, SignUpJugador, ForgotPassJug, BuscarCampeonato, InsCampeonato  } from './PagesPlayer';
 import { Principal } from './PublicPages'
 

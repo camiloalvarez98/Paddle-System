@@ -1,8 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { ContenedorJugador } from '../../Components';
+import { BarraSuperiorJugador } from '../../Components';
 import { Link } from 'react-router-dom'
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
@@ -36,7 +35,6 @@ const useStyles = makeStyles((theme)=>({
     },
     button:{
         width: '20%',
-        //margin: theme.spacing(10,65,10),
         marginTop: theme.spacing(2) ,
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(5),
@@ -58,7 +56,7 @@ export default function InsCampeonato() {
 
     return (
         <div>
-            <ContenedorJugador/>
+            <BarraSuperiorJugador/>
             <br/>
             <div align = 'center'>
                 <Box
@@ -88,35 +86,30 @@ export default function InsCampeonato() {
                     >
                         <h2>Inscripciones</h2>
                         <Grid container>
-                            {/*Nombre Campeonato*/}
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Campeonato: </h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                                 <TextField variant='outlined' fullWidth size='small' inputProps={{readOnly: true,}}/>
                             </Grid>
-                            {/*Club*/}
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Club: </h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                                 <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                             </Grid>     
-                            {/*Fecha de inicio*/}
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Fecha de incio: </h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                                 <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                             </Grid>    
-                            {/*Fecha de termino*/}
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Fecha de termino: </h4>  
                             </Grid>
                             <Grid item xs = {8} marginTop= {'10px'} marginRight = {'50px'} >
                                 <TextField variant='outlined'  fullWidth size='small' inputProps={{readOnly: true,}}/>
                             </Grid>
-                            {/*Jugadores*/}
                             <Grid item xs = {3}>
                                 <h4 className={classes.text2}>Pareja:</h4>
                             </Grid>
