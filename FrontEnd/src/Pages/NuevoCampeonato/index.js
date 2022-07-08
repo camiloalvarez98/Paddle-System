@@ -68,8 +68,8 @@ export default function NuevoCampeonato() {
   const [fecha_t, setFecha_t] = useState({})
   const [errorF, setErrorF] = React.useState(false);
   const correo_club = localStorage.getItem('correo_club')
-  const [id_camp, setId_camp] = useState('')
-  const [categoria, setCategoria] = useState('')
+  const [id_camp, setId_camp] = useState(null)
+  const [categoria, setCategoria] = useState(null)
   
  
  
@@ -171,32 +171,64 @@ export default function NuevoCampeonato() {
 
   
   const createCamp = async() =>{
-    
+    console.log('crate campeonato')
     await axios.post('http://localhost:3001/api/Club/createCampeonato/' + correo_club, nCamp)
     .then(response => {
       setId_camp(response.data.campeonato)
+      //console.log('data',response.data.campeonato)
       setData(data.concat(response.data))
+      
+     
       //aca mandar otra ruta para q agregue las categorias 
       //mostrarAlerta1()
     })   
     .catch((e) => console.log(e))
-    setTimeout(()=>  3500)
   }
 
-  console.log('idCamp', id_camp)
-  const catCamp = async() =>{
-    for(let i = 0; i<categoriesAc.length; i ++){
-      console.log(categoriesAc[i])
-      setCategoria(categoriesAc[i])
-      //console.log(categoria)
-      console.log(id_camp)
-      /*await axios.post('http://localhost:3001/api/Club/createCategoria/'+ id_camp, categorias)
-      .then(response => {
-        setData(data.concat(response.data))
-      })
-      .catch((e) => console.log(e))*/
+
+  
+  useEffect (() =>{
+    if(id_camp){
+      let x = categoriesAc //categoria
+      console.log(categoriesAc)
+      categCamp(x)
     }
+    
+  },[id_camp])
+
+  /*
+  useEffect(() =>{
+    if(categoria){
+      
+    }
+  },[categoria])
+  */
+  
+  const categCamp = async (x) =>{
+    console.log(id_camp)
+    console.log(x)
+    await axios.post('http://localhost:3001/api/Club/createCategoria', {id_camp:id_camp, cat: x})
+    .then(response => {
+      setData(data.concat(response.data))
+      //sweetalert creado
+    })
+    .catch((e) => console.log(e))
   }
+  /*
+  const catCamp = async() =>{
+      console.log('antes de entrar el set time')
+    
+      console.log('dentro del set time')
+      console.log(id_camp)
+      //console.log('data',data)
+      for(let i = 0; i<categoriesAc.length; i ++){
+        //console.log(categoriesAc[i])
+        setCategoria(categoriesAc[i])
+        //console.log('cat', categoriesAc[i])
+      }
+    
+
+  }*/
 
   return (
     <div>
@@ -367,7 +399,7 @@ export default function NuevoCampeonato() {
                 type = "button"
                 variant = 'contained'
                 size='small'
-                onClick={() => {createCamp(); catCamp()}}
+                onClick={() => {createCamp()}}
                 endIcon = {<SaveIcon/>}
             >
                 Guardar

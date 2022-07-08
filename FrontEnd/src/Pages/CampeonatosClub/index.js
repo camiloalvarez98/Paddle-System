@@ -59,11 +59,13 @@ export default function CampeonatosClub() {
     const [data, setData] = useState([]);
     const [modalEliminar, setModalEliminar] = useState(false);
     const [campSeleccionado, setCampSeleccionado] = useState({
-        id_campeonato: ''
+        id_campeonato: '',
+        id_categoria:''
     })
     const classes = useStyles()
     const correo_club = localStorage.getItem('correo_club')
     
+   
 
     const getCampeonatos = async() =>{
         await axios.get('http://localhost:3001/api/Club/getCampeonatos/' + correo_club)
@@ -76,9 +78,10 @@ export default function CampeonatosClub() {
         getCampeonatos();
     },[])
 
+    
     //delete sala 
     const deleteCampeonato = async() =>{
-        await axios.delete ('http://localhost:3001/api/Club/eliminarCampeonato/' + campSeleccionado.id_campeonato)
+        await axios.delete ('http://localhost:3001/api/Club/eliminarCampeonato/' + campSeleccionado.id_campeonato + '/' +campSeleccionado.id_categoria)
         .then(response=>{
             setData(data.filter(campeonato=>campeonato.id_campeonato !== campSeleccionado.id_club));
             abrirCerrarModalELiminar();
