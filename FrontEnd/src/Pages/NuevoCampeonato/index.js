@@ -192,6 +192,7 @@ export default function NuevoCampeonato() {
       let x = categoriesAc //categoria
       console.log(categoriesAc)
       categCamp(x)
+      window.location.reload(false);
     }
     
   },[id_camp])
