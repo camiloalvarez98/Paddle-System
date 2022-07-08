@@ -8,6 +8,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import axios from 'axios';
+import swal from 'sweetalert'
 
 const useStyles = makeStyles((theme)=>({
     icons: {
@@ -48,7 +49,8 @@ export default function BoxAgregarClub() {
         comuna_club:'',
         representante_club:'',
         direccion_club: '',
-        telefono_club:''
+        telefono_club:'',
+        correo_club:''
     })
     const handleChange=e=>{ 
         const{name, value}=e.target; 
@@ -64,7 +66,23 @@ export default function BoxAgregarClub() {
         await axios.post('http://localhost:3001/api/Administrador/createClub',ClubSeleccionado)
         .then(response =>{
             setData(data.concat(response.data))
+            
         })
+    }
+
+    const AlertaClubCreado = () =>{
+        if(!ClubSeleccionado){
+            swal({
+                title:'Club creado correctamente!',
+                icon:'success'
+            })
+        }else{
+            swal({
+                title:'Faltan datos',
+                icon:'error'
+            })
+        }
+
     }
     return (
         <div>
@@ -112,6 +130,9 @@ export default function BoxAgregarClub() {
                         <Grid item xs = {6} marginTop= {'10px'} >
                             <TextField required name='comuna_club' variant='outlined' label='Comuna' onChange = {handleChange} defaultValue=''/>
                         </Grid>
+                        <Grid item xs = {6} marginTop= {'10px'}>
+                            <TextField required name='correo_club' variant= 'outlined' label='correo'onChange = {handleChange} defaultValue='' />
+                        </Grid>
                     </Grid>
                     <br></br>
                     </BackdropFilter>    
@@ -134,7 +155,7 @@ export default function BoxAgregarClub() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<SaveIcon/>}
-                        onClick={()=>createClub()}
+                        onClick={()=> {createClub(); AlertaClubCreado()}}
                     >
                         Guardar
                     </Button>

@@ -49,9 +49,9 @@ administradorFunctions.deleteClub = async(req, res)=>{
 
 //Agregar club
 administradorFunctions.createClub = async(req,res)=>{
-    const { nombre_club, direccion_club, representante_club, telefono_club, comuna_club  } = req.body; 
+    const { nombre_club, direccion_club, representante_club, telefono_club, comuna_club, correo_club  } = req.body; 
     await pool
-    .query('INSERT INTO club (nombre_club,direccion_club, representante_club, telefono_club,comuna_club) VALUES ($1,$2,$3,$4,$5)',[nombre_club, direccion_club, representante_club, telefono_club, comuna_club])
+    .query('INSERT INTO club (nombre_club,direccion_club, representante_club, telefono_club,comuna_club, correo_club) VALUES ($1,$2,$3,$4,$5,$6)',[nombre_club, direccion_club, representante_club, telefono_club, comuna_club, correo_club])
     .then((result) => {
         console.log(result);
         res.json({

@@ -13,9 +13,9 @@ router.put('/selectGanadores/:id_campeonato/:id_categoria',clubFunctions.regGana
 
 
 router.post('/createCampeonato/:correo_club', clubFunctions.createCampeonato)
-router.post('/createCategoria/:id_campeonato',clubFunctions.campeonatoCategoria)
+router.post('/createCategoria',clubFunctions.campeonatoCategoria)
 
-router.delete('/eliminarCampeonato/:id_campeonato',clubFunctions.deleteCampeonato)
+router.delete('/eliminarCampeonato/:id_campeonato/:id_categoria',clubFunctions.deleteCampeonato)
 
 router.get("/",(req,res) => {
     res.json({"hola":"chao"});

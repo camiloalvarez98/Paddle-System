@@ -38,7 +38,7 @@ clubFunctions.updateClub = async(req, res) =>{
 
 //crear campeonato
 clubFunctions.createCampeonato = async (req,res) => {
-    const { nCamp, fecha_i, fecha_t} = req.body;
+    const { nCamp, fecha_i, fecha_t, categoria} = req.body;
    
     function getRandomInt(min,max) {
         min = Math.ceil(0);
@@ -75,20 +75,26 @@ clubFunctions.createCampeonato = async (req,res) => {
 }
 
 clubFunctions.campeonatoCategoria = async (req,res) => {
-    const { id_camp, categorias} = req.body;
-    console.log(categorias)
-    await pool  
-        .query('INSERT INTO campeonato_categoria (id_campeonato, id_categoria) VALUES ($1,$2)',[id_camp, categorias])
-        .then((result) => {
-            res.json("categoria ingresada con exito")
-        })
-        .catch((e) => console.log(e))
+    const { id_camp, cat} = req?.body;
+    console.log(req?.body)
+
+    cat?.map(async (categoria) =>{
+        console.log(categoria)
+        await pool  
+            .query('INSERT INTO campeonato_categoria (id_campeonato, id_categoria, cupos, puntaje_premio) VALUES ($1,$2,$3,$4)',[id_camp,categoria,20,100])
+            .then((result) => {
+                res.json("categoria ingresada con exito")
+            })
+            .catch((e) => console.log(e))
+    })
+
+    
 }
 
 //mostrar campeonatos
 clubFunctions.getCampeonatos = async (req,res) => {
     await pool
-        .query('select campeonato.nombre_campeonato,campeonato.id_campeonato,campeonato_categoria.id_categoria,categoria.nombre_categoria,campeonato.fecha_inicio,campeonato.fecha_termino from campeonato  inner join campeonato_categoria on campeonato.id_campeonato = campeonato_categoria.id_campeonato inner join club on campeonato.id_club = club.id_club inner join categoria on campeonato_categoria.id_categoria = categoria.id_categoria where club.correo_club = $1 and campeonato_categoria.id_dupla_ganadora is null', [req.params.correo_club])
+        .query('select campeonato.nombre_campeonato,campeonato.id_campeonato,campeonato_categoria.id_categoria,categoria.nombre_categoria,campeonato.fecha_inicio,campeonato.fecha_termino from campeonato  inner join campeonato_categoria on campeonato.id_campeonato = campeonato_categoria.id_campeonato inner join club on campeonato.id_club = club.id_club inner join categoria on campeonato_categoria.id_categoria = categoria.id_categoria where club.id_club = (select id_club from club where correo_club = $1) and campeonato_categoria.id_dupla_ganadora is null', [req.params.correo_club])
         .then((result) =>{
             res.status(200).json(result.rows);
         })
@@ -97,9 +103,9 @@ clubFunctions.getCampeonatos = async (req,res) => {
 
 //eliminar campeonato
 clubFunctions.deleteCampeonato = async (req, res) =>{
-
+    console.log(req.params.id_campeonato, req.params.id_categoria)
     await pool
-        .query('DELETE FROM campeonato WHERE id_campeonato = $1', [req.params.id_campeonato])
+        .query('DELETE FROM campeonato_categoria WHERE id_campeonato = $1 and id_categoria = $2', [req.params.id_campeonato, req.params.id_categoria])
         .then((result) => {
             res.json(`Campeonato ${req.params.id_campeonato} eliminado correctamente`)
         })
