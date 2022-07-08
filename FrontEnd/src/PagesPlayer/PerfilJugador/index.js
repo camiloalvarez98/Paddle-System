@@ -51,6 +51,7 @@ export default function PerfilJugador() {
     const classes = useStyles()
     const [modalEdit, setModalEdit] = useState(false);
     const [data, setData] = useState([]);
+    const [categoria,setCategoria] = useState(null) 
     const [jugadorSeleccionado, setJugadorSeleccionado] = useState({
         rut_jugador : '',
         nombre_jugador : '',
@@ -71,13 +72,23 @@ export default function PerfilJugador() {
         }
 
     }
+    /*
+    useEffect(()=>{
+        if(categoria){
+            localStorage.setItem('categoria_jugador',(data[0].categoria_jugador))
+        }
+    },[categoria])
+    */
     const correo = localStorage.getItem('correo_jugador')
     const getJugador = async() =>{
         await axios.get('http://localhost:3001/api/Jugador/getJugador/'+correo)
         .then(response =>{
-           setData(response.data) 
-           console.log(response.data)
-           localStorage.setItem('categoria_jugador',(data[0].categoria_jugador))
+            
+            console.log(response.data[0].categoria_jugador)
+            setData(response.data) 
+            //setCategoria(data[0].categoria_jugador)
+            localStorage.setItem('categoria_jugador',(response.data[0].categoria_jugador))
+           
         })
     }
     useEffect (() =>{
