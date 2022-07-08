@@ -155,7 +155,7 @@ export default function BoxAgregarClub() {
                         variant = 'contained'
                         size='small'
                         endIcon = {<SaveIcon/>}
-                        onClick={()=> {createClub(); AlertaClubCreado()}}
+                        onClick={()=> {createClub(); window.location.reload(false)}}
                     >
                         Guardar
                     </Button>

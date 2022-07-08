@@ -210,9 +210,16 @@ export default function NuevoCampeonato() {
     await axios.post('http://localhost:3001/api/Club/createCategoria', {id_camp:id_camp, cat: x})
     .then(response => {
       setData(data.concat(response.data))
-      //sweetalert creado
+      mostrarAlerta()
     })
     .catch((e) => console.log(e))
+  }
+
+  const mostrarAlerta= () =>{
+    swal({
+      title:'Campeonato registrado correctamente',
+      icon:'success'
+    })
   }
   /*
   const catCamp = async() =>{

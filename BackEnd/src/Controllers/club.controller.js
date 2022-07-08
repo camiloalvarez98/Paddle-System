@@ -86,9 +86,7 @@ clubFunctions.campeonatoCategoria = async (req,res) => {
                 res.json("categoria ingresada con exito")
             })
             .catch((e) => console.log(e))
-    })
-
-    
+    })    
 }
 
 //mostrar campeonatos
