@@ -94,6 +94,8 @@ export default function BuscarCampeonato() {
     },[])
 
     const getCampeonatos = async() =>{
+        console.log(key)
+        console.log(key2)
         await axios.get('http://localhost:3001/api/Jugador/getCampeonatosCategoria/'+key+'/'+key2)
         .then(response =>{
            setData(response.data) 

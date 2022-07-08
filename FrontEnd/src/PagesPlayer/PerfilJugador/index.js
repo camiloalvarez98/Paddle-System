@@ -7,6 +7,7 @@ import BackdropFilter from "react-backdrop-filter";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { ContenedorJugador } from '../../Components';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -72,7 +73,7 @@ export default function PerfilJugador() {
     }
     const correo = localStorage.getItem('correo_jugador')
     const getJugador = async() =>{
-        await axios.get('https://proyecto-topicos-back-jggmdvsoa-camiloalvarez98.vercel.app/api/Jugador/getJugador/'+correo)
+        await axios.get('http://localhost:3001/api/Jugador/getJugador/'+correo)
         .then(response =>{
            setData(response.data) 
            console.log(response.data)
@@ -226,15 +227,17 @@ export default function PerfilJugador() {
                     </BackdropFilter>        
                 </Box>
                 <div  mx = {20}>
-                    <Button 
-                        className={classes.button}
-                        type = "button"
-                        variant = 'contained'
-                        size='small'
-                        endIcon = {<KeyboardReturnIcon/>}
-                    >
-                        Volver
-                    </Button>
+                    <Link to={'/campeonatosjugador'} style={{ textDecoration: 'none' }}>
+                        <Button 
+                            className={classes.button}
+                            type = "button"
+                            variant = 'contained'
+                            size='small'
+                            endIcon = {<KeyboardReturnIcon/>}
+                        >
+                            Volver
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>
