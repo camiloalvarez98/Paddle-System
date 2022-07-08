@@ -110,7 +110,7 @@ export default function CampeonatosClub() {
         <div className={classes.modal}>
           <p>Estás seguro que deseas eliminar el campeonato <b>{campSeleccionado && campSeleccionado.id_campeonato}</b> ? </p>
           <div align="right">
-            <Button color="secondary" onClick={()=>{const f1 = deleteCampeonato(); const f2 = abrirCerrarModalELiminar() ; f1(); f2() } }>Sí</Button>
+            <Button color="secondary" onClick={()=>{const f1 = deleteCampeonato(); const f2 = abrirCerrarModalELiminar() ;const f3 = window.location.reload(false); f1(); f2();f3() } }>Sí</Button>
             <Button onClick={()=>abrirCerrarModalELiminar()}>No</Button>
           </div>
         </div>
