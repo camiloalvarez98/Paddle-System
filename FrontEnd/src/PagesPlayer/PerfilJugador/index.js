@@ -89,6 +89,7 @@ export default function PerfilJugador() {
     const seleccionarJugador=(jugador)=>{
         setJugadorSeleccionado(jugador);
     }
+    
     const bodyEdit = (
         <div className= {classes.modal}>
             <h3>Editar datos</h3>
