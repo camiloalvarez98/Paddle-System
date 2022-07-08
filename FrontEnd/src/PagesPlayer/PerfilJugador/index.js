@@ -62,7 +62,7 @@ export default function PerfilJugador() {
         correo_jugador : ''
     })
     const handleChange=e=>{
-        const{name, value}=e.target;
+        const{name , value}=e.target;
         if(name!==""){
             setJugadorSeleccionado(prevState=>({
                 ...prevState,
